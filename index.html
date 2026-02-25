@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OKX Tutorials Center - Delphi Digital Pixel-Perfect Replica</title>
-    <meta name="description" content="Professional OKX trading tutorials and research platform. Pixel-perfect replica of Delphi Digital.">
+    <title>OKX教程中心 - OKX Tutorials Center</title>
+    <meta name="description" content="专业的OKX交易教程和研究平台。Delphi Digital像素级复刻。">
     
     <!-- Tailwind CSS v3.4.1 (原站使用) -->
     <script src="https://cdn.tailwindcss.com/3.4.1"></script>
@@ -85,57 +85,71 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     
     <!-- 原站设计系统补充CSS -->
-    <link rel="stylesheet" href="./styles/design-system.css">
-    <!-- 临时使用紧急修复CSS，替代可能有问题的delphi-tailwind-extend.css -->
-    <link rel="stylesheet" href="./styles/emergency-fix.css">
-    <!-- <link rel="stylesheet" href="./styles/delphi-tailwind-extend.css"> -->
-    <link rel="stylesheet" href="./styles/font-optimization.css">
+    <link rel="stylesheet" href="/styles/design-system.css">
+    <!-- 紧急修复CSS -->
+    <link rel="stylesheet" href="/styles/emergency-fix.css">
+    <!-- 字体优化CSS -->
+    <link rel="stylesheet" href="/styles/font-optimization.css">
     
     <!-- 图标 -->
-    <link rel="icon" type="image/svg+xml" href="./assets/favicon.svg">
+    <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+    
+    <!-- 页面特定CSS -->
+    
     
     <style>
         /* 临时字体映射 - 使用Inter作为NeurialGrotesk的替代 */
         :root {
             --font-family-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            --font-family-sans-medium: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            --font-family-sans-semibold: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --color-bg-primary: #0e1012;
+            --color-bg-secondary: #1f2124;
+            --color-bg-tertiary: #2a2e32;
+            --color-text-primary: #ffffff;
+            --color-text-secondary: #e9ebed;
+            --color-text-tertiary: #979fa7;
+            --color-text-muted: #67707b;
+            --color-border: #2a2e32;
+            --color-primary: #2e90fa;
+            --color-primary-hover: #53b1fd;
+            --color-error: #f04438;
+            --color-success: #039855;
+        }
+        
+        body {
+            font-family: var(--font-family-sans);
+            background-color: var(--color-bg-primary);
+            color: var(--color-text-primary);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
         
         /* 加载动画 */
-        #app-loading {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: var(--color-bg-primary);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 9999;
-            transition: opacity 0.3s ease;
-        }
-        
         .loading-spinner {
+            border: 3px solid rgba(255, 255, 255, 0.1);
+            border-left-color: var(--color-primary);
+            border-radius: 50%;
             width: 40px;
             height: 40px;
-            border: 3px solid var(--color-border);
-            border-top-color: var(--color-primary-blue-600);
-            border-radius: 50%;
             animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
         }
     </style>
 </head>
-<body class="bg-dark-800 min-h-screen">
-    <!-- 加载动画 -->
-    <div id="app-loading">
-        <div class="loading-spinner"></div>
+<body class="min-h-screen bg-dark-900 text-white">
+    <!-- 加载遮罩 -->
+    <div id="app-loading" class="fixed inset-0 bg-dark-900 z-50 flex items-center justify-center transition-opacity duration-300">
+        <div class="text-center">
+            <div class="loading-spinner mb-4"></div>
+            <p class="text-tertiary">加载中...</p>
+        </div>
     </div>
 
     <!-- 应用容器 -->
-    <div id="app" class="hidden">
-        <!-- 顶部导航栏 -->
+    <div id="app" class="min-h-screen hidden">
+        <!-- 顶栏 -->
         <header class="sticky top-0 z-50 bg-dark-900 border-b border-dark-700">
             <div class="container">
                 <div class="flex items-center justify-between h-16">
@@ -149,8 +163,6 @@
                             <span class="text-xs font-medium px-1.5 py-0.5 bg-blue-600/10 text-blue-600 rounded">BETA</span>
                         </a>
                     </div>
-                    
-                    <!-- 主导航 (已移除 - 移动到主内容区) -->
                     
                     <!-- 右侧操作 -->
                     <div class="flex items-center space-x-4">
@@ -182,38 +194,49 @@
                         <!-- 侧边导航项 (移动端) -->
                         <div class="mb-2">
                             <div class="text-xs uppercase text-dark-400 mb-1">Navigation</div>
-                            <a href="/" class="side-nav-item active text-left block" data-nav="home">
+                            
+                            <a href="/" class="side-nav-item  text-left block" data-nav="home">
                                 <span>home</span>
                             </a>
-                            <a href="/search" class="side-nav-item text-left block" data-nav="research">
+                            
+                            <a href="/search" class="side-nav-item  text-left block" data-nav="research">
                                 <span>Research</span>
                             </a>
-                            <a href="/explore" class="side-nav-item text-left block" data-nav="library">
+                            
+                            <a href="/explore" class="side-nav-item  text-left block" data-nav="library">
                                 <span>Library</span>
                             </a>
-                            <a href="/bookmarks" class="side-nav-item text-left block" data-nav="saved">
+                            
+                            <a href="/bookmarks" class="side-nav-item  text-left block" data-nav="saved">
                                 <span>Saved</span>
                             </a>
-                            <a href="/projects" class="side-nav-item text-left block" data-nav="tools">
+                            
+                            <a href="/projects" class="side-nav-item  text-left block" data-nav="tools">
                                 <span>Tools</span>
                             </a>
+                            
                         </div>
                         
                         <!-- 帮助项 -->
                         <div class="mb-2">
                             <div class="text-xs uppercase text-dark-400 mb-1">help</div>
+                            
                             <a href="#" class="side-nav-item text-left block text-sm" data-nav="conentus">
                                 <span>Conentus</span>
                             </a>
+                            
                             <a href="#" class="side-nav-item text-left block text-sm" data-nav="faq">
                                 <span>FAQ</span>
                             </a>
+                            
                             <a href="#" class="side-nav-item text-left block text-sm" data-nav="feedback">
                                 <span>Feedback</span>
                             </a>
+                            
                         </div>
                         
-                        <!-- 内容标签 -->
+                        <!-- 内容标签 (仅首页显示) -->
+                        
                         <div class="mt-4 pt-4 border-t border-dark-700">
                             <div class="text-xs uppercase text-dark-400 mb-1">Content</div>
                             <button class="nav-tab active text-left w-full" data-tab="all">All</button>
@@ -223,6 +246,7 @@
                             <button class="nav-tab text-left w-full" data-tab="media">Media</button>
                             <button class="nav-tab text-left w-full" data-tab="reads">Reads</button>
                         </div>
+                        
                         
                         <!-- 移动端搜索 -->
                         <div class="mt-4">
@@ -241,35 +265,45 @@
             <nav class="p-6">
                 <!-- 导航项列表 -->
                 <div class="space-y-1">
-                    <a href="/" class="side-nav-item active" data-nav="home">
+                    
+                    <a href="/" class="side-nav-item " data-nav="home">
                         <span>home</span>
                     </a>
-                    <a href="/search" class="side-nav-item" data-nav="research">
+                    
+                    <a href="/search" class="side-nav-item " data-nav="research">
                         <span>Research</span>
                     </a>
-                    <a href="/explore" class="side-nav-item" data-nav="library">
+                    
+                    <a href="/explore" class="side-nav-item " data-nav="library">
                         <span>Library</span>
                     </a>
-                    <a href="/bookmarks" class="side-nav-item" data-nav="saved">
+                    
+                    <a href="/bookmarks" class="side-nav-item " data-nav="saved">
                         <span>Saved</span>
                     </a>
-                    <a href="/projects" class="side-nav-item" data-nav="tools">
+                    
+                    <a href="/projects" class="side-nav-item " data-nav="tools">
                         <span>Tools</span>
                     </a>
+                    
                     
                     <!-- 帮助下拉 -->
                     <div class="mt-8 pt-6 border-t border-dark-700">
                         <div class="text-xs uppercase text-dark-400 mb-2">help</div>
                         <div class="space-y-1 ml-2">
+                            
                             <a href="#" class="side-nav-item text-sm" data-nav="conentus">
                                 <span>Conentus</span>
                             </a>
+                            
                             <a href="#" class="side-nav-item text-sm" data-nav="faq">
                                 <span>FAQ</span>
                             </a>
+                            
                             <a href="#" class="side-nav-item text-sm" data-nav="feedback">
                                 <span>Feedback</span>
                             </a>
+                            
                         </div>
                     </div>
                 </div>
@@ -281,117 +315,114 @@
 
         <!-- 主内容区域 -->
         <main class="container py-8 lg:ml-64">
-            <!-- 页面标题和统计 -->
-            <div class="mb-8">
-                <h1 class="text-4xl font-semibold text-white mb-2" id="page-title">All</h1>
-                <div class="flex items-center space-x-2 text-sm text-tertiary" id="page-stats">
-                    <span id="total-count">Loading...</span>
-                    <span>•</span>
-                    <span>Updated today</span>
-                </div>
-                
-                <!-- 内容标签导航 (从顶栏移动到此) -->
-                <div class="mt-6 flex flex-wrap gap-2">
-                    <button class="nav-tab active" data-tab="all">All</button>
-                    <button class="nav-tab" data-tab="reports">Reports</button>
-                    <button class="nav-tab" data-tab="alpha">Alpha Insights</button>
-                    <button class="nav-tab" data-tab="notes">Notes</button>
-                    <button class="nav-tab" data-tab="media">Media</button>
-                    <button class="nav-tab" data-tab="reads">Reads</button>
-                </div>
-            </div>
+            {<!-- 首页内容 -->
+<div class="mb-8">
+    <h1 class="text-4xl font-semibold text-white mb-2" id="page-title">All</h1>
+    <div class="flex items-center space-x-2 text-sm text-tertiary" id="page-stats">
+        <span id="total-count">Loading...</span>
+    </div>
+</div>
 
-            <!-- 筛选栏 -->
-            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8 pb-6 border-b border-dark-700">
-                <!-- 时间筛选 -->
-                <div class="flex flex-wrap gap-2">
-                    <button class="filter-btn active" data-filter="all">All</button>
-                    <button class="filter-btn" data-filter="today">Today</button>
-                    <button class="filter-btn" data-filter="week">This week</button>
-                    <button class="filter-btn" data-filter="month">This month</button>
-                </div>
-                
-                <!-- 排序 -->
-                <div class="flex items-center gap-4">
-                    <select class="select" id="sort-select">
-                        <option value="newest">Newest</option>
-                        <option value="popular">Most popular</option>
-                        <option value="relevant">Most relevant</option>
-                    </select>
-                </div>
-            </div>
+<!-- 内容标签导航 -->
+<div class="mb-8">
+    <div class="flex flex-wrap gap-2">
+        <button class="nav-tab active" data-tab="all">All</button>
+        <button class="nav-tab" data-tab="reports">Reports</button>
+        <button class="nav-tab" data-tab="alpha">Alpha Insights</button>
+        <button class="nav-tab" data-tab="notes">Notes</button>
+        <button class="nav-tab" data-tab="media">Media</button>
+        <button class="nav-tab" data-tab="reads">Reads</button>
+    </div>
+</div>
 
-            <!-- 内容网格 -->
-            <div id="content-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-                <!-- 内容卡片将通过JavaScript动态生成 -->
-                <div class="col-span-full flex flex-col items-center justify-center py-12">
-                    <div class="loading-spinner mb-4"></div>
-                    <p class="text-tertiary">加载内容中...</p>
-                </div>
-            </div>
+<!-- 筛选和排序 -->
+<div class="mb-8 flex flex-col md:flex-row md:items-center justify-between">
+    <div class="flex flex-wrap gap-2 mb-4 md:mb-0">
+        <button class="filter-btn active" data-filter="all">全部</button>
+        <button class="filter-btn" data-filter="today">今日</button>
+        <button class="filter-btn" data-filter="week">本周</button>
+        <button class="filter-btn" data-filter="month">本月</button>
+    </div>
+    
+    <div class="flex items-center space-x-2">
+        <span class="text-sm text-tertiary">排序:</span>
+        <select class="input py-2 text-sm" id="sort-select">
+            <option value="newest">最新</option>
+            <option value="popular">最受欢迎</option>
+            <option value="trending">趋势</option>
+        </select>
+    </div>
+</div>
 
-            <!-- 分页 -->
-            <div class="flex items-center justify-center space-x-2" id="pagination">
-                <button class="btn btn-secondary px-4 py-2 disabled" id="prev-btn" disabled>
-                    Previous
-                </button>
-                
-                <div class="flex items-center space-x-1" id="page-numbers">
-                    <button class="btn btn-secondary w-10 h-10 active">1</button>
-                    <button class="btn btn-secondary w-10 h-10">2</button>
-                    <button class="btn btn-secondary w-10 h-10">3</button>
-                    <span class="px-2 text-tertiary">...</span>
-                    <button class="btn btn-secondary w-10 h-10">8</button>
-                </div>
-                
-                <button class="btn btn-secondary px-4 py-2" id="next-btn">
-                    Next
-                </button>
-            </div>
+<!-- 内容网格 -->
+<div id="content-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+    <!-- 内容卡片动态加载 -->
+</div>
+
+<!-- 分页 -->
+<div class="flex items-center justify-between">
+    <button class="btn btn-secondary" id="prev-btn" disabled>
+        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+        </svg>
+        上一页
+    </button>
+    
+    <div class="flex items-center space-x-2" id="page-numbers">
+        <!-- 页码动态生成 -->
+    </div>
+    
+    <button class="btn btn-secondary" id="next-btn" disabled>
+        下一页
+        <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+        </svg>
+    </button>
+</div>}
         </main>
 
         <!-- 页脚 -->
-        <footer class="bg-dark-900 border-t border-dark-700 mt-16">
+        <footer class="bg-dark-800 border-t border-dark-700 mt-16">
             <div class="container py-12">
                 <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-                    <!-- 品牌信息 -->
-                    <div>
+                    <!-- Logo和描述 -->
+                    <div class="col-span-1 md:col-span-1">
                         <div class="flex items-center space-x-2 mb-4">
                             <div class="w-8 h-8 rounded-md bg-blue-600 flex items-center justify-center">
                                 <span class="text-white font-semibold text-lg">O</span>
                             </div>
                             <span class="text-white font-semibold text-lg">OKX教程中心</span>
                         </div>
-                        <p class="text-sm text-tertiary">
-                            专业的OKX交易教程和研究平台，帮助您掌握加密货币交易技能。
+                        <p class="text-tertiary text-sm mb-4">
+                            专业的OKX交易教程和研究平台。Delphi Digital像素级复刻。
                         </p>
                     </div>
                     
-                    <!-- 分类 -->
-                    <div>
-                        <h3 class="text-white font-semibold mb-4">分类</h3>
+                    <!-- 链接 -->
+                    <div class="col-span-1">
+                        <h3 class="text-white font-medium mb-4">快速链接</h3>
                         <ul class="space-y-2">
-                            <li><a href="#" class="text-sm text-tertiary hover:text-primary transition">新手教程</a></li>
-                            <li><a href="#" class="text-sm text-tertiary hover:text-primary transition">交易策略</a></li>
-                            <li><a href="#" class="text-sm text-tertiary hover:text-primary transition">安全指南</a></li>
-                            <li><a href="#" class="text-sm text-tertiary hover:text-primary transition">工具使用</a></li>
+                            <li><a href="/" class="text-sm text-tertiary hover:text-primary transition">首页</a></li>
+                            <li><a href="/search" class="text-sm text-tertiary hover:text-primary transition">搜索</a></li>
+                            <li><a href="/explore" class="text-sm text-tertiary hover:text-primary transition">知识库</a></li>
+                            <li><a href="/projects" class="text-sm text-tertiary hover:text-primary transition">项目库</a></li>
                         </ul>
                     </div>
                     
                     <!-- 资源 -->
-                    <div>
-                        <h3 class="text-white font-semibold mb-4">资源</h3>
+                    <div class="col-span-1">
+                        <h3 class="text-white font-medium mb-4">资源</h3>
                         <ul class="space-y-2">
-                            <li><a href="#" class="text-sm text-tertiary hover:text-primary transition">OKX官网</a></li>
-                            <li><a href="#" class="text-sm text-tertiary hover:text-primary transition">帮助中心</a></li>
-                            <li><a href="#" class="text-sm text-tertiary hover:text-primary transition">API文档</a></li>
-                            <li><a href="#" class="text-sm text-tertiary hover:text-primary transition">社区论坛</a></li>
+                            <li><a href="#" class="text-sm text-tertiary hover:text-primary transition">文档中心</a></li>
+                            <li><a href="#" class="text-sm text-tertiary hover:text-primary transition">API参考</a></li>
+                            <li><a href="#" class="text-sm text-tertiary hover:text-primary transition">开发者工具</a></li>
+                            <li><a href="#" class="text-sm text-tertiary hover:text-primary transition">状态监控</a></li>
                         </ul>
                     </div>
                     
-                    <!-- 联系 -->
-                    <div>
-                        <h3 class="text-white font-semibold mb-4">联系</h3>
+                    <!-- 支持 -->
+                    <div class="col-span-1">
+                        <h3 class="text-white font-medium mb-4">支持</h3>
                         <ul class="space-y-2">
                             <li><a href="#" class="text-sm text-tertiary hover:text-primary transition">反馈建议</a></li>
                             <li><a href="#" class="text-sm text-tertiary hover:text-primary transition">合作咨询</a></li>
@@ -426,13 +457,18 @@
     <script src="https://code.highcharts.com/highcharts.js"></script>
     
     <!-- 项目JavaScript文件 -->
-    <script src="./data/content.js"></script>
+    <script src="/data/content.js"></script>
     
     <!-- 扩展性架构初始化 -->
-    <script src="./scripts/init.js" type="module"></script>
+    <script src="/scripts/init.js" type="module"></script>
     
     <!-- 主应用脚本 -->
-    <script src="./scripts/app.js"></script>
+    <script src="/scripts/app.js"></script>
+    
+    <!-- 页面特定JavaScript -->
+    
+    <script src="/scripts/app.js"></script>
+    
     
     <script>
         // 隐藏加载动画，显示应用
@@ -445,6 +481,13 @@
                 }, 300);
             }, 500);
         });
+        
+        // 页面特定初始化
+        
+        window.addEventListener('app:servicesReady', function() {
+            initApp();
+        });
+        
     </script>
 </body>
 </html>
