@@ -1,0 +1,326 @@
+/* Delphi Digital像素级复刻 - Manrope字体优化 (预备) */
+/* 目标: 使用Manrope字体替代Inter，更接近NeurialGrotesk视觉效果 */
+/* 状态: 预备文件，等待用户决策后激活 */
+
+/* Manrope字体特征 (Google Fonts) */
+/* 
+字体家族: Manrope
+设计风格: 几何无衬线，现代感强
+x-height: 较高，可读性好
+字重范围: 200-800 (7个字重)
+视觉相似度: 与NeurialGrotesk约85%
+优点: 免费，Google Fonts直接可用，字重齐全
+缺点: 与NeurialGrotesk仍有15%视觉差异
+*/
+
+:root {
+  /* ===== Manrope字体配置 ===== */
+  --font-family-manrope: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  
+  /* ===== 字重映射优化 ===== */
+  /* Manrope字重需要调整以匹配NeurialGrotesk视觉效果 */
+  --font-weight-ultralight: 200;    /* Manrope: 200, Neurial: 可能为200 */
+  --font-weight-extralight: 300;    /* Manrope: 300, Neurial: 可能为300 */
+  --font-weight-light: 400;         /* Manrope: 400, Neurial: 可能为400 */
+  --font-weight-normal: 500;        /* Manrope: 500, Neurial: 常规400 (调整) */
+  --font-weight-medium: 600;        /* Manrope: 600, Neurial: 中等500 (调整) */
+  --font-weight-semibold: 700;      /* Manrope: 700, Neurial: 半粗600 (调整) */
+  --font-weight-bold: 800;          /* Manrope: 800, Neurial: 粗体700 (调整) */
+  
+  /* 针对元素的字重映射调整 (Manrope专用) */
+  --font-weight-h1-manrope: var(--font-weight-semibold);    /* 700调整为600视觉效果 */
+  --font-weight-h2-manrope: var(--font-weight-semibold);    /* 700调整为600 */
+  --font-weight-h3-manrope: var(--font-weight-medium);      /* 600调整为500 */
+  --font-weight-h4-manrope: var(--font-weight-medium);      /* 600调整为500 */
+  --font-weight-body-manrope: var(--font-weight-normal);    /* 500调整为400 */
+  --font-weight-button-manrope: var(--font-weight-medium);  /* 600调整为500 */
+  --font-weight-label-manrope: var(--font-weight-medium);   /* 600调整为500 */
+  --font-weight-nav-manrope: var(--font-weight-medium);     /* 600调整为500 */
+  --font-weight-card-title-manrope: var(--font-weight-semibold); /* 700调整为600 */
+  --font-weight-footer-manrope: var(--font-weight-normal);  /* 500调整为400 */
+  
+  /* ===== 行高优化 (Manrope专用) ===== */
+  /* Manrope字体需要不同的行高设置 */
+  --line-height-tighter-manrope: 1.05;      /* 超紧凑 - 用于大标题 */
+  --line-height-tight-manrope: 1.1;         /* 紧凑 - 用于标题 */
+  --line-height-normal-manrope: 1.35;       /* 正常 - 用于正文 */
+  --line-height-relaxed-manrope: 1.45;      /* 宽松 - 用于长文本 */
+  --line-height-loose-manrope: 1.55;        /* 松散 - 特殊情况 */
+  
+  /* ===== 字距优化 (Manrope专用) ===== */
+  /* Manrope字体需要不同的字距设置 */
+  --letter-spacing-tighter-manrope: -0.015em;  /* 超紧缩 */
+  --letter-spacing-tight-manrope: -0.01em;     /* 紧缩 */
+  --letter-spacing-normal-manrope: 0;          /* 正常 */
+  --letter-spacing-wide-manrope: 0.005em;      /* 扩张 */
+  --letter-spacing-wider-manrope: 0.01em;      /* 超扩张 */
+}
+
+/* ===== Manrope字体激活样式 ===== */
+/* 这些样式在激活Manrope字体后生效 */
+.manrope-active {
+  /* 基础字体激活 */
+  font-family: var(--font-family-manrope);
+  
+  /* 字体优化特性 */
+  font-feature-settings: "kern" 1, "liga" 1, "calt" 1;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-display: swap;
+}
+
+/* ===== 标题优化 (Manrope专用) ===== */
+.manrope-active h1,
+.manrope-active .text-5xl,
+.manrope-active .text-4xl {
+  font-weight: var(--font-weight-h1-manrope);
+  line-height: var(--line-height-tighter-manrope);
+  letter-spacing: var(--letter-spacing-tighter-manrope);
+}
+
+.manrope-active h2,
+.manrope-active .text-3xl,
+.manrope-active .text-2xl {
+  font-weight: var(--font-weight-h2-manrope);
+  line-height: var(--line-height-tight-manrope);
+  letter-spacing: var(--letter-spacing-tight-manrope);
+}
+
+.manrope-active h3,
+.manrope-active .text-xl {
+  font-weight: var(--font-weight-h3-manrope);
+  line-height: var(--line-height-tight-manrope);
+  letter-spacing: var(--letter-spacing-tight-manrope);
+}
+
+.manrope-active h4,
+.manrope-active .text-lg {
+  font-weight: var(--font-weight-h4-manrope);
+  line-height: var(--line-height-normal-manrope);
+  letter-spacing: var(--letter-spacing-normal-manrope);
+}
+
+/* ===== 正文优化 (Manrope专用) ===== */
+.manrope-active p,
+.manrope-active li,
+.manrope-active .body-text,
+.manrope-active .text-base,
+.manrope-active .text-sm {
+  font-weight: var(--font-weight-body-manrope);
+  line-height: var(--line-height-normal-manrope);
+  letter-spacing: var(--letter-spacing-normal-manrope);
+}
+
+/* ===== 导航元素优化 (Manrope专用) ===== */
+.manrope-active .nav-tab,
+.manrope-active .nav-link {
+  font-weight: var(--font-weight-nav-manrope);
+  letter-spacing: var(--letter-spacing-tight-manrope);
+}
+
+.manrope-active .nav-tab.active {
+  font-weight: var(--font-weight-semibold);
+}
+
+/* ===== 卡片和内容元素优化 (Manrope专用) ===== */
+.manrope-active .card-title,
+.manrope-active .content-title {
+  font-weight: var(--font-weight-card-title-manrope);
+  line-height: var(--line-height-tight-manrope);
+  letter-spacing: var(--letter-spacing-tight-manrope);
+}
+
+.manrope-active .card-body,
+.manrope-active .content-body {
+  line-height: var(--line-height-normal-manrope);
+  letter-spacing: var(--letter-spacing-normal-manrope);
+}
+
+/* ===== 按钮优化 (Manrope专用) ===== */
+.manrope-active .btn,
+.manrope-active button,
+.manrope-active .filter-btn,
+.manrope-active .select {
+  font-weight: var(--font-weight-button-manrope);
+  letter-spacing: var(--letter-spacing-normal-manrope);
+}
+
+/* ===== 标签和徽章优化 (Manrope专用) ===== */
+.manrope-active .label,
+.manrope-active .badge,
+.manrope-active .tag {
+  font-weight: var(--font-weight-label-manrope);
+  letter-spacing: var(--letter-spacing-tight-manrope);
+}
+
+/* ===== 页脚优化 (Manrope专用) ===== */
+.manrope-active footer,
+.manrope-active .footer-text {
+  font-weight: var(--font-weight-footer-manrope);
+  letter-spacing: var(--letter-spacing-normal-manrope);
+  line-height: var(--line-height-normal-manrope);
+}
+
+/* ===== 响应式字体优化 (Manrope专用) ===== */
+@media (max-width: 640px) {
+  .manrope-active {
+    --line-height-normal-manrope: 1.4; /* 移动端稍宽松 */
+    --letter-spacing-normal-manrope: 0.005em; /* 移动端稍扩张 */
+  }
+  
+  .manrope-active h1,
+  .manrope-active .text-4xl,
+  .manrope-active .text-5xl {
+    line-height: var(--line-height-tight-manrope); /* 移动端标题稍宽松 */
+  }
+}
+
+/* ===== 激活脚本 ===== */
+/* 通过添加.manrope-active类到body元素激活Manrope字体 */
+/* 
+使用方式:
+1. 添加Google Fonts Manrope链接
+2. 在body标签添加class="manrope-active"
+3. 更新Tailwind配置中的fontFamily.sans
+*/
+
+/* ===== 过渡动画 ===== */
+/* 字体切换时的平滑过渡 */
+.font-transition {
+  transition: font-family 0.3s ease, font-weight 0.3s ease, letter-spacing 0.3s ease;
+}
+
+/* ===== 性能优化 ===== */
+/* 字体加载优化 */
+.manrope-active {
+  font-display: swap;
+}
+
+/* 字体预加载提示 */
+.link-preload-manrope {
+  rel: "preload";
+  as: "font";
+  type: "font/woff2";
+  crossorigin: "anonymous";
+}
+
+/* ===== 浏览器特定优化 ===== */
+/* Firefox优化 */
+@-moz-document url-prefix() {
+  .manrope-active {
+    font-weight: calc(var(--font-weight-normal) + 20); /* Firefox下稍重 */
+  }
+}
+
+/* Safari优化 */
+@media not all and (min-resolution: 0.001dpcm) {
+  @supports (-webkit-appearance: none) {
+    .manrope-active {
+      -webkit-font-smoothing: antialiased;
+    }
+  }
+}
+
+/* ===== 对比测试辅助类 ===== */
+/* 用于快速对比Inter和Manrope字体效果 */
+.font-comparison-inter {
+  font-family: 'Inter', sans-serif;
+}
+
+.font-comparison-manrope {
+  font-family: 'Manrope', sans-serif;
+}
+
+/* 对比容器样式 */
+.font-comparison-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  padding: 2rem;
+  background: var(--color-dark-800);
+  border-radius: 0.75rem;
+}
+
+.font-comparison-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+/* ===== 字体切换控制 ===== */
+/* 通过JavaScript控制的字体切换 */
+.font-toggle-container {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: 9999;
+  background: var(--color-dark-700);
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  border: 1px solid var(--color-dark-600);
+}
+
+.font-toggle-button {
+  background: var(--color-primary-blue-600);
+  color: white;
+  border: none;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  font-size: 0.875rem;
+}
+
+.font-toggle-button:hover {
+  background: var(--color-primary-blue-700);
+}
+
+/* ===== 字体加载状态指示器 ===== */
+.font-loading-indicator {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: var(--color-dark-800);
+  padding: 1rem 2rem;
+  border-radius: 0.75rem;
+  border: 1px solid var(--color-dark-600);
+  z-index: 9998;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.font-loading-indicator.active {
+  opacity: 1;
+}
+
+.font-loading-text {
+  color: var(--color-dark-300);
+  font-size: 0.875rem;
+}
+
+/* ===== 字体回滚机制 ===== */
+/* 如果Manrope字体加载失败，回退到Inter */
+@supports not (font-family: 'Manrope') {
+  .manrope-active {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+}
+
+/* ===== 打印优化 ===== */
+@media print {
+  .manrope-active {
+    font-weight: var(--font-weight-normal);
+    line-height: var(--line-height-normal-manrope);
+    letter-spacing: var(--letter-spacing-normal-manrope);
+  }
+  
+  .manrope-active h1,
+  .manrope-active h2,
+  .manrope-active h3,
+  .manrope-active h4 {
+    font-weight: var(--font-weight-bold);
+    letter-spacing: var(--letter-spacing-tight-manrope);
+  }
+}
