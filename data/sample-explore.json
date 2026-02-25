@@ -1,0 +1,170 @@
+{
+  "categories": [
+    {
+      "slug": "finance",
+      "name": "Finance",
+      "description": "Financial markets, economics, and investment strategies",
+      "icon": "💰",
+      "color": "blue",
+      "articleCount": 45,
+      "subcategories": [
+        {
+          "slug": "asset-management",
+          "name": "Asset Management",
+          "articleCount": 18,
+          "description": "Portfolio management and investment strategies"
+        },
+        {
+          "slug": "trading",
+          "name": "Trading",
+          "articleCount": 22,
+          "description": "Trading strategies and market analysis"
+        },
+        {
+          "slug": "macro",
+          "name": "Macro Economics",
+          "articleCount": 5,
+          "description": "Macroeconomic trends and analysis"
+        }
+      ],
+      "featuredArticles": [
+        {
+          "slug": "bitcoin-etf-flows-analysis",
+          "title": "Bitcoin ETF Flows Analysis"
+        },
+        {
+          "slug": "macro-outlook-2026",
+          "title": "Macroeconomic Outlook 2026"
+        }
+      ]
+    },
+    {
+      "slug": "infrastructure",
+      "name": "Infrastructure",
+      "description": "Blockchain infrastructure, protocols, and technology",
+      "icon": "⚙️",
+      "color": "green",
+      "articleCount": 38,
+      "subcategories": [
+        {
+          "slug": "layer-1",
+          "name": "Layer 1 Protocols",
+          "articleCount": 15,
+          "description": "Base layer blockchain protocols"
+        },
+        {
+          "slug": "layer-2",
+          "name": "Layer 2 Solutions",
+          "articleCount": 12,
+          "description": "Scaling solutions and rollups"
+        },
+        {
+          "slug": "oracles",
+          "name": "Oracles",
+          "articleCount": 8,
+          "description": "Data oracles and external connectivity"
+        },
+        {
+          "slug": "artificial-intelligence",
+          "name": "Artificial Intelligence",
+          "articleCount": 3,
+          "description": "AI and blockchain convergence"
+        }
+      ],
+      "featuredArticles": [
+        {
+          "slug": "solana-the-modular",
+          "title": "Solana: The Modular Future"
+        },
+        {
+          "slug": "ethereum-layer2-ecosystem",
+          "title": "Ethereum Layer 2 Ecosystem"
+        }
+      ]
+    },
+    {
+      "slug": "defi",
+      "name": "DeFi",
+      "description": "Decentralized finance protocols and applications",
+      "icon": "🏦",
+      "color": "yellow",
+      "articleCount": 32,
+      "subcategories": [
+        {
+          "slug": "lending",
+          "name": "Lending",
+          "articleCount": 12,
+          "description": "Decentralized lending protocols"
+        },
+        {
+          "slug": "dex",
+          "name": "DEX",
+          "articleCount": 10,
+          "description": "Decentralized exchanges"
+        },
+        {
+          "slug": "yield",
+          "name": "Yield",
+          "articleCount": 8,
+          "description": "Yield farming and strategies"
+        },
+        {
+          "slug": "derivatives",
+          "name": "Derivatives",
+          "articleCount": 2,
+          "description": "Decentralized derivatives"
+        }
+      ],
+      "featuredArticles": [
+        {
+          "slug": "defi-summer-2.0",
+          "title": "DeFi Summer 2.0"
+        },
+        {
+          "slug": "yield-optimization",
+          "title": "Yield Optimization Strategies"
+        }
+      ]
+    }
+  ],
+  "trending": [
+    {
+      "slug": "solana-the-modular",
+      "title": "Solana: The Modular Future",
+      "category": "infrastructure",
+      "views": 12500
+    },
+    {
+      "slug": "bitcoin-etf-flows-analysis",
+      "title": "Bitcoin ETF Flows Analysis",
+      "category": "finance",
+      "views": 8900
+    },
+    {
+      "slug": "ai-blockchain-convergence",
+      "title": "AI and Blockchain Convergence",
+      "category": "infrastructure",
+      "views": 5300
+    }
+  ],
+  "recentlyAdded": [
+    {
+      "slug": "nft-market-trends",
+      "title": "NFT Market Trends Q1 2026",
+      "category": "nft",
+      "added": "2026-02-25"
+    },
+    {
+      "slug": "gaming-economy",
+      "title": "Gaming Economy Analysis",
+      "category": "gaming",
+      "added": "2026-02-24"
+    },
+    {
+      "slug": "privacy-solutions",
+      "title": "Privacy Solutions Overview",
+      "category": "infrastructure",
+      "added": "2026-02-23"
+    }
+  ]
+}

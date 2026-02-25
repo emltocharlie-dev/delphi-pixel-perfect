@@ -1,0 +1,122 @@
+[
+  {
+    "id": "1",
+    "slug": "solana-the-modular",
+    "title": "Solana: The Modular Future of Blockchain",
+    "description": "An in-depth analysis of Solana architecture and its position in the modular blockchain ecosystem.",
+    "excerpt": "This report examines Solana technical architecture, scalability solutions, and its competitive positioning in the rapidly evolving modular blockchain landscape.",
+    "content": "Full article content would be here...",
+    "category": "Infrastructure",
+    "publishedDate": "2026-02-20T10:30:00Z",
+    "author": "Alex Thompson",
+    "views": 12500,
+    "likes": 420,
+    "readTime": 12,
+    "tags": [
+      "Solana",
+      "Blockchain",
+      "Modular",
+      "Infrastructure",
+      "Scalability"
+    ],
+    "delphiTag": "reports",
+    "isPremium": false,
+    "featured": true
+  },
+  {
+    "id": "2",
+    "slug": "bitcoin-etf-flows-analysis",
+    "title": "Bitcoin ETF Flows Analysis: Institutional Adoption Trends",
+    "description": "Weekly analysis of Bitcoin ETF flows and institutional adoption patterns.",
+    "excerpt": "This analysis tracks Bitcoin ETF flows, institutional interest trends, and market implications for the broader cryptocurrency ecosystem.",
+    "content": "Full article content would be here...",
+    "category": "Finance",
+    "publishedDate": "2026-02-19T14:20:00Z",
+    "author": "Maria Chen",
+    "views": 8900,
+    "likes": 310,
+    "readTime": 8,
+    "tags": [
+      "Bitcoin",
+      "ETF",
+      "Institutional",
+      "Finance",
+      "Analysis"
+    ],
+    "delphiTag": "alpha",
+    "isPremium": true,
+    "featured": true
+  },
+  {
+    "id": "3",
+    "slug": "ethereum-layer2-ecosystem",
+    "title": "Ethereum Layer 2 Ecosystem: State of the Union",
+    "description": "Comprehensive overview of the Ethereum Layer 2 scaling solutions landscape.",
+    "excerpt": "This report provides a detailed analysis of the current state of Ethereum Layer 2 solutions, including Arbitrum, Optimism, zkSync, and StarkNet.",
+    "content": "Full article content would be here...",
+    "category": "Infrastructure",
+    "publishedDate": "2026-02-18T09:15:00Z",
+    "author": "James Wilson",
+    "views": 7450,
+    "likes": 285,
+    "readTime": 15,
+    "tags": [
+      "Ethereum",
+      "Layer 2",
+      "Scaling",
+      "Rollups",
+      "zkSync"
+    ],
+    "delphiTag": "reports",
+    "isPremium": false,
+    "featured": true
+  },
+  {
+    "id": "4",
+    "slug": "defi-summer-2.0",
+    "title": "DeFi Summer 2.0: What to Expect in the Next Cycle",
+    "description": "Analysis of emerging trends and opportunities in the DeFi space.",
+    "excerpt": "This research explores potential catalysts and innovation areas that could drive the next DeFi growth cycle.",
+    "content": "Full article content would be here...",
+    "category": "DeFi",
+    "publishedDate": "2026-02-17T16:45:00Z",
+    "author": "Sarah Johnson",
+    "views": 6200,
+    "likes": 195,
+    "readTime": 10,
+    "tags": [
+      "DeFi",
+      "Yield",
+      "Lending",
+      "DEX",
+      "Innovation"
+    ],
+    "delphiTag": "alpha",
+    "isPremium": false,
+    "featured": false
+  },
+  {
+    "id": "5",
+    "slug": "ai-blockchain-convergence",
+    "title": "AI and Blockchain Convergence: Use Cases and Opportunities",
+    "description": "Exploring the intersection of artificial intelligence and blockchain technology.",
+    "excerpt": "This analysis examines how AI and blockchain technologies are converging and the new opportunities this creates.",
+    "content": "Full article content would be here...",
+    "category": "Innovation",
+    "publishedDate": "2026-02-16T11:30:00Z",
+    "author": "Robert Kim",
+    "views": 5300,
+    "likes": 178,
+    "readTime": 14,
+    "tags": [
+      "AI",
+      "Blockchain",
+      "Convergence",
+      "Innovation",
+      "Technology"
+    ],
+    "delphiTag": "notes",
+    "isPremium": true,
+    "featured": false
+  }
+]

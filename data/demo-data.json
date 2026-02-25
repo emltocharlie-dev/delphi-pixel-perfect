@@ -1,0 +1,574 @@
+{
+  "version": "1.0.0",
+  "generatedAt": "2026-02-25T18:08:48.451Z",
+  "description": "Delphi Digital Demo数据 - 用于开发和测试",
+  "articles": [
+    {
+      "id": "1",
+      "slug": "solana-the-modular",
+      "title": "Solana: The Modular Future of Blockchain",
+      "description": "An in-depth analysis of Solana architecture and its position in the modular blockchain ecosystem.",
+      "excerpt": "This report examines Solana technical architecture, scalability solutions, and its competitive positioning in the rapidly evolving modular blockchain landscape.",
+      "content": "Full article content would be here...",
+      "category": "Infrastructure",
+      "publishedDate": "2026-02-20T10:30:00Z",
+      "author": "Alex Thompson",
+      "views": 12500,
+      "likes": 420,
+      "readTime": 12,
+      "tags": [
+        "Solana",
+        "Blockchain",
+        "Modular",
+        "Infrastructure",
+        "Scalability"
+      ],
+      "delphiTag": "reports",
+      "isPremium": false,
+      "featured": true
+    },
+    {
+      "id": "2",
+      "slug": "bitcoin-etf-flows-analysis",
+      "title": "Bitcoin ETF Flows Analysis: Institutional Adoption Trends",
+      "description": "Weekly analysis of Bitcoin ETF flows and institutional adoption patterns.",
+      "excerpt": "This analysis tracks Bitcoin ETF flows, institutional interest trends, and market implications for the broader cryptocurrency ecosystem.",
+      "content": "Full article content would be here...",
+      "category": "Finance",
+      "publishedDate": "2026-02-19T14:20:00Z",
+      "author": "Maria Chen",
+      "views": 8900,
+      "likes": 310,
+      "readTime": 8,
+      "tags": [
+        "Bitcoin",
+        "ETF",
+        "Institutional",
+        "Finance",
+        "Analysis"
+      ],
+      "delphiTag": "alpha",
+      "isPremium": true,
+      "featured": true
+    },
+    {
+      "id": "3",
+      "slug": "ethereum-layer2-ecosystem",
+      "title": "Ethereum Layer 2 Ecosystem: State of the Union",
+      "description": "Comprehensive overview of the Ethereum Layer 2 scaling solutions landscape.",
+      "excerpt": "This report provides a detailed analysis of the current state of Ethereum Layer 2 solutions, including Arbitrum, Optimism, zkSync, and StarkNet.",
+      "content": "Full article content would be here...",
+      "category": "Infrastructure",
+      "publishedDate": "2026-02-18T09:15:00Z",
+      "author": "James Wilson",
+      "views": 7450,
+      "likes": 285,
+      "readTime": 15,
+      "tags": [
+        "Ethereum",
+        "Layer 2",
+        "Scaling",
+        "Rollups",
+        "zkSync"
+      ],
+      "delphiTag": "reports",
+      "isPremium": false,
+      "featured": true
+    },
+    {
+      "id": "4",
+      "slug": "defi-summer-2.0",
+      "title": "DeFi Summer 2.0: What to Expect in the Next Cycle",
+      "description": "Analysis of emerging trends and opportunities in the DeFi space.",
+      "excerpt": "This research explores potential catalysts and innovation areas that could drive the next DeFi growth cycle.",
+      "content": "Full article content would be here...",
+      "category": "DeFi",
+      "publishedDate": "2026-02-17T16:45:00Z",
+      "author": "Sarah Johnson",
+      "views": 6200,
+      "likes": 195,
+      "readTime": 10,
+      "tags": [
+        "DeFi",
+        "Yield",
+        "Lending",
+        "DEX",
+        "Innovation"
+      ],
+      "delphiTag": "alpha",
+      "isPremium": false,
+      "featured": false
+    },
+    {
+      "id": "5",
+      "slug": "ai-blockchain-convergence",
+      "title": "AI and Blockchain Convergence: Use Cases and Opportunities",
+      "description": "Exploring the intersection of artificial intelligence and blockchain technology.",
+      "excerpt": "This analysis examines how AI and blockchain technologies are converging and the new opportunities this creates.",
+      "content": "Full article content would be here...",
+      "category": "Innovation",
+      "publishedDate": "2026-02-16T11:30:00Z",
+      "author": "Robert Kim",
+      "views": 5300,
+      "likes": 178,
+      "readTime": 14,
+      "tags": [
+        "AI",
+        "Blockchain",
+        "Convergence",
+        "Innovation",
+        "Technology"
+      ],
+      "delphiTag": "notes",
+      "isPremium": true,
+      "featured": false
+    }
+  ],
+  "projects": [
+    {
+      "id": "bitcoin",
+      "slug": "bitcoin",
+      "name": "Bitcoin",
+      "description": "The original cryptocurrency and digital gold standard.",
+      "longDescription": "Bitcoin is the first decentralized cryptocurrency, created in 2009 by Satoshi Nakamoto. It operates on a peer-to-peer network without central authority, using proof-of-work consensus.",
+      "icon": "₿",
+      "categories": [
+        "Store of Value",
+        "Digital Gold",
+        "Layer 1"
+      ],
+      "metrics": {
+        "marketCap": "$1.2T",
+        "price": "$62,450",
+        "change24h": "+2.3%",
+        "dominance": "52.4%",
+        "hashRate": "650 EH/s"
+      },
+      "tools": [
+        {
+          "id": "etf-flows",
+          "name": "ETF Flows",
+          "description": "Bitcoin ETF flow analysis and tracking",
+          "metrics": [
+            "dailyFlows",
+            "totalAUM",
+            "premiumDiscount"
+          ]
+        },
+        {
+          "id": "top-signal",
+          "name": "Top Signal",
+          "description": "Top trading signals and market indicators",
+          "metrics": [
+            "RSI",
+            "MACD",
+            "volumeProfile"
+          ]
+        },
+        {
+          "id": "on-chain",
+          "name": "On-Chain Analysis",
+          "description": "Bitcoin on-chain metrics and network health",
+          "metrics": [
+            "hodlWaves",
+            "mvrv",
+            "nupl"
+          ]
+        }
+      ],
+      "research": [
+        {
+          "slug": "bitcoin-etf-flows-analysis",
+          "title": "Bitcoin ETF Flows Analysis"
+        },
+        {
+          "slug": "bitcoin-halving-2024",
+          "title": "Bitcoin Halving 2024 Analysis"
+        }
+      ],
+      "status": "active",
+      "lastUpdated": "2026-02-25T10:00:00Z"
+    },
+    {
+      "id": "ethereum",
+      "slug": "ethereum",
+      "name": "Ethereum",
+      "description": "The leading smart contract platform and decentralized application ecosystem.",
+      "longDescription": "Ethereum is a decentralized, open-source blockchain with smart contract functionality. It is the foundation for the majority of DeFi, NFT, and Web3 applications.",
+      "icon": "Ξ",
+      "categories": [
+        "Smart Contracts",
+        "DeFi",
+        "Layer 1"
+      ],
+      "metrics": {
+        "marketCap": "$420B",
+        "price": "$3,450",
+        "change24h": "+1.8%",
+        "tvl": "$52B",
+        "dailyTransactions": "1.2M"
+      },
+      "tools": [
+        {
+          "id": "layer2-analysis",
+          "name": "Layer 2 Analysis",
+          "description": "Ethereum layer 2 ecosystem analysis",
+          "metrics": [
+            "l2TVL",
+            "transactionCount",
+            "feeComparison"
+          ]
+        },
+        {
+          "id": "defi-dashboard",
+          "name": "DeFi Dashboard",
+          "description": "Ethereum DeFi ecosystem metrics",
+          "metrics": [
+            "totalValueLocked",
+            "protocolRevenue",
+            "userGrowth"
+          ]
+        },
+        {
+          "id": "staking",
+          "name": "Staking Analytics",
+          "description": "Ethereum staking metrics and validator analysis",
+          "metrics": [
+            "stakingRatio",
+            "validatorCount",
+            "apr"
+          ]
+        }
+      ],
+      "research": [
+        {
+          "slug": "ethereum-layer2-ecosystem",
+          "title": "Ethereum Layer 2 Ecosystem"
+        },
+        {
+          "slug": "ethereum-upgrade-roadmap",
+          "title": "Ethereum Upgrade Roadmap"
+        }
+      ],
+      "status": "active",
+      "lastUpdated": "2026-02-25T09:30:00Z"
+    },
+    {
+      "id": "solana",
+      "slug": "solana",
+      "name": "Solana",
+      "description": "High-performance blockchain supporting decentralized apps and crypto-currencies.",
+      "longDescription": "Solana is a high-performance blockchain supporting decentralized applications and cryptocurrencies at scale. It uses a unique proof-of-history consensus combined with proof-of-stake.",
+      "icon": "◎",
+      "categories": [
+        "High Performance",
+        "Layer 1",
+        "Web3"
+      ],
+      "metrics": {
+        "marketCap": "$85B",
+        "price": "$185",
+        "change24h": "+3.2%",
+        "tps": "2,500",
+        "activeAddresses": "950K"
+      },
+      "tools": [
+        {
+          "id": "performance",
+          "name": "Performance Metrics",
+          "description": "Solana network performance and health metrics",
+          "metrics": [
+            "transactionsPerSecond",
+            "blockTime",
+            "validatorHealth"
+          ]
+        },
+        {
+          "id": "ecosystem",
+          "name": "Ecosystem Tracker",
+          "description": "Solana ecosystem projects and growth",
+          "metrics": [
+            "projectCount",
+            "developerActivity",
+            "funding"
+          ]
+        }
+      ],
+      "research": [
+        {
+          "slug": "solana-the-modular",
+          "title": "Solana: The Modular Future"
+        }
+      ],
+      "status": "active",
+      "lastUpdated": "2026-02-25T08:45:00Z"
+    }
+  ],
+  "explore": {
+    "categories": [
+      {
+        "slug": "finance",
+        "name": "Finance",
+        "description": "Financial markets, economics, and investment strategies",
+        "icon": "💰",
+        "color": "blue",
+        "articleCount": 45,
+        "subcategories": [
+          {
+            "slug": "asset-management",
+            "name": "Asset Management",
+            "articleCount": 18,
+            "description": "Portfolio management and investment strategies"
+          },
+          {
+            "slug": "trading",
+            "name": "Trading",
+            "articleCount": 22,
+            "description": "Trading strategies and market analysis"
+          },
+          {
+            "slug": "macro",
+            "name": "Macro Economics",
+            "articleCount": 5,
+            "description": "Macroeconomic trends and analysis"
+          }
+        ],
+        "featuredArticles": [
+          {
+            "slug": "bitcoin-etf-flows-analysis",
+            "title": "Bitcoin ETF Flows Analysis"
+          },
+          {
+            "slug": "macro-outlook-2026",
+            "title": "Macroeconomic Outlook 2026"
+          }
+        ]
+      },
+      {
+        "slug": "infrastructure",
+        "name": "Infrastructure",
+        "description": "Blockchain infrastructure, protocols, and technology",
+        "icon": "⚙️",
+        "color": "green",
+        "articleCount": 38,
+        "subcategories": [
+          {
+            "slug": "layer-1",
+            "name": "Layer 1 Protocols",
+            "articleCount": 15,
+            "description": "Base layer blockchain protocols"
+          },
+          {
+            "slug": "layer-2",
+            "name": "Layer 2 Solutions",
+            "articleCount": 12,
+            "description": "Scaling solutions and rollups"
+          },
+          {
+            "slug": "oracles",
+            "name": "Oracles",
+            "articleCount": 8,
+            "description": "Data oracles and external connectivity"
+          },
+          {
+            "slug": "artificial-intelligence",
+            "name": "Artificial Intelligence",
+            "articleCount": 3,
+            "description": "AI and blockchain convergence"
+          }
+        ],
+        "featuredArticles": [
+          {
+            "slug": "solana-the-modular",
+            "title": "Solana: The Modular Future"
+          },
+          {
+            "slug": "ethereum-layer2-ecosystem",
+            "title": "Ethereum Layer 2 Ecosystem"
+          }
+        ]
+      },
+      {
+        "slug": "defi",
+        "name": "DeFi",
+        "description": "Decentralized finance protocols and applications",
+        "icon": "🏦",
+        "color": "yellow",
+        "articleCount": 32,
+        "subcategories": [
+          {
+            "slug": "lending",
+            "name": "Lending",
+            "articleCount": 12,
+            "description": "Decentralized lending protocols"
+          },
+          {
+            "slug": "dex",
+            "name": "DEX",
+            "articleCount": 10,
+            "description": "Decentralized exchanges"
+          },
+          {
+            "slug": "yield",
+            "name": "Yield",
+            "articleCount": 8,
+            "description": "Yield farming and strategies"
+          },
+          {
+            "slug": "derivatives",
+            "name": "Derivatives",
+            "articleCount": 2,
+            "description": "Decentralized derivatives"
+          }
+        ],
+        "featuredArticles": [
+          {
+            "slug": "defi-summer-2.0",
+            "title": "DeFi Summer 2.0"
+          },
+          {
+            "slug": "yield-optimization",
+            "title": "Yield Optimization Strategies"
+          }
+        ]
+      }
+    ],
+    "trending": [
+      {
+        "slug": "solana-the-modular",
+        "title": "Solana: The Modular Future",
+        "category": "infrastructure",
+        "views": 12500
+      },
+      {
+        "slug": "bitcoin-etf-flows-analysis",
+        "title": "Bitcoin ETF Flows Analysis",
+        "category": "finance",
+        "views": 8900
+      },
+      {
+        "slug": "ai-blockchain-convergence",
+        "title": "AI and Blockchain Convergence",
+        "category": "infrastructure",
+        "views": 5300
+      }
+    ],
+    "recentlyAdded": [
+      {
+        "slug": "nft-market-trends",
+        "title": "NFT Market Trends Q1 2026",
+        "category": "nft",
+        "added": "2026-02-25"
+      },
+      {
+        "slug": "gaming-economy",
+        "title": "Gaming Economy Analysis",
+        "category": "gaming",
+        "added": "2026-02-24"
+      },
+      {
+        "slug": "privacy-solutions",
+        "title": "Privacy Solutions Overview",
+        "category": "infrastructure",
+        "added": "2026-02-23"
+      }
+    ]
+  },
+  "search": {
+    "popularQueries": [
+      {
+        "query": "Bitcoin",
+        "count": 1250
+      },
+      {
+        "query": "Ethereum",
+        "count": 980
+      },
+      {
+        "query": "DeFi",
+        "count": 750
+      },
+      {
+        "query": "NFT",
+        "count": 620
+      },
+      {
+        "query": "Solana",
+        "count": 580
+      },
+      {
+        "query": "Layer 2",
+        "count": 450
+      },
+      {
+        "query": "Staking",
+        "count": 380
+      },
+      {
+        "query": "Yield",
+        "count": 320
+      }
+    ],
+    "searchSuggestions": {
+      "bitcoin": [
+        "bitcoin etf",
+        "bitcoin price",
+        "bitcoin mining",
+        "bitcoin halving"
+      ],
+      "ethereum": [
+        "ethereum upgrade",
+        "ethereum staking",
+        "ethereum gas",
+        "ethereum layer 2"
+      ],
+      "defi": [
+        "defi protocols",
+        "defi yield",
+        "defi risks",
+        "defi trends"
+      ],
+      "solana": [
+        "solana performance",
+        "solana ecosystem",
+        "solana validators"
+      ]
+    },
+    "searchFilters": {
+      "type": [
+        "all",
+        "articles",
+        "projects",
+        "dashboards",
+        "analysts"
+      ],
+      "timeframe": [
+        "all",
+        "today",
+        "week",
+        "month",
+        "year"
+      ],
+      "sort": [
+        "relevance",
+        "newest",
+        "popular",
+        "trending"
+      ],
+      "category": [
+        "all",
+        "finance",
+        "infrastructure",
+        "defi",
+        "nft",
+        "gaming"
+      ]
+    }
+  },
+  "stats": {
+    "totalArticles": 5,
+    "totalProjects": 3,
+    "totalCategories": 3,
+    "totalSearchQueries": 8
+  }
+}

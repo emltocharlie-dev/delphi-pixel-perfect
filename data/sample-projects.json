@@ -1,0 +1,180 @@
+[
+  {
+    "id": "bitcoin",
+    "slug": "bitcoin",
+    "name": "Bitcoin",
+    "description": "The original cryptocurrency and digital gold standard.",
+    "longDescription": "Bitcoin is the first decentralized cryptocurrency, created in 2009 by Satoshi Nakamoto. It operates on a peer-to-peer network without central authority, using proof-of-work consensus.",
+    "icon": "₿",
+    "categories": [
+      "Store of Value",
+      "Digital Gold",
+      "Layer 1"
+    ],
+    "metrics": {
+      "marketCap": "$1.2T",
+      "price": "$62,450",
+      "change24h": "+2.3%",
+      "dominance": "52.4%",
+      "hashRate": "650 EH/s"
+    },
+    "tools": [
+      {
+        "id": "etf-flows",
+        "name": "ETF Flows",
+        "description": "Bitcoin ETF flow analysis and tracking",
+        "metrics": [
+          "dailyFlows",
+          "totalAUM",
+          "premiumDiscount"
+        ]
+      },
+      {
+        "id": "top-signal",
+        "name": "Top Signal",
+        "description": "Top trading signals and market indicators",
+        "metrics": [
+          "RSI",
+          "MACD",
+          "volumeProfile"
+        ]
+      },
+      {
+        "id": "on-chain",
+        "name": "On-Chain Analysis",
+        "description": "Bitcoin on-chain metrics and network health",
+        "metrics": [
+          "hodlWaves",
+          "mvrv",
+          "nupl"
+        ]
+      }
+    ],
+    "research": [
+      {
+        "slug": "bitcoin-etf-flows-analysis",
+        "title": "Bitcoin ETF Flows Analysis"
+      },
+      {
+        "slug": "bitcoin-halving-2024",
+        "title": "Bitcoin Halving 2024 Analysis"
+      }
+    ],
+    "status": "active",
+    "lastUpdated": "2026-02-25T10:00:00Z"
+  },
+  {
+    "id": "ethereum",
+    "slug": "ethereum",
+    "name": "Ethereum",
+    "description": "The leading smart contract platform and decentralized application ecosystem.",
+    "longDescription": "Ethereum is a decentralized, open-source blockchain with smart contract functionality. It is the foundation for the majority of DeFi, NFT, and Web3 applications.",
+    "icon": "Ξ",
+    "categories": [
+      "Smart Contracts",
+      "DeFi",
+      "Layer 1"
+    ],
+    "metrics": {
+      "marketCap": "$420B",
+      "price": "$3,450",
+      "change24h": "+1.8%",
+      "tvl": "$52B",
+      "dailyTransactions": "1.2M"
+    },
+    "tools": [
+      {
+        "id": "layer2-analysis",
+        "name": "Layer 2 Analysis",
+        "description": "Ethereum layer 2 ecosystem analysis",
+        "metrics": [
+          "l2TVL",
+          "transactionCount",
+          "feeComparison"
+        ]
+      },
+      {
+        "id": "defi-dashboard",
+        "name": "DeFi Dashboard",
+        "description": "Ethereum DeFi ecosystem metrics",
+        "metrics": [
+          "totalValueLocked",
+          "protocolRevenue",
+          "userGrowth"
+        ]
+      },
+      {
+        "id": "staking",
+        "name": "Staking Analytics",
+        "description": "Ethereum staking metrics and validator analysis",
+        "metrics": [
+          "stakingRatio",
+          "validatorCount",
+          "apr"
+        ]
+      }
+    ],
+    "research": [
+      {
+        "slug": "ethereum-layer2-ecosystem",
+        "title": "Ethereum Layer 2 Ecosystem"
+      },
+      {
+        "slug": "ethereum-upgrade-roadmap",
+        "title": "Ethereum Upgrade Roadmap"
+      }
+    ],
+    "status": "active",
+    "lastUpdated": "2026-02-25T09:30:00Z"
+  },
+  {
+    "id": "solana",
+    "slug": "solana",
+    "name": "Solana",
+    "description": "High-performance blockchain supporting decentralized apps and crypto-currencies.",
+    "longDescription": "Solana is a high-performance blockchain supporting decentralized applications and cryptocurrencies at scale. It uses a unique proof-of-history consensus combined with proof-of-stake.",
+    "icon": "◎",
+    "categories": [
+      "High Performance",
+      "Layer 1",
+      "Web3"
+    ],
+    "metrics": {
+      "marketCap": "$85B",
+      "price": "$185",
+      "change24h": "+3.2%",
+      "tps": "2,500",
+      "activeAddresses": "950K"
+    },
+    "tools": [
+      {
+        "id": "performance",
+        "name": "Performance Metrics",
+        "description": "Solana network performance and health metrics",
+        "metrics": [
+          "transactionsPerSecond",
+          "blockTime",
+          "validatorHealth"
+        ]
+      },
+      {
+        "id": "ecosystem",
+        "name": "Ecosystem Tracker",
+        "description": "Solana ecosystem projects and growth",
+        "metrics": [
+          "projectCount",
+          "developerActivity",
+          "funding"
+        ]
+      }
+    ],
+    "research": [
+      {
+        "slug": "solana-the-modular",
+        "title": "Solana: The Modular Future"
+      }
+    ],
+    "status": "active",
+    "lastUpdated": "2026-02-25T08:45:00Z"
+  }
+]

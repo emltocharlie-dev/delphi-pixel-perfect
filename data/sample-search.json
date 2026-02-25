@@ -1,0 +1,91 @@
+{
+  "popularQueries": [
+    {
+      "query": "Bitcoin",
+      "count": 1250
+    },
+    {
+      "query": "Ethereum",
+      "count": 980
+    },
+    {
+      "query": "DeFi",
+      "count": 750
+    },
+    {
+      "query": "NFT",
+      "count": 620
+    },
+    {
+      "query": "Solana",
+      "count": 580
+    },
+    {
+      "query": "Layer 2",
+      "count": 450
+    },
+    {
+      "query": "Staking",
+      "count": 380
+    },
+    {
+      "query": "Yield",
+      "count": 320
+    }
+  ],
+  "searchSuggestions": {
+    "bitcoin": [
+      "bitcoin etf",
+      "bitcoin price",
+      "bitcoin mining",
+      "bitcoin halving"
+    ],
+    "ethereum": [
+      "ethereum upgrade",
+      "ethereum staking",
+      "ethereum gas",
+      "ethereum layer 2"
+    ],
+    "defi": [
+      "defi protocols",
+      "defi yield",
+      "defi risks",
+      "defi trends"
+    ],
+    "solana": [
+      "solana performance",
+      "solana ecosystem",
+      "solana validators"
+    ]
+  },
+  "searchFilters": {
+    "type": [
+      "all",
+      "articles",
+      "projects",
+      "dashboards",
+      "analysts"
+    ],
+    "timeframe": [
+      "all",
+      "today",
+      "week",
+      "month",
+      "year"
+    ],
+    "sort": [
+      "relevance",
+      "newest",
+      "popular",
+      "trending"
+    ],
+    "category": [
+      "all",
+      "finance",
+      "infrastructure",
+      "defi",
+      "nft",
+      "gaming"
+    ]
+  }
+}

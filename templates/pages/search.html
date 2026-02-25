@@ -1,14 +1,177 @@
-<!-- 搜索页面内容 -->
+<!-- 搜索页面标题 -->
 <div class="mb-8">
     <h1 class="text-4xl font-semibold text-white mb-2">Research</h1>
     <p class="text-tertiary">高级搜索和研究工具</p>
 </div>
 
-<div class="bg-dark-800 rounded-xl p-6 mb-8">
-    <h2 class="text-2xl font-semibold text-white mb-4">搜索功能开发中</h2>
-    <p class="text-tertiary mb-4">Research页面正在开发中，将提供高级搜索和研究工具。</p>
-    <div class="flex space-x-4">
-        <a href="/" class="btn btn-primary">返回首页</a>
-        <a href="/explore" class="btn btn-secondary">浏览知识库</a>
+<!-- 高级搜索栏 -->
+<div class="mb-8">
+    <div class="bg-dark-800 rounded-xl p-6">
+        <div class="flex flex-col md:flex-row md:items-end gap-4">
+            <!-- 主搜索框 -->
+            <div class="flex-1">
+                <label class="block text-sm font-medium text-tertiary mb-2">搜索内容</label>
+                <div class="relative">
+                    <input type="search" 
+                           class="input pl-12 pr-4 py-3 w-full" 
+                           placeholder="输入关键词、项目名称或作者..." 
+                           id="advanced-search-input">
+                    <div class="absolute left-4 top-1/2 transform -translate-y-1/2">
+                        <svg class="w-5 h-5 text-tertiary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                        </svg>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 类型筛选 -->
+            <div>
+                <label class="block text-sm font-medium text-tertiary mb-2">类型</label>
+                <select class="input py-3" id="search-type">
+                    <option value="all">全部</option>
+                    <option value="articles">文章</option>
+                    <option value="projects">项目</option>
+                    <option value="dashboards">数据应用</option>
+                    <option value="analysts">分析师</option>
+                </select>
+            </div>
+            
+            <!-- 时间范围 -->
+            <div>
+                <label class="block text-sm font-medium text-tertiary mb-2">时间范围</label>
+                <select class="input py-3" id="search-timeframe">
+                    <option value="all">全部时间</option>
+                    <option value="today">今天</option>
+                    <option value="week">本周</option>
+                    <option value="month">本月</option>
+                    <option value="year">今年</option>
+                </select>
+            </div>
+            
+            <!-- 搜索按钮 -->
+            <div>
+                <button class="btn btn-primary py-3 px-6" id="advanced-search-btn">
+                    搜索
+                </button>
+            </div>
+        </div>
+        
+        <!-- 高级选项 -->
+        <div class="mt-4 pt-4 border-t border-dark-700 hidden" id="advanced-options">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div>
+                    <label class="block text-sm font-medium text-tertiary mb-2">排序方式</label>
+                    <select class="input py-2 w-full" id="search-sort">
+                        <option value="relevance">相关性</option>
+                        <option value="newest">最新</option>
+                        <option value="popular">最受欢迎</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-tertiary mb-2">分类</label>
+                    <select class="input py-2 w-full" id="search-category">
+                        <option value="all">全部分类</option>
+                        <option value="finance">金融</option>
+                        <option value="infrastructure">基础设施</option>
+                        <option value="defi">DeFi</option>
+                        <option value="nft">NFT</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-tertiary mb-2">每页数量</label>
+                    <select class="input py-2 w-full" id="search-limit">
+                        <option value="10">10条</option>
+                        <option value="25">25条</option>
+                        <option value="50">50条</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 显示/隐藏高级选项 -->
+        <div class="mt-4 text-center">
+            <button class="text-sm text-tertiary hover:text-primary flex items-center justify-center mx-auto" id="toggle-advanced-btn">
+                <span>高级选项</span>
+                <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                </svg>
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- 搜索结果区域 -->
+<div class="mb-8">
+    <div class="flex items-center justify-between mb-4">
+        <h2 class="text-2xl font-semibold text-white">搜索结果</h2>
+        <div class="text-tertiary text-sm" id="search-stats">
+            输入关键词开始搜索
+        </div>
+    </div>
+    
+    <!-- 搜索结果容器 -->
+    <div id="search-results" class="space-y-4">
+        <!-- 初始状态：搜索提示 -->
+        <div class="bg-dark-800 rounded-xl p-8 text-center">
+            <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-dark-700 flex items-center justify-center">
+                <svg class="w-8 h-8 text-tertiary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                </svg>
+            </div>
+            <h3 class="text-white font-medium mb-2">开始您的搜索</h3>
+            <p class="text-tertiary mb-4">输入关键词来搜索文章、项目、数据应用等内容</p>
+            <div class="text-sm text-tertiary">
+                <p>试试搜索: <span class="text-primary cursor-pointer hover:underline" data-suggestion="Bitcoin">Bitcoin</span>, 
+                <span class="text-primary cursor-pointer hover:underline" data-suggestion="Ethereum">Ethereum</span>, 
+                <span class="text-primary cursor-pointer hover:underline" data-suggestion="DeFi">DeFi</span></p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 分页 -->
+    <div class="mt-8 hidden" id="search-pagination">
+        <div class="flex items-center justify-between">
+            <button class="btn btn-secondary" id="prev-page-btn" disabled>
+                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                </svg>
+                上一页
+            </button>
+            
+            <div class="flex items-center space-x-2" id="page-numbers">
+                <!-- 页码动态生成 -->
+            </div>
+            
+            <button class="btn btn-secondary" id="next-page-btn" disabled>
+                下一页
+                <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                </svg>
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- 搜索历史 -->
+<div class="mt-12 pt-8 border-t border-dark-700">
+    <h3 class="text-xl font-semibold text-white mb-4">最近搜索</h3>
+    <div id="search-history" class="flex flex-wrap gap-2">
+        <!-- 搜索历史动态生成 -->
+        <div class="text-sm text-tertiary">暂无搜索历史</div>
+    </div>
+</div>
+
+<!-- 热门搜索 -->
+<div class="mt-8">
+    <h3 class="text-xl font-semibold text-white mb-4">热门搜索</h3>
+    <div class="flex flex-wrap gap-2">
+        <span class="px-3 py-1.5 bg-dark-700 hover:bg-dark-600 rounded-lg text-sm cursor-pointer transition-colors" data-tag="Bitcoin">Bitcoin</span>
+        <span class="px-3 py-1.5 bg-dark-700 hover:bg-dark-600 rounded-lg text-sm cursor-pointer transition-colors" data-tag="Ethereum">Ethereum</span>
+        <span class="px-3 py-1.5 bg-dark-700 hover:bg-dark-600 rounded-lg text-sm cursor-pointer transition-colors" data-tag="DeFi">DeFi</span>
+        <span class="px-3 py-1.5 bg-dark-700 hover:bg-dark-600 rounded-lg text-sm cursor-pointer transition-colors" data-tag="NFT">NFT</span>
+        <span class="px-3 py-1.5 bg-dark-700 hover:bg-dark-600 rounded-lg text-sm cursor-pointer transition-colors" data-tag="Solana">Solana</span>
+        <span class="px-3 py-1.5 bg-dark-700 hover:bg-dark-600 rounded-lg text-sm cursor-pointer transition-colors" data-tag="Layer 2">Layer 2</span>
+        <span class="px-3 py-1.5 bg-dark-700 hover:bg-dark-600 rounded-lg text-sm cursor-pointer transition-colors" data-tag="GameFi">GameFi</span>
+        <span class="px-3 py-1.5 bg-dark-700 hover:bg-dark-600 rounded-lg text-sm cursor-pointer transition-colors" data-tag="Web3">Web3</span>
     </div>
 </div>
