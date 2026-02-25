@@ -1,14 +1,179 @@
-<!-- 知识库页面内容 -->
+<!-- 知识库页面标题 -->
 <div class="mb-8">
     <h1 class="text-4xl font-semibold text-white mb-2">Library</h1>
-    <p class="text-tertiary">知识库和探索页面</p>
+    <p class="text-tertiary">知识库和多层级内容探索</p>
 </div>
 
-<div class="bg-dark-800 rounded-xl p-6 mb-8">
-    <h2 class="text-2xl font-semibold text-white mb-4">知识库开发中</h2>
-    <p class="text-tertiary mb-4">Library页面正在开发中，将提供多层级知识库导航和内容探索。</p>
-    <div class="flex space-x-4">
-        <a href="/" class="btn btn-primary">返回首页</a>
-        <a href="/search" class="btn btn-secondary">使用搜索</a>
+<!-- 知识库概览 -->
+<div class="mb-8">
+    <div class="bg-dark-800 rounded-xl p-6">
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+            <div>
+                <h2 class="text-2xl font-semibold text-white mb-2">探索知识库</h2>
+                <p class="text-tertiary">浏览按类别组织的专业内容和研究资料</p>
+            </div>
+            <div class="flex items-center space-x-2">
+                <div class="relative">
+                    <input type="search" 
+                           class="input pl-10 pr-4 py-2" 
+                           placeholder="在知识库中搜索..." 
+                           id="explore-search-input">
+                    <div class="absolute left-3 top-1/2 transform -translate-y-1/2">
+                        <svg class="w-4 h-4 text-tertiary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                        </svg>
+                    </div>
+                </div>
+                <button class="btn btn-primary" id="explore-search-btn">搜索</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 分类导航 -->
+<div class="mb-8">
+    <h2 class="text-2xl font-semibold text-white mb-4">知识分类</h2>
+    
+    <div id="category-navigation" class="space-y-4">
+        <!-- 分类卡片动态生成 -->
+        <div class="text-center py-8 text-tertiary">
+            <div class="loading-spinner mx-auto mb-4"></div>
+            <p>加载分类中...</p>
+        </div>
+    </div>
+</div>
+
+<!-- 趋势内容 -->
+<div class="mb-8">
+    <div class="flex items-center justify-between mb-4">
+        <h2 class="text-2xl font-semibold text-white">趋势内容</h2>
+        <a href="/search?sort=trending" class="text-sm text-primary hover:underline">查看全部趋势 →</a>
+    </div>
+    
+    <div id="trending-content" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- 趋势内容卡片动态生成 -->
+    </div>
+</div>
+
+<!-- 最近添加 -->
+<div class="mb-8">
+    <div class="flex items-center justify-between mb-4">
+        <h2 class="text-2xl font-semibold text-white">最近添加</h2>
+        <a href="/search?sort=newest" class="text-sm text-primary hover:underline">查看全部最新 →</a>
+    </div>
+    
+    <div id="recent-content" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- 最近内容卡片动态生成 -->
+    </div>
+</div>
+
+<!-- 特色专题 -->
+<div class="mb-8">
+    <div class="bg-dark-800 rounded-xl p-6">
+        <h2 class="text-2xl font-semibold text-white mb-4">特色专题</h2>
+        <p class="text-tertiary mb-6">深入探索特定主题的系列内容和研究</p>
+        
+        <div id="featured-topics" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div class="bg-dark-900 rounded-lg p-6 border border-dark-700 hover:border-primary/30 transition-colors">
+                <div class="w-12 h-12 rounded-lg bg-blue-600/20 flex items-center justify-center text-xl mb-4">
+                    🏦
+                </div>
+                <h3 class="text-white font-semibold mb-2">DeFi深度解析</h3>
+                <p class="text-tertiary text-sm mb-4">去中心化金融协议、风险和机会的全面分析</p>
+                <div class="flex items-center text-sm text-tertiary">
+                    <span>12篇文章</span>
+                    <span class="mx-2">•</span>
+                    <span>3个工具</span>
+                </div>
+            </div>
+            
+            <div class="bg-dark-900 rounded-lg p-6 border border-dark-700 hover:border-primary/30 transition-colors">
+                <div class="w-12 h-12 rounded-lg bg-green-600/20 flex items-center justify-center text-xl mb-4">
+                    ⚙️
+                </div>
+                <h3 class="text-white font-semibold mb-2">区块链基础设施</h3>
+                <p class="text-tertiary text-sm mb-4">Layer 1、Layer 2、跨链桥等技术架构分析</p>
+                <div class="flex items-center text-sm text-tertiary">
+                    <span>18篇文章</span>
+                    <span class="mx-2">•</span>
+                    <span>5个项目</span>
+                </div>
+            </div>
+            
+            <div class="bg-dark-900 rounded-lg p-6 border border-dark-700 hover:border-primary/30 transition-colors">
+                <div class="w-12 h-12 rounded-lg bg-purple-600/20 flex items-center justify-center text-xl mb-4">
+                    🎮
+                </div>
+                <h3 class="text-white font-semibold mb-2">GameFi与NFT</h3>
+                <p class="text-tertiary text-sm mb-4">游戏化金融和数字资产的市场趋势和机会</p>
+                <div class="flex items-center text-sm text-tertiary">
+                    <span>8篇文章</span>
+                    <span class="mx-2">•</span>
+                    <span>2个工具</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 知识图谱概览 -->
+<div class="mb-8">
+    <div class="bg-gradient-to-r from-dark-800 to-dark-900 rounded-xl p-6 border border-dark-700">
+        <h2 class="text-2xl font-semibold text-white mb-4">知识图谱</h2>
+        <p class="text-tertiary mb-6">探索内容之间的关联和知识结构</p>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="text-center">
+                <div class="text-3xl font-bold text-primary mb-2" id="total-articles">0</div>
+                <div class="text-sm text-tertiary">总文章数</div>
+            </div>
+            
+            <div class="text-center">
+                <div class="text-3xl font-bold text-primary mb-2" id="total-categories">0</div>
+                <div class="text-sm text-tertiary">分类数量</div>
+            </div>
+            
+            <div class="text-center">
+                <div class="text-3xl font-bold text-primary mb-2" id="total-tags">0</div>
+                <div class="text-sm text-tertiary">标签数量</div>
+            </div>
+        </div>
+        
+        <div class="mt-6 pt-6 border-t border-dark-700">
+            <div class="flex flex-wrap gap-2" id="popular-tags">
+                <!-- 热门标签动态生成 -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 浏览指南 -->
+<div class="mb-8">
+    <h2 class="text-2xl font-semibold text-white mb-4">如何浏览知识库</h2>
+    
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="bg-dark-800 rounded-lg p-6">
+            <div class="w-10 h-10 rounded-lg bg-blue-600/20 flex items-center justify-center text-blue-600 mb-4">
+                1
+            </div>
+            <h3 class="text-white font-semibold mb-2">按分类浏览</h3>
+            <p class="text-tertiary text-sm">从顶部分类导航中选择感兴趣的主题领域，查看相关内容和子分类。</p>
+        </div>
+        
+        <div class="bg-dark-800 rounded-lg p-6">
+            <div class="w-10 h-10 rounded-lg bg-green-600/20 flex items-center justify-center text-green-600 mb-4">
+                2
+            </div>
+            <h3 class="text-white font-semibold mb-2">使用搜索</h3>
+            <p class="text-tertiary text-sm">通过搜索框查找特定关键词或主题，快速定位相关内容。</p>
+        </div>
+        
+        <div class="bg-dark-800 rounded-lg p-6">
+            <div class="w-10 h-10 rounded-lg bg-purple-600/20 flex items-center justify-center text-purple-600 mb-4">
+                3
+            </div>
+            <h3 class="text-white font-semibold mb-2">探索趋势</h3>
+            <p class="text-tertiary text-sm">查看趋势内容和热门专题，了解当前最受关注的研究方向。</p>
+        </div>
     </div>
 </div>
