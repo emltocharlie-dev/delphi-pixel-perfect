@@ -378,11 +378,12 @@ function createContentCard(article) {
   `;
   
   // 添加点击事件
-  card.addEventListener('click', () => {
+  card.addEventListener('click', (e) => {
+    // 防止事件冒泡（如果内部元素也有点击事件）
+    e.stopPropagation();
     console.log(`点击卡片: ${article.id} - ${article.title}`);
-    showNotification(`打开: ${article.title}`);
-    // 实际应该导航到详情页面
-    // window.location.href = `/article/${article.slug}`;
+    // 导航到文章详情页
+    window.location.href = `article.html?slug=${article.slug}`;
   });
   
   return card;
