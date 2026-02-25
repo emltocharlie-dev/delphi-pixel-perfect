@@ -382,8 +382,8 @@ function createContentCard(article) {
     // 防止事件冒泡（如果内部元素也有点击事件）
     e.stopPropagation();
     console.log(`点击卡片: ${article.id} - ${article.title}`);
-    // 导航到文章详情页
-    window.location.href = `article.html?slug=${article.slug}`;
+    // 导航到文章详情页 (无扩展名URL，与_redirects配置一致)
+    window.location.href = `article?slug=${article.slug}`;
   });
   
   return card;
