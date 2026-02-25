@@ -653,11 +653,56 @@ function resetFilters() {
 window.clearSearch = clearSearch;
 window.resetFilters = resetFilters;
 
+// 增强的启动函数 - 等待服务就绪
+function enhancedInitApp() {
+  console.log('🚀 增强启动: 检查服务就绪状态...');
+  
+  // 检查ContentManager是否可用
+  if (typeof ContentManager === 'undefined') {
+    console.warn('⚠️ ContentManager未定义，等待服务初始化...');
+    
+    // 等待服务就绪事件
+    window.addEventListener('app:servicesReady', function onServicesReady(event) {
+      console.log('✅ 服务就绪事件收到，启动应用:', event.detail);
+      window.removeEventListener('app:servicesReady', onServicesReady);
+      initApp();
+    });
+    
+    // 处理服务失败
+    window.addEventListener('app:servicesFailed', function onServicesFailed(event) {
+      console.error('❌ 服务初始化失败:', event.detail);
+      window.removeEventListener('app:servicesFailed', onServicesFailed);
+      
+      // 仍然尝试启动，使用降级模式
+      console.warn('⚠️ 使用降级模式启动应用');
+      initApp();
+    });
+    
+    // 设置超时，防止永远等待
+    setTimeout(() => {
+      if (!window.appStarted) {
+        console.warn('⚠️ 服务初始化超时，强制启动应用');
+        window.appStarted = true;
+        initApp();
+      }
+    }, 5000);
+    
+    return;
+  }
+  
+  // ContentManager已可用，直接启动
+  console.log('✅ ContentManager已就绪，直接启动应用');
+  initApp();
+}
+
+// 标记应用已启动
+window.appStarted = false;
+
 // 启动应用
 if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', initApp);
+  document.addEventListener('DOMContentLoaded', enhancedInitApp);
 } else {
-  initApp();
+  enhancedInitApp();
 }
 
 console.log('Delphi Digital像素级复刻应用脚本加载完成');
