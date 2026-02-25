@@ -246,12 +246,12 @@ const CONTENT_DATA = {
 
 // Delphi Digital标签系统
 const DELPHI_TAGS = {
-  all: "全部内容",
-  reports: "研究报告",
-  alpha: "Alpha见解",
-  notes: "笔记",
-  media: "媒体",
-  reads: "阅读推荐"
+  all: "All",
+  reports: "Reports",
+  alpha: "Alpha Insights",
+  notes: "Notes",
+  media: "Media",
+  reads: "Reads"
 };
 
 // 内容管理系统API

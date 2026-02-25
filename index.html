@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OKX教程中心 - Delphi Digital像素级复刻</title>
-    <meta name="description" content="专业的OKX交易教程和研究平台，Delphi Digital像素级复刻">
+    <title>OKX Tutorials Center - Delphi Digital Pixel-Perfect Replica</title>
+    <meta name="description" content="Professional OKX trading tutorials and research platform. Pixel-perfect replica of Delphi Digital.">
     
     <!-- Tailwind CSS v3.4.1 (原站使用) -->
     <script src="https://cdn.tailwindcss.com/3.4.1"></script>
@@ -124,12 +124,12 @@
                     
                     <!-- 主导航 -->
                     <nav class="hidden md:flex items-center space-x-1">
-                        <button class="nav-tab active" data-tab="all">全部内容</button>
-                        <button class="nav-tab" data-tab="reports">研究报告</button>
-                        <button class="nav-tab" data-tab="alpha">Alpha见解</button>
-                        <button class="nav-tab" data-tab="notes">笔记</button>
-                        <button class="nav-tab" data-tab="media">媒体</button>
-                        <button class="nav-tab" data-tab="reads">阅读推荐</button>
+                        <button class="nav-tab active" data-tab="all">All</button>
+                        <button class="nav-tab" data-tab="reports">Reports</button>
+                        <button class="nav-tab" data-tab="alpha">Alpha Insights</button>
+                        <button class="nav-tab" data-tab="notes">Notes</button>
+                        <button class="nav-tab" data-tab="media">Media</button>
+                        <button class="nav-tab" data-tab="reads">Reads</button>
                     </nav>
                     
                     <!-- 右侧操作 -->
@@ -159,12 +159,12 @@
                 <!-- 移动端导航 -->
                 <div class="md:hidden hidden py-4 border-t border-dark-700" id="mobile-menu">
                     <div class="flex flex-col space-y-2">
-                        <button class="nav-tab active text-left" data-tab="all">全部内容</button>
-                        <button class="nav-tab text-left" data-tab="reports">研究报告</button>
-                        <button class="nav-tab text-left" data-tab="alpha">Alpha见解</button>
-                        <button class="nav-tab text-left" data-tab="notes">笔记</button>
-                        <button class="nav-tab text-left" data-tab="media">媒体</button>
-                        <button class="nav-tab text-left" data-tab="reads">阅读推荐</button>
+                        <button class="nav-tab active text-left" data-tab="all">All</button>
+                        <button class="nav-tab text-left" data-tab="reports">Reports</button>
+                        <button class="nav-tab text-left" data-tab="alpha">Alpha Insights</button>
+                        <button class="nav-tab text-left" data-tab="notes">Notes</button>
+                        <button class="nav-tab text-left" data-tab="media">Media</button>
+                        <button class="nav-tab text-left" data-tab="reads">Reads</button>
                         
                         <!-- 移动端搜索 -->
                         <div class="mt-4">
@@ -182,11 +182,11 @@
         <main class="container py-8">
             <!-- 页面标题和统计 -->
             <div class="mb-8">
-                <h1 class="text-4xl font-semibold text-white mb-2" id="page-title">全部内容</h1>
+                <h1 class="text-4xl font-semibold text-white mb-2" id="page-title">All</h1>
                 <div class="flex items-center space-x-2 text-sm text-tertiary" id="page-stats">
-                    <span id="total-count">加载中...</span>
+                    <span id="total-count">Loading...</span>
                     <span>•</span>
-                    <span>今日更新</span>
+                    <span>Updated today</span>
                 </div>
             </div>
 
@@ -194,18 +194,18 @@
             <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8 pb-6 border-b border-dark-700">
                 <!-- 时间筛选 -->
                 <div class="flex flex-wrap gap-2">
-                    <button class="filter-btn active" data-filter="all">全部</button>
-                    <button class="filter-btn" data-filter="today">今日</button>
-                    <button class="filter-btn" data-filter="week">本周</button>
-                    <button class="filter-btn" data-filter="month">本月</button>
+                    <button class="filter-btn active" data-filter="all">All</button>
+                    <button class="filter-btn" data-filter="today">Today</button>
+                    <button class="filter-btn" data-filter="week">This week</button>
+                    <button class="filter-btn" data-filter="month">This month</button>
                 </div>
                 
                 <!-- 排序 -->
                 <div class="flex items-center gap-4">
                     <select class="select" id="sort-select">
-                        <option value="newest">最新优先</option>
-                        <option value="popular">最受欢迎</option>
-                        <option value="relevant">最相关</option>
+                        <option value="newest">Newest</option>
+                        <option value="popular">Most popular</option>
+                        <option value="relevant">Most relevant</option>
                     </select>
                 </div>
             </div>
@@ -222,7 +222,7 @@
             <!-- 分页 -->
             <div class="flex items-center justify-center space-x-2" id="pagination">
                 <button class="btn btn-secondary px-4 py-2 disabled" id="prev-btn" disabled>
-                    上一页
+                    Previous
                 </button>
                 
                 <div class="flex items-center space-x-1" id="page-numbers">
@@ -234,7 +234,7 @@
                 </div>
                 
                 <button class="btn btn-secondary px-4 py-2" id="next-btn">
-                    下一页
+                    Next
                 </button>
             </div>
         </main>
@@ -293,7 +293,7 @@
                 <!-- 底部信息 -->
                 <div class="mt-12 pt-8 border-t border-dark-700 flex flex-col md:flex-row md:items-center justify-between">
                     <p class="text-sm text-tertiary">
-                        © 2026 OKX教程中心. 基于Delphi Digital像素级复刻.
+                        © 2026 OKX Tutorials Center. Pixel-perfect replica of Delphi Digital.
                     </p>
                     <div class="flex items-center space-x-4 mt-4 md:mt-0">
                         <a href="#" class="text-tertiary hover:text-primary transition">🐦 Twitter</a>
