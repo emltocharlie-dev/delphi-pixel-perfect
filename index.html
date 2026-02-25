@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OKX教程中心 - Delphi Digital像素级复刻</title>
+    <meta name="description" content="专业的OKX交易教程和研究平台，Delphi Digital像素级复刻">
+    
+    <!-- Tailwind CSS v3.4.1 (原站使用) -->
+    <script src="https://cdn.tailwindcss.com/3.4.1"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        dark: {
+                            50: '#f3f5f6',
+                            100: '#e9ebed',
+                            200: '#d9dbdf',
+                            300: '#979fa7',
+                            400: '#67707b',
+                            500: '#4b5259',
+                            600: '#363a3f',
+                            700: '#2a2e32',
+                            800: '#1f2124',
+                            900: '#0e1012',
+                        },
+                        'primary-blue': {
+                            50: '#eff8ff',
+                            100: '#d1e9ff',
+                            400: '#53b1fd',
+                            500: '#2e90fa',
+                            600: '#007afb',
+                            800: '#1849a9',
+                        },
+                        error: {
+                            400: '#f97066',
+                            500: '#f04438',
+                            700: '#b42318',
+                        },
+                        success: {
+                            300: '#12b76a',
+                            400: '#32d583',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+                    },
+                    spacing: {
+                        '128': '32rem',
+                        '144': '36rem',
+                    },
+                    borderRadius: {
+                        'xl': '0.75rem',
+                        '2xl': '1rem',
+                    }
+                }
+            },
+            darkMode: 'class',
+        }
+    </script>
+    
+    <!-- 原站设计系统补充CSS -->
+    <link rel="stylesheet" href="./styles/delphi-tailwind-extend.css">
+    
+    <!-- 图标 -->
+    <link rel="icon" type="image/svg+xml" href="./assets/favicon.svg">
+    
+    <style>
+        /* 临时字体映射 - 使用Inter作为NeurialGrotesk的替代 */
+        :root {
+            --font-family-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-family-sans-medium: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-family-sans-semibold: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+        
+        /* 加载动画 */
+        #app-loading {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--color-bg-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.3s ease;
+        }
+        
+        .loading-spinner {
+            width: 40px;
+            height: 40px;
+            border: 3px solid var(--color-border);
+            border-top-color: var(--color-primary-blue-600);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+    </style>
+</head>
+<body class="bg-dark-800 min-h-screen">
+    <!-- 加载动画 -->
+    <div id="app-loading">
+        <div class="loading-spinner"></div>
+    </div>
+
+    <!-- 应用容器 -->
+    <div id="app" class="hidden">
+        <!-- 顶部导航栏 -->
+        <header class="sticky top-0 z-50 bg-dark-900 border-b border-dark-700">
+            <div class="container">
+                <div class="flex items-center justify-between h-16">
+                    <!-- Logo -->
+                    <div class="flex items-center">
+                        <a href="/" class="flex items-center space-x-2">
+                            <div class="w-8 h-8 rounded-md bg-blue-600 flex items-center justify-center">
+                                <span class="text-white font-semibold text-lg">O</span>
+                            </div>
+                            <span class="text-white font-semibold text-lg">OKX教程中心</span>
+                            <span class="text-xs font-medium px-1.5 py-0.5 bg-blue-600/10 text-blue-600 rounded">BETA</span>
+                        </a>
+                    </div>
+                    
+                    <!-- 主导航 -->
+                    <nav class="hidden md:flex items-center space-x-1">
+                        <button class="nav-tab active" data-tab="all">全部内容</button>
+                        <button class="nav-tab" data-tab="reports">研究报告</button>
+                        <button class="nav-tab" data-tab="alpha">Alpha见解</button>
+                        <button class="nav-tab" data-tab="notes">笔记</button>
+                        <button class="nav-tab" data-tab="media">媒体</button>
+                        <button class="nav-tab" data-tab="reads">阅读推荐</button>
+                    </nav>
+                    
+                    <!-- 右侧操作 -->
+                    <div class="flex items-center space-x-4">
+                        <!-- 搜索框 -->
+                        <div class="relative hidden md:block">
+                            <input type="search" 
+                                   class="input pl-10 pr-4 py-2 w-64" 
+                                   placeholder="搜索教程..." 
+                                   id="search-input">
+                            <div class="absolute left-3 top-1/2 transform -translate-y-1/2">
+                                <svg class="w-4 h-4 text-tertiary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                                </svg>
+                            </div>
+                        </div>
+                        
+                        <!-- 移动端菜单按钮 -->
+                        <button class="md:hidden p-2 rounded-md hover:bg-tertiary" id="mobile-menu-btn">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- 移动端导航 -->
+                <div class="md:hidden hidden py-4 border-t border-dark-700" id="mobile-menu">
+                    <div class="flex flex-col space-y-2">
+                        <button class="nav-tab active text-left" data-tab="all">全部内容</button>
+                        <button class="nav-tab text-left" data-tab="reports">研究报告</button>
+                        <button class="nav-tab text-left" data-tab="alpha">Alpha见解</button>
+                        <button class="nav-tab text-left" data-tab="notes">笔记</button>
+                        <button class="nav-tab text-left" data-tab="media">媒体</button>
+                        <button class="nav-tab text-left" data-tab="reads">阅读推荐</button>
+                        
+                        <!-- 移动端搜索 -->
+                        <div class="mt-4">
+                            <input type="search" 
+                                   class="input w-full" 
+                                   placeholder="搜索教程..." 
+                                   id="mobile-search-input">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- 主内容区域 -->
+        <main class="container py-8">
+            <!-- 页面标题和统计 -->
+            <div class="mb-8">
+                <h1 class="text-4xl font-semibold text-white mb-2" id="page-title">全部内容</h1>
+                <div class="flex items-center space-x-2 text-sm text-tertiary" id="page-stats">
+                    <span id="total-count">加载中...</span>
+                    <span>•</span>
+                    <span>今日更新</span>
+                </div>
+            </div>
+
+            <!-- 筛选栏 -->
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8 pb-6 border-b border-dark-700">
+                <!-- 时间筛选 -->
+                <div class="flex flex-wrap gap-2">
+                    <button class="filter-btn active" data-filter="all">全部</button>
+                    <button class="filter-btn" data-filter="today">今日</button>
+                    <button class="filter-btn" data-filter="week">本周</button>
+                    <button class="filter-btn" data-filter="month">本月</button>
+                </div>
+                
+                <!-- 排序 -->
+                <div class="flex items-center gap-4">
+                    <select class="select" id="sort-select">
+                        <option value="newest">最新优先</option>
+                        <option value="popular">最受欢迎</option>
+                        <option value="relevant">最相关</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- 内容网格 -->
+            <div id="content-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+                <!-- 内容卡片将通过JavaScript动态生成 -->
+                <div class="col-span-full flex flex-col items-center justify-center py-12">
+                    <div class="loading-spinner mb-4"></div>
+                    <p class="text-tertiary">加载内容中...</p>
+                </div>
+            </div>
+
+            <!-- 分页 -->
+            <div class="flex items-center justify-center space-x-2" id="pagination">
+                <button class="btn btn-secondary px-4 py-2 disabled" id="prev-btn" disabled>
+                    上一页
+                </button>
+                
+                <div class="flex items-center space-x-1" id="page-numbers">
+                    <button class="btn btn-secondary w-10 h-10 active">1</button>
+                    <button class="btn btn-secondary w-10 h-10">2</button>
+                    <button class="btn btn-secondary w-10 h-10">3</button>
+                    <span class="px-2 text-tertiary">...</span>
+                    <button class="btn btn-secondary w-10 h-10">8</button>
+                </div>
+                
+                <button class="btn btn-secondary px-4 py-2" id="next-btn">
+                    下一页
+                </button>
+            </div>
+        </main>
+
+        <!-- 页脚 -->
+        <footer class="bg-dark-900 border-t border-dark-700 mt-16">
+            <div class="container py-12">
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                    <!-- 品牌信息 -->
+                    <div>
+                        <div class="flex items-center space-x-2 mb-4">
+                            <div class="w-8 h-8 rounded-md bg-blue-600 flex items-center justify-center">
+                                <span class="text-white font-semibold text-lg">O</span>
+                            </div>
+                            <span class="text-white font-semibold text-lg">OKX教程中心</span>
+                        </div>
+                        <p class="text-sm text-tertiary">
+                            专业的OKX交易教程和研究平台，帮助您掌握加密货币交易技能。
+                        </p>
+                    </div>
+                    
+                    <!-- 分类 -->
+                    <div>
+                        <h3 class="text-white font-semibold mb-4">分类</h3>
+                        <ul class="space-y-2">
+                            <li><a href="#" class="text-sm text-tertiary hover:text-primary transition">新手教程</a></li>
+                            <li><a href="#" class="text-sm text-tertiary hover:text-primary transition">交易策略</a></li>
+                            <li><a href="#" class="text-sm text-tertiary hover:text-primary transition">安全指南</a></li>
+                            <li><a href="#" class="text-sm text-tertiary hover:text-primary transition">工具使用</a></li>
+                        </ul>
+                    </div>
+                    
+                    <!-- 资源 -->
+                    <div>
+                        <h3 class="text-white font-semibold mb-4">资源</h3>
+                        <ul class="space-y-2">
+                            <li><a href="#" class="text-sm text-tertiary hover:text-primary transition">OKX官网</a></li>
+                            <li><a href="#" class="text-sm text-tertiary hover:text-primary transition">帮助中心</a></li>
+                            <li><a href="#" class="text-sm text-tertiary hover:text-primary transition">API文档</a></li>
+                            <li><a href="#" class="text-sm text-tertiary hover:text-primary transition">社区论坛</a></li>
+                        </ul>
+                    </div>
+                    
+                    <!-- 联系 -->
+                    <div>
+                        <h3 class="text-white font-semibold mb-4">联系</h3>
+                        <ul class="space-y-2">
+                            <li><a href="#" class="text-sm text-tertiary hover:text-primary transition">反馈建议</a></li>
+                            <li><a href="#" class="text-sm text-tertiary hover:text-primary transition">合作咨询</a></li>
+                            <li><a href="#" class="text-sm text-tertiary hover:text-primary transition">隐私政策</a></li>
+                            <li><a href="#" class="text-sm text-tertiary hover:text-primary transition">服务条款</a></li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- 底部信息 -->
+                <div class="mt-12 pt-8 border-t border-dark-700 flex flex-col md:flex-row md:items-center justify-between">
+                    <p class="text-sm text-tertiary">
+                        © 2026 OKX教程中心. 基于Delphi Digital像素级复刻.
+                    </p>
+                    <div class="flex items-center space-x-4 mt-4 md:mt-0">
+                        <a href="#" class="text-tertiary hover:text-primary transition">🐦 Twitter</a>
+                        <a href="#" class="text-tertiary hover:text-primary transition">📢 Telegram</a>
+                        <a href="#" class="text-tertiary hover:text-primary transition">💻 GitHub</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- 原站JavaScript依赖 -->
+    <!-- Vue.js 3.x (原站推断使用) -->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <!-- Swiper轮播库 (原站可能使用) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <!-- Highcharts图表库 (原站可能使用) -->
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    
+    <!-- 项目JavaScript文件 -->
+    <script src="./data/content.js"></script>
+    <script src="./scripts/app.js"></script>
+    
+    <script>
+        // 隐藏加载动画，显示应用
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                document.getElementById('app-loading').style.opacity = '0';
+                setTimeout(function() {
+                    document.getElementById('app-loading').style.display = 'none';
+                    document.getElementById('app').classList.remove('hidden');
+                }, 300);
+            }, 500);
+        });
+    </script>
+</body>
+</html>

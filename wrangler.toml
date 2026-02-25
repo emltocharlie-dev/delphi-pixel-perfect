@@ -1,0 +1,21 @@
+name = "delphi-pixel-perfect"
+main = "index.html"
+compatibility_date = "2026-02-25"
+
+[build]
+command = ""
+publish = "."
+
+[[routes]]
+pattern = "/*"
+script_name = "delphi-pixel-perfect"
+
+[site]
+bucket = "."
+entry-point = "."
+
+# 开发服务器配置
+[dev]
+port = 8787
+local_protocol = "http"
+ip = "localhost"

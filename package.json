@@ -1,0 +1,14 @@
+{
+  "name": "delphi-pixel-perfect",
+  "version": "1.0.0",
+  "description": "Delphi Digital像素级复刻 - OKX教程中心",
+  "main": "index.html",
+  "scripts": {
+    "build": "echo 'No build required - static site'",
+    "start": "echo 'Open index.html in browser'"
+  },
+  "keywords": ["delphi-digital", "okx", "tutorial", "pixel-perfect"],
+  "author": "StarAI Team",
+  "license": "UNLICENSED",
+  "private": true
+}
