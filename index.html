@@ -150,15 +150,7 @@
                         </a>
                     </div>
                     
-                    <!-- 主导航 -->
-                    <nav class="hidden md:flex items-center space-x-1">
-                        <button class="nav-tab active" data-tab="all">All</button>
-                        <button class="nav-tab" data-tab="reports">Reports</button>
-                        <button class="nav-tab" data-tab="alpha">Alpha Insights</button>
-                        <button class="nav-tab" data-tab="notes">Notes</button>
-                        <button class="nav-tab" data-tab="media">Media</button>
-                        <button class="nav-tab" data-tab="reads">Reads</button>
-                    </nav>
+                    <!-- 主导航 (已移除 - 移动到主内容区) -->
                     
                     <!-- 右侧操作 -->
                     <div class="flex items-center space-x-4">
@@ -187,12 +179,50 @@
                 <!-- 移动端导航 -->
                 <div class="md:hidden hidden py-4 border-t border-dark-700" id="mobile-menu">
                     <div class="flex flex-col space-y-2">
-                        <button class="nav-tab active text-left" data-tab="all">All</button>
-                        <button class="nav-tab text-left" data-tab="reports">Reports</button>
-                        <button class="nav-tab text-left" data-tab="alpha">Alpha Insights</button>
-                        <button class="nav-tab text-left" data-tab="notes">Notes</button>
-                        <button class="nav-tab text-left" data-tab="media">Media</button>
-                        <button class="nav-tab text-left" data-tab="reads">Reads</button>
+                        <!-- 侧边导航项 (移动端) -->
+                        <div class="mb-2">
+                            <div class="text-xs uppercase text-dark-400 mb-1">Navigation</div>
+                            <a href="/" class="side-nav-item active text-left block" data-nav="home">
+                                <span>home</span>
+                            </a>
+                            <a href="/search" class="side-nav-item text-left block" data-nav="research">
+                                <span>Research</span>
+                            </a>
+                            <a href="/explore" class="side-nav-item text-left block" data-nav="library">
+                                <span>Library</span>
+                            </a>
+                            <a href="/bookmarks" class="side-nav-item text-left block" data-nav="saved">
+                                <span>Saved</span>
+                            </a>
+                            <a href="/projects" class="side-nav-item text-left block" data-nav="tools">
+                                <span>Tools</span>
+                            </a>
+                        </div>
+                        
+                        <!-- 帮助项 -->
+                        <div class="mb-2">
+                            <div class="text-xs uppercase text-dark-400 mb-1">help</div>
+                            <a href="#" class="side-nav-item text-left block text-sm" data-nav="conentus">
+                                <span>Conentus</span>
+                            </a>
+                            <a href="#" class="side-nav-item text-left block text-sm" data-nav="faq">
+                                <span>FAQ</span>
+                            </a>
+                            <a href="#" class="side-nav-item text-left block text-sm" data-nav="feedback">
+                                <span>Feedback</span>
+                            </a>
+                        </div>
+                        
+                        <!-- 内容标签 -->
+                        <div class="mt-4 pt-4 border-t border-dark-700">
+                            <div class="text-xs uppercase text-dark-400 mb-1">Content</div>
+                            <button class="nav-tab active text-left w-full" data-tab="all">All</button>
+                            <button class="nav-tab text-left w-full" data-tab="reports">Reports</button>
+                            <button class="nav-tab text-left w-full" data-tab="alpha">Alpha Insights</button>
+                            <button class="nav-tab text-left w-full" data-tab="notes">Notes</button>
+                            <button class="nav-tab text-left w-full" data-tab="media">Media</button>
+                            <button class="nav-tab text-left w-full" data-tab="reads">Reads</button>
+                        </div>
                         
                         <!-- 移动端搜索 -->
                         <div class="mt-4">
@@ -206,8 +236,51 @@
             </div>
         </header>
 
+        <!-- 侧边导航栏 -->
+        <aside id="sidebar" class="hidden lg:block fixed left-0 top-16 bottom-0 w-64 bg-dark-900 border-r border-dark-700 overflow-y-auto z-40">
+            <nav class="p-6">
+                <!-- 导航项列表 -->
+                <div class="space-y-1">
+                    <a href="/" class="side-nav-item active" data-nav="home">
+                        <span>home</span>
+                    </a>
+                    <a href="/search" class="side-nav-item" data-nav="research">
+                        <span>Research</span>
+                    </a>
+                    <a href="/explore" class="side-nav-item" data-nav="library">
+                        <span>Library</span>
+                    </a>
+                    <a href="/bookmarks" class="side-nav-item" data-nav="saved">
+                        <span>Saved</span>
+                    </a>
+                    <a href="/projects" class="side-nav-item" data-nav="tools">
+                        <span>Tools</span>
+                    </a>
+                    
+                    <!-- 帮助下拉 -->
+                    <div class="mt-8 pt-6 border-t border-dark-700">
+                        <div class="text-xs uppercase text-dark-400 mb-2">help</div>
+                        <div class="space-y-1 ml-2">
+                            <a href="#" class="side-nav-item text-sm" data-nav="conentus">
+                                <span>Conentus</span>
+                            </a>
+                            <a href="#" class="side-nav-item text-sm" data-nav="faq">
+                                <span>FAQ</span>
+                            </a>
+                            <a href="#" class="side-nav-item text-sm" data-nav="feedback">
+                                <span>Feedback</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </aside>
+
+        <!-- 移动端侧边栏遮罩 -->
+        <div id="sidebar-overlay" class="lg:hidden fixed inset-0 bg-black bg-opacity-50 z-30 hidden"></div>
+
         <!-- 主内容区域 -->
-        <main class="container py-8">
+        <main class="container py-8 lg:ml-64">
             <!-- 页面标题和统计 -->
             <div class="mb-8">
                 <h1 class="text-4xl font-semibold text-white mb-2" id="page-title">All</h1>
@@ -215,6 +288,16 @@
                     <span id="total-count">Loading...</span>
                     <span>•</span>
                     <span>Updated today</span>
+                </div>
+                
+                <!-- 内容标签导航 (从顶栏移动到此) -->
+                <div class="mt-6 flex flex-wrap gap-2">
+                    <button class="nav-tab active" data-tab="all">All</button>
+                    <button class="nav-tab" data-tab="reports">Reports</button>
+                    <button class="nav-tab" data-tab="alpha">Alpha Insights</button>
+                    <button class="nav-tab" data-tab="notes">Notes</button>
+                    <button class="nav-tab" data-tab="media">Media</button>
+                    <button class="nav-tab" data-tab="reads">Reads</button>
                 </div>
             </div>
 
