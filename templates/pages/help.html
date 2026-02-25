@@ -1,0 +1,275 @@
+<!-- 帮助页面标题 -->
+<div class="mb-8">
+    <h1 class="text-4xl font-semibold text-white mb-2">Help & Support</h1>
+    <p class="text-tertiary">帮助中心和支持资源</p>
+</div>
+
+<!-- 帮助概览 -->
+<div class="mb-8">
+    <div class="bg-dark-800 rounded-xl p-6">
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+            <div>
+                <h2 class="text-2xl font-semibold text-white mb-2">帮助中心</h2>
+                <p class="text-tertiary">查找常见问题解答、使用指南和反馈渠道</p>
+            </div>
+            <div class="flex items-center space-x-2">
+                <div class="relative">
+                    <input type="search" 
+                           class="input pl-10 pr-4 py-2" 
+                           placeholder="搜索帮助..." 
+                           id="help-search-input">
+                    <div class="absolute left-3 top-1/2 transform -translate-y-1/2">
+                        <svg class="w-4 h-4 text-tertiary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                        </svg>
+                    </div>
+                </div>
+                <button class="btn btn-primary" id="help-search-btn">搜索</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 帮助导航 -->
+<div class="mb-8">
+    <h2 class="text-2xl font-semibold text-white mb-4">帮助分类</h2>
+    
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <!-- Conentus -->
+        <div class="bg-dark-800 rounded-xl p-6 hover:bg-dark-700 transition-colors cursor-pointer" 
+             onclick="navigateToSection('conentus')">
+            <div class="w-12 h-12 rounded-lg bg-blue-600/20 flex items-center justify-center text-2xl text-blue-600 mb-4">
+                📚
+            </div>
+            <h3 class="text-white font-semibold mb-2">Conentus</h3>
+            <p class="text-tertiary text-sm mb-4">内容指南和使用教程，帮助您充分利用平台功能</p>
+            <div class="flex items-center text-sm text-tertiary">
+                <span>12个指南</span>
+                <span class="mx-2">•</span>
+                <span>6个教程</span>
+            </div>
+        </div>
+        
+        <!-- FAQ -->
+        <div class="bg-dark-800 rounded-xl p-6 hover:bg-dark-700 transition-colors cursor-pointer"
+             onclick="navigateToSection('faq')">
+            <div class="w-12 h-12 rounded-lg bg-green-600/20 flex items-center justify-center text-2xl text-green-600 mb-4">
+                ❓
+            </div>
+            <h3 class="text-white font-semibold mb-2">FAQ</h3>
+            <p class="text-tertiary text-sm mb-4">常见问题解答，快速解决您可能遇到的问题</p>
+            <div class="flex items-center text-sm text-tertiary">
+                <span>25个常见问题</span>
+                <span class="mx-2">•</span>
+                <span>8个类别</span>
+            </div>
+        </div>
+        
+        <!-- Feedback -->
+        <div class="bg-dark-800 rounded-xl p-6 hover:bg-dark-700 transition-colors cursor-pointer"
+             onclick="navigateToSection('feedback')">
+            <div class="w-12 h-12 rounded-lg bg-purple-600/20 flex items-center justify-center text-2xl text-purple-600 mb-4">
+                💬
+            </div>
+            <h3 class="text-white font-semibold mb-2">Feedback</h3>
+            <p class="text-tertiary text-sm mb-4">提供反馈和建议，帮助我们改进平台</p>
+            <div class="flex items-center text-sm text-tertiary">
+                <span>提交反馈</span>
+                <span class="mx-2">•</span>
+                <span>功能请求</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Conentus部分 -->
+<div class="mb-8" id="conentus-section">
+    <div class="flex items-center justify-between mb-4">
+        <h2 class="text-2xl font-semibold text-white">Conentus</h2>
+        <a href="#conentus" class="text-sm text-primary hover:underline">查看全部 →</a>
+    </div>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="bg-dark-800 rounded-xl p-6">
+            <h3 class="text-white font-semibold mb-2">开始使用指南</h3>
+            <p class="text-tertiary text-sm mb-4">新用户入门指南，快速了解平台核心功能</p>
+            <ul class="space-y-2 text-sm text-tertiary">
+                <li class="flex items-center">
+                    <svg class="w-4 h-4 mr-2 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    账户设置和偏好配置
+                </li>
+                <li class="flex items-center">
+                    <svg class="w-4 h-4 mr-2 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    导航和搜索功能介绍
+                </li>
+                <li class="flex items-center">
+                    <svg class="w-4 h-4 mr-2 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    内容收藏和管理指南
+                </li>
+            </ul>
+        </div>
+        
+        <div class="bg-dark-800 rounded-xl p-6">
+            <h3 class="text-white font-semibold mb-2">高级功能教程</h3>
+            <p class="text-tertiary text-sm mb-4">深入探索平台的高级功能和工具</p>
+            <ul class="space-y-2 text-sm text-tertiary">
+                <li class="flex items-center">
+                    <svg class="w-4 h-4 mr-2 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    数据应用使用指南
+                </li>
+                <li class="flex items-center">
+                    <svg class="w-4 h-4 mr-2 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    项目分析工具详解
+                </li>
+                <li class="flex items-center">
+                    <svg class="w-4 h-4 mr-2 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    知识库导航和搜索技巧
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- FAQ部分 -->
+<div class="mb-8" id="faq-section">
+    <div class="flex items-center justify-between mb-4">
+        <h2 class="text-2xl font-semibold text-white">常见问题解答</h2>
+        <a href="#faq" class="text-sm text-primary hover:underline">查看全部FAQ →</a>
+    </div>
+    
+    <div class="space-y-4">
+        <div class="bg-dark-800 rounded-xl p-6">
+            <h3 class="text-white font-semibold mb-2">如何搜索特定的研究内容？</h3>
+            <p class="text-tertiary text-sm">使用Research页面的高级搜索功能，可以按类型、时间范围和排序方式进行筛选。输入关键词后，系统会实时显示相关结果。</p>
+        </div>
+        
+        <div class="bg-dark-800 rounded-xl p-6">
+            <h3 class="text-white font-semibold mb-2">如何收藏感兴趣的内容？</h3>
+            <p class="text-tertiary text-sm">在文章、项目或工具页面点击"收藏"按钮，内容将自动添加到Saved页面。您可以在Saved页面管理和组织收藏内容。</p>
+        </div>
+        
+        <div class="bg-dark-800 rounded-xl p-6">
+            <h3 class="text-white font-semibold mb-2">数据应用需要付费吗？</h3>
+            <p class="text-tertiary text-sm">目前所有数据应用都是免费的。我们提供Sector Performance Dashboard和BTC Game Theory Tool等工具，供用户免费使用。</p>
+        </div>
+    </div>
+</div>
+
+<!-- Feedback部分 -->
+<div class="mb-8" id="feedback-section">
+    <div class="bg-gradient-to-r from-dark-800 to-dark-900 rounded-xl p-6 border border-dark-700">
+        <h2 class="text-2xl font-semibold text-white mb-4">反馈和建议</h2>
+        <p class="text-tertiary mb-6">我们重视您的反馈，请告诉我们您的想法和建议</p>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+                <h3 class="text-white font-medium mb-2">报告问题</h3>
+                <p class="text-tertiary text-sm mb-4">如果您遇到任何技术问题或错误，请通过以下方式报告。</p>
+                <button class="btn btn-secondary" onclick="reportIssue()">
+                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.998-.833-2.732 0L3.34 16.5c-.77.833.192 2.5 1.732 2.5z" />
+                    </svg>
+                    报告问题
+                </button>
+            </div>
+            
+            <div>
+                <h3 class="text-white font-medium mb-2">功能请求</h3>
+                <p class="text-tertiary text-sm mb-4">如果您希望看到新功能或改进，请提交功能请求。</p>
+                <button class="btn btn-secondary" onclick="requestFeature()">
+                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                    </svg>
+                    请求功能
+                </button>
+            </div>
+        </div>
+        
+        <div class="mt-6 pt-6 border-t border-dark-700">
+            <h3 class="text-white font-medium mb-2">直接反馈</h3>
+            <div class="space-y-4">
+                <textarea class="input w-full h-32" placeholder="请详细描述您的反馈或建议..." id="feedback-textarea"></textarea>
+                <div class="flex justify-end">
+                    <button class="btn btn-primary" onclick="submitFeedback()">提交反馈</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 联系信息 -->
+<div class="mb-8">
+    <h2 class="text-2xl font-semibold text-white mb-4">联系信息</h2>
+    
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="bg-dark-800 rounded-xl p-6">
+            <div class="w-10 h-10 rounded-lg bg-blue-600/20 flex items-center justify-center text-blue-600 mb-4">
+                📧
+            </div>
+            <h3 class="text-white font-semibold mb-2">电子邮件</h3>
+            <p class="text-tertiary text-sm">support@delphi-pixel-perfect.pages.dev</p>
+            <p class="text-tertiary text-sm mt-2">技术支持：24小时内回复</p>
+        </div>
+        
+        <div class="bg-dark-800 rounded-xl p-6">
+            <div class="w-10 h-10 rounded-lg bg-green-600/20 flex items-center justify-center text-green-600 mb-4">
+                📋
+            </div>
+            <h3 class="text-white font-semibold mb-2">文档中心</h3>
+            <p class="text-tertiary text-sm">完整的技术文档和API参考</p>
+            <a href="/docs" class="text-primary hover:underline text-sm mt-2 block">查看文档 →</a>
+        </div>
+        
+        <div class="bg-dark-800 rounded-xl p-6">
+            <div class="w-10 h-10 rounded-lg bg-purple-600/20 flex items-center justify-center text-purple-600 mb-4">
+                🔄
+            </div>
+            <h3 class="text-white font-semibold mb-2">状态页面</h3>
+            <p class="text-tertiary text-sm">实时系统状态和更新通知</p>
+            <a href="/status" class="text-primary hover:underline text-sm mt-2 block">查看状态 →</a>
+        </div>
+    </div>
+</div>
+
+<!-- 帮助提示 -->
+<div class="mb-8">
+    <h2 class="text-2xl font-semibold text-white mb-4">帮助提示</h2>
+    
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="bg-dark-800 rounded-lg p-6">
+            <div class="w-10 h-10 rounded-lg bg-blue-600/20 flex items-center justify-center text-blue-600 mb-4">
+                1
+            </div>
+            <h3 class="text-white font-semibold mb-2">详细描述问题</h3>
+            <p class="text-tertiary text-sm">提供详细的步骤描述、截图或错误信息，有助于我们更快解决问题。</p>
+        </div>
+        
+        <div class="bg-dark-800 rounded-lg p-6">
+            <div class="w-10 h-10 rounded-lg bg-green-600/20 flex items-center justify-center text-green-600 mb-4">
+                2
+            </div>
+            <h3 class="text-white font-semibold mb-2">先查看FAQ</h3>
+            <p class="text-tertiary text-sm">大多数常见问题都可以在FAQ部分找到答案，请先查看相关文档。</p>
+        </div>
+        
+        <div class="bg-dark-800 rounded-lg p-6">
+            <div class="w-10 h-10 rounded-lg bg-purple-600/20 flex items-center justify-center text-purple-600 mb-4">
+                3
+            </div>
+            <h3 class="text-white font-semibold mb-2">使用搜索功能</h3>
+            <p class="text-tertiary text-sm">使用帮助搜索功能快速定位相关帮助内容，节省时间。</p>
+        </div>
+    </div>
+</div>

@@ -186,6 +186,29 @@ const pageData = {
     content: fs.readFileSync(path.join(config.templateDir, 'pages/projects.html'), 'utf8'),
     pageScripts: '/scripts/pages/projects.js',
     initFunction: 'initProjectsPage'
+  },
+  
+  // 帮助页面
+  help: {
+    title: 'Help - 帮助中心',
+    description: 'Delphi Digital像素级复刻 - 帮助和支持页面',
+    sideNavItems: [
+      { id: 'home', label: 'home', href: '/', active: false },
+      { id: 'research', label: 'Research', href: '/search', active: false },
+      { id: 'library', label: 'Library', href: '/explore', active: false },
+      { id: 'saved', label: 'Saved', href: '/bookmarks', active: false },
+      { id: 'tools', label: 'Tools', href: '/projects', active: false },
+      { id: 'help', label: 'Help', href: '/help', active: true }
+    ],
+    helpItems: [
+      { id: 'conentus', label: 'Conentus', href: '#' },
+      { id: 'faq', label: 'FAQ', href: '#' },
+      { id: 'feedback', label: 'Feedback', href: '#' }
+    ],
+    showContentTabs: false,
+    content: fs.readFileSync(path.join(config.templateDir, 'pages/help.html'), 'utf8'),
+    pageScripts: '/scripts/pages/help.js',
+    initFunction: 'initHelpPage'
   }
 };
 
