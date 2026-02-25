@@ -635,4 +635,90 @@ function exportBookmarksAsCsv() {
   
   const exportFileDefaultName = `delphi-bookmarks-${new Date().toISOString().split('T')[0]}.csv`;
   
-  const linkElement = document.createElement
+  const linkElement = document.createElement('a');
+  linkElement.setAttribute('href', dataUri);
+  linkElement.setAttribute('download', exportFileDefaultName);
+  linkElement.click();
+  
+  showMessage('书签已导出为CSV文件');
+}
+
+// 导入书签
+function importBookmarks() {
+  console.log('📥 导入书签');
+  
+  // 在实际应用中，这里会打开文件选择器并解析文件
+  // 这里只是演示
+  
+  const input = document.createElement('input');
+  input.type = 'file';
+  input.accept = '.json,.csv';
+  input.onchange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      showMessage(`已选择文件: ${file.name}`);
+      // 实际应用中会解析文件并导入书签
+    }
+  };
+  input.click();
+}
+
+// 同步外部书签
+function syncExternalBookmarks() {
+  console.log('🔗 同步外部书签');
+  
+  // 在实际应用中，这里会连接外部服务
+  // 这里只是演示
+  
+  showMessage('外部书签同步功能需要用户登录');
+}
+
+// 清除筛选
+function clearFilters() {
+  BookmarksState.currentType = 'all';
+  BookmarksState.currentFilter = 'all';
+  BookmarksState.filteredBookmarks = [...BookmarksState.bookmarks];
+  
+  // 更新UI
+  BookmarksDOM.typeFilters.forEach(btn => {
+    if (btn.getAttribute('data-type') === 'all') {
+      btn.classList.add('active');
+    } else {
+      btn.classList.remove('active');
+    }
+  });
+  
+  renderBookmarksGrid();
+  showMessage('筛选已清除');
+}
+
+// 设置加载状态
+function setLoadingState(isLoading) {
+  BookmarksState.isLoading = isLoading;
+  
+  if (isLoading) {
+    console.log('⏳ 书签加载中...');
+  } else {
+    console.log('✅ 书签加载完成');
+  }
+}
+
+// 显示消息
+function showMessage(message) {
+  console.log('💬', message);
+  
+  // 在实际实现中，可以显示一个toast或通知
+  // 这里使用控制台日志
+}
+
+// 显示错误消息
+function showErrorMessage(message) {
+  console.error('❌', message);
+  
+  // 在实际实现中，可以显示错误提示
+}
+
+// 全局访问
+window.initBookmarksPage = initBookmarksPage;
+window.clearFilters = clearFilters;
+window.syncBookmarks = syncBookmarks;
