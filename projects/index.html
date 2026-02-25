@@ -305,18 +305,283 @@
 
         <!-- 主内容区域 -->
         <main class="container py-8 lg:ml-64">
-            {<!-- 项目库页面内容 -->
+            {<!-- 项目库页面标题 -->
 <div class="mb-8">
     <h1 class="text-4xl font-semibold text-white mb-2">Tools</h1>
-    <p class="text-tertiary">项目库和工具页面</p>
+    <p class="text-tertiary">项目库和工具集合</p>
 </div>
 
-<div class="bg-dark-800 rounded-xl p-6 mb-8">
-    <h2 class="text-2xl font-semibold text-white mb-4">项目库开发中</h2>
-    <p class="text-tertiary mb-4">Tools页面正在开发中，将提供项目库、数据分析工具和仪表板。</p>
-    <div class="flex space-x-4">
-        <a href="/" class="btn btn-primary">返回首页</a>
-        <a href="/search" class="btn btn-secondary">使用搜索</a>
+<!-- 项目库概览 -->
+<div class="mb-8">
+    <div class="bg-dark-800 rounded-xl p-6">
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+            <div>
+                <h2 class="text-2xl font-semibold text-white mb-2">探索项目与工具</h2>
+                <p class="text-tertiary">Delphi Digital专业的项目研究和分析工具</p>
+            </div>
+            <div class="flex items-center space-x-2">
+                <div class="text-sm text-tertiary">
+                    共 <span id="project-count">0</span> 个项目
+                </div>
+                <button class="btn btn-secondary" id="refresh-projects-btn">
+                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                    </svg>
+                    刷新
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 项目筛选 -->
+<div class="mb-8">
+    <div class="flex flex-col md:flex-row md:items-center justify-between mb-4">
+        <h2 class="text-2xl font-semibold text-white">项目筛选</h2>
+        <div class="flex space-x-2 mt-2 md:mt-0">
+            <button class="filter-btn active" data-type="all">全部项目</button>
+            <button class="filter-btn" data-type="popular">热门项目</button>
+            <button class="filter-btn" data-type="new">最新项目</button>
+            <button class="filter-btn" data-type="tools">仅工具</button>
+        </div>
+    </div>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
+        <div class="relative">
+            <input type="search" 
+                   class="input pl-10 pr-4 py-3 w-full" 
+                   placeholder="搜索项目..." 
+                   id="project-search-input">
+            <div class="absolute left-3 top-1/2 transform -translate-y-1/2">
+                <svg class="w-4 h-4 text-tertiary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                </svg>
+            </div>
+        </div>
+        
+        <select class="input py-3" id="project-category-select">
+            <option value="">所有分类</option>
+            <option value="layer-1">Layer 1</option>
+            <option value="layer-2">Layer 2</option>
+            <option value="defi">DeFi</option>
+            <option value="infrastructure">基础设施</option>
+            <option value="gaming">游戏/NFT</option>
+            <option value="analytics">数据分析</option>
+        </select>
+        
+        <select class="input py-3" id="project-sort-select">
+            <option value="name">按名称排序</option>
+            <option value="popularity">按人气排序</option>
+            <option value="marketcap">按市值排序</option>
+            <option value="newest">按最新排序</option>
+        </select>
+    </div>
+</div>
+
+<!-- 项目网格 -->
+<div class="mb-8">
+    <div id="projects-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- 项目卡片动态生成 -->
+        <div class="col-span-full text-center py-12">
+            <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-dark-700 flex items-center justify-center">
+                <svg class="w-8 h-8 text-tertiary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                </svg>
+            </div>
+            <h3 class="text-white font-medium mb-2">暂无项目数据</h3>
+            <p class="text-tertiary mb-4">加载项目库中，或暂无符合筛选条件的项目</p>
+            <button class="btn btn-primary" onclick="refreshProjects()">刷新项目</button>
+        </div>
+    </div>
+</div>
+
+<!-- 项目统计 -->
+<div class="mb-8">
+    <div class="bg-dark-800 rounded-xl p-6">
+        <h2 class="text-2xl font-semibold text-white mb-4">项目统计</h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+            <div class="text-center">
+                <div class="text-3xl font-bold text-primary mb-2" id="stats-total-projects">0</div>
+                <div class="text-sm text-tertiary">项目总数</div>
+            </div>
+            
+            <div class="text-center">
+                <div class="text-3xl font-bold text-primary mb-2" id="stats-layer1">0</div>
+                <div class="text-sm text-tertiary">Layer 1 项目</div>
+            </div>
+            
+            <div class="text-center">
+                <div class="text-3xl font-bold text-primary mb-2" id="stats-defi">0</div>
+                <div class="text-sm text-tertiary">DeFi 项目</div>
+            </div>
+            
+            <div class="text-center">
+                <div class="text-3xl font-bold text-primary mb-2" id="stats-tools">0</div>
+                <div class="text-sm text-tertiary">分析工具</div>
+            </div>
+        </div>
+        
+        <div class="mt-6 pt-6 border-t border-dark-700">
+            <div class="flex flex-wrap gap-2" id="project-categories">
+                <!-- 项目分类标签动态生成 -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 热门工具 -->
+<div class="mb-8">
+    <div class="flex items-center justify-between mb-4">
+        <h2 class="text-2xl font-semibold text-white">热门工具</h2>
+        <a href="/data-apps" class="text-sm text-primary hover:underline">查看所有工具 →</a>
+    </div>
+    
+    <div id="popular-tools" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- 工具卡片动态生成 -->
+        <div class="bg-dark-800 rounded-xl p-6 hover:bg-dark-700 transition-colors">
+            <div class="flex items-center justify-between mb-4">
+                <span class="text-xs font-medium px-2 py-1 bg-blue-600/10 text-blue-600 rounded">
+                    数据仪表板
+                </span>
+                <button class="text-tertiary hover:text-white">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
+                        <path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd" />
+                    </svg>
+                </button>
+            </div>
+            
+            <h3 class="text-white font-semibold mb-2">Sector Performance Dashboard</h3>
+            <p class="text-tertiary text-sm mb-4">实时监测加密货币各板块的表现数据，包含交互式图表和市场趋势分析。</p>
+            
+            <div class="pt-4 border-t border-dark-700 flex items-center justify-between">
+                <div class="text-sm text-tertiary">数据更新: 实时</div>
+                <a href="/data-apps/sector-performance" class="text-primary hover:underline">
+                    使用工具 →
+                </a>
+            </div>
+        </div>
+        
+        <div class="bg-dark-800 rounded-xl p-6 hover:bg-dark-700 transition-colors">
+            <div class="flex items-center justify-between mb-4">
+                <span class="text-xs font-medium px-2 py-1 bg-green-600/10 text-green-600 rounded">
+                    游戏理论
+                </span>
+                <button class="text-tertiary hover:text-white">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
+                        <path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd" />
+                    </svg>
+                </button>
+            </div>
+            
+            <h3 class="text-white font-semibold mb-2">BTC Game Theory Tool</h3>
+            <p class="text-tertiary text-sm mb-4">比特币博弈论分析工具，分析矿工、投资者和交易所之间的博弈关系。</p>
+            
+            <div class="pt-4 border-t border-dark-700 flex items-center justify-between">
+                <div class="text-sm text-tertiary">更新频率: 每周</div>
+                <a href="/data-apps/btc-game-theory" class="text-primary hover:underline">
+                    使用工具 →
+                </a>
+            </div>
+        </div>
+        
+        <div class="bg-dark-800 rounded-xl p-6 hover:bg-dark-700 transition-colors">
+            <div class="flex items-center justify-between mb-4">
+                <span class="text-xs font-medium px-2 py-1 bg-purple-600/10 text-purple-600 rounded">
+                    市场情绪
+                </span>
+                <button class="text-tertiary hover:text-white">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
+                        <path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd" />
+                    </svg>
+                </button>
+            </div>
+            
+            <h3 class="text-white font-semibold mb-2">Market Sentiment Analyzer</h3>
+            <p class="text-tertiary text-sm mb-4">综合社交媒体、新闻和市场数据，分析加密货币市场整体情绪和趋势。</p>
+            
+            <div class="pt-4 border-t border-dark-700 flex items-center justify-between">
+                <div class="text-sm text-tertiary">数据源: 多平台</div>
+                <a href="/data-apps/market-sentiment" class="text-primary hover:underline">
+                    使用工具 →
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 项目库导航 -->
+<div class="mb-8">
+    <div class="bg-gradient-to-r from-dark-800 to-dark-900 rounded-xl p-6 border border-dark-700">
+        <h2 class="text-2xl font-semibold text-white mb-4">项目库导航指南</h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="text-center">
+                <div class="w-10 h-10 rounded-lg bg-blue-600/20 flex items-center justify-center text-blue-600 mb-4 mx-auto">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                    </svg>
+                </div>
+                <h3 class="text-white font-semibold mb-2">搜索项目</h3>
+                <p class="text-tertiary text-sm">使用搜索框或筛选器快速找到感兴趣的项目和工具。</p>
+            </div>
+            
+            <div class="text-center">
+                <div class="w-10 h-10 rounded-lg bg-green-600/20 flex items-center justify-center text-green-600 mb-4 mx-auto">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                    </svg>
+                </div>
+                <h3 class="text-white font-semibold mb-2">查看详情</h3>
+                <p class="text-tertiary text-sm">点击项目卡片查看详细的分析报告、工具和相关信息。</p>
+            </div>
+            
+            <div class="text-center">
+                <div class="w-10 h-10 rounded-lg bg-purple-600/20 flex items-center justify-center text-purple-600 mb-4 mx-auto">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z" />
+                    </svg>
+                </div>
+                <h3 class="text-white font-semibold mb-2">收藏项目</h3>
+                <p class="text-tertiary text-sm">收藏重要的项目和研究工具，方便后续快速访问。</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 项目分类概览 -->
+<div class="mb-8">
+    <h2 class="text-2xl font-semibold text-white mb-4">项目分类概览</h2>
+    
+    <div id="category-overview" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- 分类概览卡片动态生成 -->
+    </div>
+</div>
+
+<!-- 数据应用提示 -->
+<div class="mb-8">
+    <div class="bg-dark-800 rounded-xl p-6">
+        <h2 class="text-2xl font-semibold text-white mb-2">关于数据应用</h2>
+        <p class="text-tertiary mb-4">数据应用提供交互式图表和分析工具，支持实时数据查询和可视化分析。</p>
+        
+        <div class="flex flex-col sm:flex-row gap-4">
+            <a href="/data-apps/sector-performance" class="btn btn-primary">
+                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                </svg>
+                进入Sector Performance仪表板
+            </a>
+            
+            <a href="/data-apps/btc-game-theory" class="btn btn-secondary">
+                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                </svg>
+                探索BTC Game Theory工具
+            </a>
+        </div>
     </div>
 </div>}
         </main>
