@@ -1,0 +1,64 @@
+<!-- 首页内容 -->
+<div class="mb-8">
+    <h1 class="text-4xl font-semibold text-white mb-2" id="page-title">All</h1>
+    <div class="flex items-center space-x-2 text-sm text-tertiary" id="page-stats">
+        <span id="total-count">Loading...</span>
+    </div>
+</div>
+
+<!-- 内容标签导航 -->
+<div class="mb-8">
+    <div class="flex flex-wrap gap-2">
+        <button class="nav-tab active" data-tab="all">All</button>
+        <button class="nav-tab" data-tab="reports">Reports</button>
+        <button class="nav-tab" data-tab="alpha">Alpha Insights</button>
+        <button class="nav-tab" data-tab="notes">Notes</button>
+        <button class="nav-tab" data-tab="media">Media</button>
+        <button class="nav-tab" data-tab="reads">Reads</button>
+    </div>
+</div>
+
+<!-- 筛选和排序 -->
+<div class="mb-8 flex flex-col md:flex-row md:items-center justify-between">
+    <div class="flex flex-wrap gap-2 mb-4 md:mb-0">
+        <button class="filter-btn active" data-filter="all">全部</button>
+        <button class="filter-btn" data-filter="today">今日</button>
+        <button class="filter-btn" data-filter="week">本周</button>
+        <button class="filter-btn" data-filter="month">本月</button>
+    </div>
+    
+    <div class="flex items-center space-x-2">
+        <span class="text-sm text-tertiary">排序:</span>
+        <select class="input py-2 text-sm" id="sort-select">
+            <option value="newest">最新</option>
+            <option value="popular">最受欢迎</option>
+            <option value="trending">趋势</option>
+        </select>
+    </div>
+</div>
+
+<!-- 内容网格 -->
+<div id="content-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+    <!-- 内容卡片动态加载 -->
+</div>
+
+<!-- 分页 -->
+<div class="flex items-center justify-between">
+    <button class="btn btn-secondary" id="prev-btn" disabled>
+        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+        </svg>
+        上一页
+    </button>
+    
+    <div class="flex items-center space-x-2" id="page-numbers">
+        <!-- 页码动态生成 -->
+    </div>
+    
+    <button class="btn btn-secondary" id="next-btn" disabled>
+        下一页
+        <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+        </svg>
+    </button>
+</div>
