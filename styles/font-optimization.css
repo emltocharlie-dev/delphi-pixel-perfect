@@ -1,0 +1,334 @@
+/* Delphi Digital像素级复刻 - 字体优化 */
+/* 目标: 优化Inter字体参数以更接近NeurialGrotesk视觉效果 */
+/* 版本: v1.0 - 基于技术分析和推断 */
+
+:root {
+  /* ===== 字重映射优化 ===== */
+  /* Inter字重需要调整以匹配NeurialGrotesk视觉效果 */
+  --font-weight-ultralight: 100;    /* Inter: 100, Neurial: 可能为200 */
+  --font-weight-extralight: 200;    /* Inter: 200, Neurial: 可能为300 */
+  --font-weight-light: 300;         /* Inter: 300, Neurial: 可能为400 */
+  --font-weight-normal: 400;        /* Inter: 400, Neurial: 常规400 */
+  --font-weight-medium: 500;        /* Inter: 500, Neurial: 中等500 */
+  --font-weight-semibold: 600;      /* Inter: 600, Neurial: 半粗600 */
+  --font-weight-bold: 700;          /* Inter: 700, Neurial: 粗体700 */
+  --font-weight-extrabold: 800;     /* Inter: 800, Neurial: 特粗800 */
+  --font-weight-black: 900;         /* Inter: 900, Neurial: 最粗900 */
+  
+  /* 针对元素的字重映射调整 */
+  --font-weight-h1: var(--font-weight-semibold);    /* 原可能为700，调整为600 */
+  --font-weight-h2: var(--font-weight-semibold);    /* 保持600 */
+  --font-weight-h3: var(--font-weight-medium);      /* 保持500 */
+  --font-weight-h4: var(--font-weight-medium);      /* 保持500 */
+  --font-weight-body: var(--font-weight-normal);    /* 保持400 */
+  --font-weight-button: var(--font-weight-medium);  /* 保持500 */
+  --font-weight-label: var(--font-weight-medium);   /* 保持500 */
+  --font-weight-nav: var(--font-weight-medium);     /* 保持500 */
+  --font-weight-card-title: var(--font-weight-semibold); /* 600 */
+  --font-weight-footer: var(--font-weight-normal);  /* 400 */
+  
+  /* ===== 行高优化 ===== */
+  /* 调整行高以匹配原站文字密度 */
+  --line-height-tighter: 1.1;      /* 超紧凑 - 用于大标题 */
+  --line-height-tight: 1.15;       /* 紧凑 - 用于标题 */
+  --line-height-normal: 1.4;       /* 正常 - 用于正文 (原1.5-1.6) */
+  --line-height-relaxed: 1.5;      /* 宽松 - 用于长文本 */
+  --line-height-loose: 1.6;        /* 松散 - 特殊情况 */
+  
+  /* ===== 字距优化 ===== */
+  /* 调整字母间距以改善文字密度 */
+  --letter-spacing-tighter: -0.02em;  /* 超紧缩 */
+  --letter-spacing-tight: -0.01em;    /* 紧缩 */
+  --letter-spacing-normal: 0;         /* 正常 */
+  --letter-spacing-wide: 0.01em;      /* 扩张 */
+  --letter-spacing-wider: 0.02em;     /* 超扩张 */
+  
+  /* ===== 字体大小微调 ===== */
+  /* 针对特定元素的大小调整 */
+  --text-xs-optimized: 0.75rem;      /* 12px - 微小文本 */
+  --text-sm-optimized: 0.875rem;     /* 14px - 小文本 */
+  --text-base-optimized: 1rem;       /* 16px - 基础文本 */
+  --text-lg-optimized: 1.125rem;     /* 18px - 大文本 */
+  --text-xl-optimized: 1.25rem;      /* 20px - 超大文本 */
+  --text-2xl-optimized: 1.5rem;      /* 24px - 2倍大 */
+  --text-3xl-optimized: 1.875rem;    /* 30px - 3倍大 */
+  --text-4xl-optimized: 2.25rem;     /* 36px - 4倍大 */
+  --text-5xl-optimized: 3rem;        /* 48px - 5倍大 */
+}
+
+/* ===== 通用字体优化 ===== */
+/* 基础字体优化 */
+body {
+  letter-spacing: var(--letter-spacing-tight); /* 轻微紧缩 */
+}
+
+/* ===== 标题优化 ===== */
+h1, .text-5xl, .text-4xl {
+  line-height: var(--line-height-tighter);
+  letter-spacing: var(--letter-spacing-tighter);
+  font-weight: var(--font-weight-h1);
+}
+
+h2, .text-3xl, .text-2xl {
+  line-height: var(--line-height-tight);
+  letter-spacing: var(--letter-spacing-tight);
+  font-weight: var(--font-weight-h2);
+}
+
+h3, .text-xl {
+  line-height: var(--line-height-tight);
+  letter-spacing: var(--letter-spacing-tight);
+  font-weight: var(--font-weight-h3);
+}
+
+h4, .text-lg {
+  line-height: var(--line-height-normal);
+  letter-spacing: var(--letter-spacing-normal);
+  font-weight: var(--font-weight-h4);
+}
+
+/* ===== 正文优化 ===== */
+p, li, .body-text, .text-base, .text-sm {
+  line-height: var(--line-height-normal);
+  letter-spacing: var(--letter-spacing-normal);
+  font-weight: var(--font-weight-body);
+}
+
+/* 段落间距优化 */
+p + p, p + ul, ul + p, li + li {
+  margin-top: 0.75em; /* 稍紧凑的段落间距 */
+}
+
+/* ===== 导航元素优化 ===== */
+.nav-tab, .nav-link {
+  font-weight: var(--font-weight-nav);
+  letter-spacing: var(--letter-spacing-tight);
+}
+
+/* 活动导航标签优化 */
+.nav-tab.active {
+  font-weight: var(--font-weight-semibold); /* 稍重 */
+}
+
+/* ===== 卡片和内容元素优化 ===== */
+.card-title, .content-title {
+  font-weight: var(--font-weight-card-title);
+  line-height: var(--line-height-tight);
+  letter-spacing: var(--letter-spacing-tight);
+}
+
+.card-body, .content-body {
+  line-height: var(--line-height-normal);
+  letter-spacing: var(--letter-spacing-normal);
+}
+
+/* 卡片元数据优化 */
+.card-meta, .content-meta {
+  font-size: var(--text-sm-optimized);
+  letter-spacing: var(--letter-spacing-normal);
+  font-weight: var(--font-weight-normal);
+}
+
+/* ===== 按钮优化 ===== */
+.btn, button, .filter-btn, .select {
+  font-weight: var(--font-weight-button);
+  letter-spacing: var(--letter-spacing-normal);
+}
+
+/* 主要按钮优化 */
+.btn-primary, .btn-secondary {
+  letter-spacing: var(--letter-spacing-wide); /* 按钮文字稍扩张 */
+}
+
+/* ===== 表单元素优化 ===== */
+input, textarea, select {
+  letter-spacing: var(--letter-spacing-normal);
+  font-weight: var(--font-weight-normal);
+}
+
+/* 输入框占位符优化 */
+::placeholder {
+  letter-spacing: var(--letter-spacing-normal);
+  font-weight: var(--font-weight-light);
+}
+
+/* ===== 标签和徽章优化 ===== */
+.label, .badge, .tag {
+  font-weight: var(--font-weight-label);
+  letter-spacing: var(--letter-spacing-tight);
+  font-size: var(--text-xs-optimized);
+}
+
+/* ===== 页脚优化 ===== */
+footer, .footer-text {
+  font-weight: var(--font-weight-footer);
+  letter-spacing: var(--letter-spacing-normal);
+  line-height: var(--line-height-normal);
+}
+
+/* ===== 响应式字体优化 ===== */
+/* 移动端字体优化 */
+@media (max-width: 640px) {
+  :root {
+    --line-height-normal: 1.45; /* 移动端稍宽松 */
+    --letter-spacing-normal: 0.005em; /* 移动端稍扩张 */
+  }
+  
+  h1, .text-4xl, .text-5xl {
+    line-height: var(--line-height-tight); /* 移动端标题稍宽松 */
+  }
+}
+
+/* 平板字体优化 */
+@media (min-width: 641px) and (max-width: 1024px) {
+  :root {
+    --line-height-normal: 1.42; /* 平板中间值 */
+  }
+}
+
+/* ===== 特定组件字体优化 ===== */
+
+/* 搜索框优化 */
+#search-input {
+  font-weight: var(--font-weight-normal);
+  letter-spacing: var(--letter-spacing-normal);
+}
+
+/* 分页按钮优化 */
+#prev-btn, #next-btn, .pagination-btn {
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--letter-spacing-normal);
+}
+
+/* 筛选按钮优化 */
+.filter-btn {
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--letter-spacing-tight);
+  font-size: var(--text-sm-optimized);
+}
+
+.filter-btn.active {
+  font-weight: var(--font-weight-semibold); /* 活动状态加重 */
+}
+
+/* 排序选择器优化 */
+.select {
+  font-weight: var(--font-weight-normal);
+  letter-spacing: var(--letter-spacing-normal);
+}
+
+/* 统计数字优化 */
+.stat-number, .count-number {
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--letter-spacing-tight);
+}
+
+/* 统计标签优化 */
+.stat-label, .count-label {
+  font-weight: var(--font-weight-normal);
+  letter-spacing: var(--letter-spacing-normal);
+  font-size: var(--text-xs-optimized);
+}
+
+/* ===== 内容卡片特定优化 ===== */
+.content-card {
+  /* 卡片内部字体优化 */
+}
+
+.content-card .title {
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-tight);
+  letter-spacing: var(--letter-spacing-tight);
+  margin-bottom: 0.5em; /* 标题与正文间距 */
+}
+
+.content-card .description {
+  line-height: var(--line-height-normal);
+  letter-spacing: var(--letter-spacing-normal);
+  font-weight: var(--font-weight-normal);
+  margin-bottom: 0.75em; /* 描述与元数据间距 */
+}
+
+.content-card .meta {
+  font-size: var(--text-xs-optimized);
+  letter-spacing: var(--letter-spacing-normal);
+  font-weight: var(--font-weight-normal);
+}
+
+/* ===== 辅助类 ===== */
+/* 字体优化辅助类 */
+.font-optimized {
+  font-feature-settings: "kern" 1, "liga" 1, "calt" 1;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* 字重辅助类 */
+.fw-ultralight { font-weight: var(--font-weight-ultralight); }
+.fw-extralight { font-weight: var(--font-weight-extralight); }
+.fw-light { font-weight: var(--font-weight-light); }
+.fw-normal { font-weight: var(--font-weight-normal); }
+.fw-medium { font-weight: var(--font-weight-medium); }
+.fw-semibold { font-weight: var(--font-weight-semibold); }
+.fw-bold { font-weight: var(--font-weight-bold); }
+.fw-extrabold { font-weight: var(--font-weight-extrabold); }
+.fw-black { font-weight: var(--font-weight-black); }
+
+/* 行高辅助类 */
+.lh-tighter { line-height: var(--line-height-tighter); }
+.lh-tight { line-height: var(--line-height-tight); }
+.lh-normal { line-height: var(--line-height-normal); }
+.lh-relaxed { line-height: var(--line-height-relaxed); }
+.lh-loose { line-height: var(--line-height-loose); }
+
+/* 字距辅助类 */
+.ls-tighter { letter-spacing: var(--letter-spacing-tighter); }
+.ls-tight { letter-spacing: var(--letter-spacing-tight); }
+.ls-normal { letter-spacing: var(--letter-spacing-normal); }
+.ls-wide { letter-spacing: var(--letter-spacing-wide); }
+.ls-wider { letter-spacing: var(--letter-spacing-wider); }
+
+/* ===== 打印优化 ===== */
+@media print {
+  body {
+    font-weight: var(--font-weight-normal);
+    line-height: var(--line-height-normal);
+    letter-spacing: var(--letter-spacing-normal);
+  }
+  
+  h1, h2, h3, h4 {
+    font-weight: var(--font-weight-bold);
+    letter-spacing: var(--letter-spacing-tight);
+  }
+}
+
+/* ===== 性能优化 ===== */
+/* 字体加载优化 */
+.font-loading {
+  font-display: swap;
+  font-feature-settings: normal;
+}
+
+/* 平滑字体渲染 */
+.font-smooth {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ===== 浏览器特定优化 ===== */
+/* Firefox优化 */
+@-moz-document url-prefix() {
+  body {
+    font-weight: calc(var(--font-weight-normal) + 10); /* Firefox下稍重 */
+  }
+}
+
+/* Safari优化 */
+@media not all and (min-resolution: 0.001dpcm) {
+  @supports (-webkit-appearance: none) {
+    body {
+      -webkit-font-smoothing: antialiased;
+    }
+  }
+}
