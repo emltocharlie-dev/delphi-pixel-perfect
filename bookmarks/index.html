@@ -305,18 +305,267 @@
 
         <!-- 主内容区域 -->
         <main class="container py-8 lg:ml-64">
-            {<!-- 书签页面内容 -->
+            {<!-- 书签页面标题 -->
 <div class="mb-8">
     <h1 class="text-4xl font-semibold text-white mb-2">Saved</h1>
-    <p class="text-tertiary">书签和收藏页面</p>
+    <p class="text-tertiary">书签和收藏管理</p>
 </div>
 
-<div class="bg-dark-800 rounded-xl p-6 mb-8">
-    <h2 class="text-2xl font-semibold text-white mb-4">书签功能开发中</h2>
-    <p class="text-tertiary mb-4">Saved页面正在开发中，将提供书签管理和收藏内容查看功能。</p>
-    <div class="flex space-x-4">
-        <a href="/" class="btn btn-primary">返回首页</a>
-        <a href="/explore" class="btn btn-secondary">浏览知识库</a>
+<!-- 书签概述 -->
+<div class="mb-8">
+    <div class="bg-dark-800 rounded-xl p-6">
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+            <div>
+                <h2 class="text-2xl font-semibold text-white mb-2">我的收藏</h2>
+                <p class="text-tertiary">保存的文章、项目和工具，方便快速访问</p>
+            </div>
+            <div class="flex items-center space-x-2">
+                <div class="text-sm text-tertiary">
+                    <span id="bookmark-count">0</span> 个收藏
+                </div>
+                <button class="btn btn-secondary" id="sync-bookmarks-btn">
+                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                    </svg>
+                    同步
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 书签分类 -->
+<div class="mb-8">
+    <div class="flex items-center justify-between mb-4">
+        <h2 class="text-2xl font-semibold text-white">按类型浏览</h2>
+        <div class="flex space-x-2">
+            <button class="filter-btn active" data-type="all">全部</button>
+            <button class="filter-btn" data-type="articles">文章</button>
+            <button class="filter-btn" data-type="projects">项目</button>
+            <button class="filter-btn" data-type="tools">工具</button>
+        </div>
+    </div>
+    
+    <div id="bookmark-filters" class="flex flex-wrap gap-2 mb-6">
+        <!-- 标签筛选动态生成 -->
+    </div>
+</div>
+
+<!-- 收藏内容网格 -->
+<div class="mb-8">
+    <div id="bookmarks-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- 书签卡片动态生成 -->
+        <div class="col-span-full text-center py-12">
+            <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-dark-700 flex items-center justify-center">
+                <svg class="w-8 h-8 text-tertiary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z" />
+                </svg>
+            </div>
+            <h3 class="text-white font-medium mb-2">暂无收藏内容</h3>
+            <p class="text-tertiary mb-4">保存您感兴趣的内容，方便以后快速访问</p>
+            <div class="flex flex-col sm:flex-row gap-2 justify-center">
+                <a href="/" class="btn btn-primary">浏览首页</a>
+                <a href="/explore" class="btn btn-secondary">探索知识库</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 示例收藏内容 (开发演示) -->
+<div class="mb-8 hidden" id="demo-bookmarks">
+    <div class="flex items-center justify-between mb-4">
+        <h2 class="text-2xl font-semibold text-white">示例收藏</h2>
+        <div class="text-sm text-tertiary">演示目的</div>
+    </div>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- 示例文章收藏 -->
+        <div class="bg-dark-800 rounded-xl p-6 hover:bg-dark-700 transition-colors">
+            <div class="flex items-center justify-between mb-4">
+                <span class="text-xs font-medium px-2 py-1 bg-blue-600/10 text-blue-600 rounded">
+                    文章
+                </span>
+                <button class="text-tertiary hover:text-white">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
+                        <path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd" />
+                    </svg>
+                </button>
+            </div>
+            
+            <h3 class="text-white font-semibold mb-2">Solana: The Modular Future</h3>
+            <p class="text-tertiary text-sm mb-4">An in-depth analysis of Solana architecture and its position in the modular blockchain ecosystem.</p>
+            
+            <div class="flex items-center justify-between text-sm">
+                <div class="text-tertiary">2026-02-20</div>
+                <a href="/article?slug=solana-the-modular" class="text-primary hover:underline">
+                    查看 →
+                </a>
+            </div>
+        </div>
+        
+        <!-- 示例项目收藏 -->
+        <div class="bg-dark-800 rounded-xl p-6 hover:bg-dark-700 transition-colors">
+            <div class="flex items-center justify-between mb-4">
+                <span class="text-xs font-medium px-2 py-1 bg-green-600/10 text-green-600 rounded">
+                    项目
+                </span>
+                <button class="text-tertiary hover:text-white">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
+                        <path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd" />
+                    </svg>
+                </button>
+            </div>
+            
+            <h3 class="text-white font-semibold mb-2">Bitcoin</h3>
+            <p class="text-tertiary text-sm mb-4">The original cryptocurrency and digital gold standard. Bitcoin ETF flow analysis and on-chain metrics.</p>
+            
+            <div class="flex items-center justify-between text-sm">
+                <div class="text-tertiary">3个工具</div>
+                <a href="/projects/bitcoin" class="text-primary hover:underline">
+                    查看项目 →
+                </a>
+            </div>
+        </div>
+        
+        <!-- 示例工具收藏 -->
+        <div class="bg-dark-800 rounded-xl p-6 hover:bg-dark-700 transition-colors">
+            <div class="flex items-center justify-between mb-4">
+                <span class="text-xs font-medium px-2 py-1 bg-purple-600/10 text-purple-600 rounded">
+                    工具
+                </span>
+                <button class="text-tertiary hover:text-white">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
+                        <path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd" />
+                    </svg>
+                </button>
+            </div>
+            
+            <h3 class="text-white font-semibold mb-2">Sector Performance Dashboard</h3>
+            <p class="text-tertiary text-sm mb-4">Real-time performance metrics across crypto sectors. Interactive charts and analytics.</p>
+            
+            <div class="flex items-center justify-between text-sm">
+                <div class="text-tertiary">数据应用</div>
+                <a href="/data-apps/sector-performance" class="text-primary hover:underline">
+                    使用工具 →
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 收藏统计 -->
+<div class="mb-8">
+    <div class="bg-dark-800 rounded-xl p-6">
+        <h2 class="text-2xl font-semibold text-white mb-4">收藏统计</h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+            <div class="text-center">
+                <div class="text-3xl font-bold text-primary mb-2" id="stats-articles">0</div>
+                <div class="text-sm text-tertiary">收藏文章</div>
+            </div>
+            
+            <div class="text-center">
+                <div class="text-3xl font-bold text-primary mb-2" id="stats-projects">0</div>
+                <div class="text-sm text-tertiary">收藏项目</div>
+            </div>
+            
+            <div class="text-center">
+                <div class="text-3xl font-bold text-primary mb-2" id="stats-tools">0</div>
+                <div class="text-sm text-tertiary">收藏工具</div>
+            </div>
+            
+            <div class="text-center">
+                <div class="text-3xl font-bold text-primary mb-2" id="stats-tags">0</div>
+                <div class="text-sm text-tertiary">使用标签</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 收藏管理 -->
+<div class="mb-8">
+    <div class="bg-gradient-to-r from-dark-800 to-dark-900 rounded-xl p-6 border border-dark-700">
+        <h2 class="text-2xl font-semibold text-white mb-4">收藏管理</h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+                <h3 class="text-white font-medium mb-2">导出收藏</h3>
+                <p class="text-tertiary text-sm mb-4">将您的收藏导出为JSON或CSV格式，方便备份或迁移。</p>
+                <div class="flex space-x-2">
+                    <button class="btn btn-secondary" id="export-json-btn">
+                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M9 19l3 3m0 0l3-3m-3 3V10" />
+                        </svg>
+                        导出JSON
+                    </button>
+                    <button class="btn btn-secondary" id="export-csv-btn">
+                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                        </svg>
+                        导出CSV
+                    </button>
+                </div>
+            </div>
+            
+            <div>
+                <h3 class="text-white font-medium mb-2">导入收藏</h3>
+                <p class="text-tertiary text-sm mb-4">从其他平台导入收藏，或从备份文件恢复您的收藏。</p>
+                <div class="flex space-x-2">
+                    <button class="btn btn-secondary" id="import-btn">
+                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+                        </svg>
+                        导入收藏
+                    </button>
+                    <button class="btn btn-secondary" id="sync-external-btn">
+                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
+                        </svg>
+                        同步外部
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 使用提示 -->
+<div class="mb-8">
+    <h2 class="text-2xl font-semibold text-white mb-4">使用提示</h2>
+    
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="bg-dark-800 rounded-lg p-6">
+            <div class="w-10 h-10 rounded-lg bg-blue-600/20 flex items-center justify-center text-blue-600 mb-4">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z" />
+                </svg>
+            </div>
+            <h3 class="text-white font-semibold mb-2">添加收藏</h3>
+            <p class="text-tertiary text-sm">在文章、项目或工具页面点击"收藏"按钮，将其添加到您的收藏列表。</p>
+        </div>
+        
+        <div class="bg-dark-800 rounded-lg p-6">
+            <div class="w-10 h-10 rounded-lg bg-green-600/20 flex items-center justify-center text-green-600 mb-4">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
+                </svg>
+            </div>
+            <h3 class="text-white font-semibold mb-2">添加标签</h3>
+            <p class="text-tertiary text-sm">为收藏内容添加自定义标签，方便按主题或项目进行组织和筛选。</p>
+        </div>
+        
+        <div class="bg-dark-800 rounded-lg p-6">
+            <div class="w-10 h-10 rounded-lg bg-purple-600/20 flex items-center justify-center text-purple-600 mb-4">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                </svg>
+            </div>
+            <h3 class="text-white font-semibold mb-2">导出备份</h3>
+            <p class="text-tertiary text-sm">定期导出您的收藏作为备份，防止数据丢失，或迁移到其他设备。</p>
+        </div>
     </div>
 </div>}
         </main>
