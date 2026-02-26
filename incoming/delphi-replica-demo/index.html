@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OKX教程中心 - Delphi风格复刻</title>
+    <meta name="description" content="专业的OKX交易教程和研究平台，Delphi Digital风格复刻">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- 使用Google Fonts作为字体占位，后续替换为实际字体 -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="assets/images/favicon.ico">
+</head>
+<body>
+    <!-- 顶部导航栏 -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <a href="/" class="logo-link">
+                        <span class="logo-text">OKX教程中心</span>
+                        <span class="logo-beta">BETA</span>
+                    </a>
+                </div>
+                
+                <nav class="main-nav">
+                    <ul class="nav-list">
+                        <li class="nav-item"><a href="#" class="nav-link active" data-tab="all">全部内容</a></li>
+                        <li class="nav-item"><a href="#" class="nav-link" data-tab="reports">研究报告</a></li>
+                        <li class="nav-item"><a href="#" class="nav-link" data-tab="alpha">Alpha见解</a></li>
+                        <li class="nav-item"><a href="#" class="nav-link" data-tab="notes">笔记</a></li>
+                        <li class="nav-item"><a href="#" class="nav-link" data-tab="media">媒体</a></li>
+                        <li class="nav-item"><a href="#" class="nav-link" data-tab="reads">阅读推荐</a></li>
+                    </ul>
+                </nav>
+                
+                <div class="header-actions">
+                    <div class="search-container">
+                        <input type="search" class="search-input" placeholder="搜索教程..." aria-label="搜索教程">
+                        <button class="search-btn" aria-label="搜索">
+                            <svg class="search-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M14 14L10 10M11.3333 6.66667C11.3333 9.244 9.244 11.3333 6.66667 11.3333C4.08934 11.3333 2 9.244 2 6.66667C2 4.08934 4.08934 2 6.66667 2C9.244 2 11.3333 4.08934 11.3333 6.66667Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- 主内容区域 -->
+    <main class="main-content">
+        <div class="container">
+            <!-- 页面标题和统计 -->
+            <div class="page-header">
+                <h1 class="page-title">全部内容</h1>
+                <div class="page-stats">
+                    <span class="stat-item">128 篇文章</span>
+                    <span class="stat-divider">•</span>
+                    <span class="stat-item">24 小时更新</span>
+                </div>
+            </div>
+
+            <!-- 筛选栏 -->
+            <div class="filters-bar">
+                <div class="filter-group">
+                    <button class="filter-btn active">全部</button>
+                    <button class="filter-btn">今日</button>
+                    <button class="filter-btn">本周</button>
+                    <button class="filter-btn">本月</button>
+                </div>
+                <div class="filter-group">
+                    <select class="filter-select" aria-label="排序方式">
+                        <option value="newest">最新优先</option>
+                        <option value="popular">最受欢迎</option>
+                        <option value="relevant">最相关</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- 内容网格 -->
+            <div class="content-grid" id="content-grid">
+                <!-- 内容卡片将通过JavaScript动态生成 -->
+                <div class="loading-indicator">
+                    <div class="loading-spinner"></div>
+                    <p>加载内容中...</p>
+                </div>
+            </div>
+
+            <!-- 分页 -->
+            <div class="pagination">
+                <button class="pagination-btn prev" disabled>上一页</button>
+                <div class="page-numbers">
+                    <button class="page-btn active">1</button>
+                    <button class="page-btn">2</button>
+                    <button class="page-btn">3</button>
+                    <span class="page-ellipsis">...</span>
+                    <button class="page-btn">8</button>
+                </div>
+                <button class="pagination-btn next">下一页</button>
+            </div>
+        </div>
+    </main>
+
+    <!-- 底部导航 -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3 class="footer-title">OKX教程中心</h3>
+                    <p class="footer-description">
+                        专业的OKX交易教程和研究平台，帮助您掌握加密货币交易技能。
+                    </p>
+                </div>
+                <div class="footer-section">
+                    <h4 class="footer-subtitle">分类</h4>
+                    <ul class="footer-links">
+                        <li><a href="#" class="footer-link">新手教程</a></li>
+                        <li><a href="#" class="footer-link">交易策略</a></li>
+                        <li><a href="#" class="footer-link">安全指南</a></li>
+                        <li><a href="#" class="footer-link">工具使用</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4 class="footer-subtitle">资源</h4>
+                    <ul class="footer-links">
+                        <li><a href="#" class="footer-link">OKX官网</a></li>
+                        <li><a href="#" class="footer-link">帮助中心</a></li>
+                        <li><a href="#" class="footer-link">API文档</a></li>
+                        <li><a href="#" class="footer-link">社区论坛</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4 class="footer-subtitle">联系</h4>
+                    <ul class="footer-links">
+                        <li><a href="#" class="footer-link">反馈建议</a></li>
+                        <li><a href="#" class="footer-link">合作咨询</a></li>
+                        <li><a href="#" class="footer-link">隐私政策</a></li>
+                        <li><a href="#" class="footer-link">服务条款</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p class="copyright">© 2026 OKX教程中心. 基于Delphi Digital风格复刻.</p>
+                <div class="footer-social">
+                    <a href="#" class="social-link" aria-label="Twitter">🐦</a>
+                    <a href="#" class="social-link" aria-label="Telegram">📢</a>
+                    <a href="#" class="social-link" aria-label="GitHub">💻</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript文件 -->
+    <script src="script.js"></script>
+</body>
+</html>

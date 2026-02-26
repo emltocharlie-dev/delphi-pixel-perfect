@@ -1,0 +1,17 @@
+# 文件归位日志
+# 时间：2026-02-26 13:55 UTC
+
+## 工程文件 (→ 40_engineering/)
+- scripts/ → 40_engineering/scripts/
+- templates/ → 40_engineering/templates/
+- styles/ → 40_engineering/styles/
+- data/ → 40_engineering/data/
+
+## 产品文件 (→ 30_product/)
+- assets/ → 30_product/assets/
+
+## 研究报告 (→ 10_research/)
+- 无 (分析报告在 workspace/clawd/runs/)
+
+## 配置文件 (保留根目录)
+- _headers, _redirects, wrangler.toml, package.json
