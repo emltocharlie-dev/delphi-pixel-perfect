@@ -18,7 +18,7 @@
   - **verify**: 路由可访问 + 基本页面结构完整 + 响应式正常
   - **目标**: Analysts、Transparency、Legal 页面技术框架
 
-- [ ] **P4: 跨页面一致性验证** (预计：1-2 小时)
+- [x] **P4: 跨页面一致性验证** (完成时间：2026-02-26 14:40 UTC) (预计：1-2 小时)
   - **owner**: 小星
   - **model**: kimi-k2.5
   - **output**: `runs/delphi-consistency-check-20260226/report.md`
