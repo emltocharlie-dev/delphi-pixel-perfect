@@ -255,6 +255,52 @@ const pageData = {
     content: fs.readFileSync(path.join(config.templateDir, 'pages/btc-game-theory.html'), 'utf8'),
     pageScripts: '/scripts/pages/data-apps.js',
     initFunction: 'initDataAppsPage'
+  },
+  
+  // Analysts 页面
+  analysts: {
+    title: 'Analysts - 分析师团队',
+    description: 'Delphi Digital 像素级复刻 - 分析师团队页面',
+    sideNavItems: [
+      { id: 'home', label: 'home', href: '/', active: false },
+      { id: 'research', label: 'Research', href: '/search', active: false },
+      { id: 'library', label: 'Library', href: '/explore', active: false },
+      { id: 'saved', label: 'Saved', href: '/bookmarks', active: false },
+      { id: 'tools', label: 'Tools', href: '/projects', active: false },
+      { id: 'help', label: 'Help', href: '/help', active: false }
+    ],
+    helpItems: [
+      { id: 'conentus', label: 'Conentus', href: '#' },
+      { id: 'faq', label: 'FAQ', href: '#' },
+      { id: 'feedback', label: 'Feedback', href: '#' }
+    ],
+    showContentTabs: false,
+    content: fs.readFileSync(path.join(config.templateDir, 'pages/analysts.html'), 'utf8'),
+    pageScripts: '/scripts/pages/analysts.js',
+    initFunction: 'initAnalystsPage'
+  },
+  
+  // Transparency 页面
+  transparency: {
+    title: 'Transparency - 透明度报告',
+    description: 'Delphi Digital 像素级复刻 - 透明度报告页面',
+    sideNavItems: [
+      { id: 'home', label: 'home', href: '/', active: false },
+      { id: 'research', label: 'Research', href: '/search', active: false },
+      { id: 'library', label: 'Library', href: '/explore', active: false },
+      { id: 'saved', label: 'Saved', href: '/bookmarks', active: false },
+      { id: 'tools', label: 'Tools', href: '/projects', active: false },
+      { id: 'help', label: 'Help', href: '/help', active: false }
+    ],
+    helpItems: [
+      { id: 'conentus', label: 'Conentus', href: '#' },
+      { id: 'faq', label: 'FAQ', href: '#' },
+      { id: 'feedback', label: 'Feedback', href: '#' }
+    ],
+    showContentTabs: false,
+    content: fs.readFileSync(path.join(config.templateDir, 'pages/transparency.html'), 'utf8'),
+    pageScripts: '/scripts/pages/transparency.js',
+    initFunction: 'initTransparencyPage'
   }
 };
 

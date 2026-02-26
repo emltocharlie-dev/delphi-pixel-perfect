@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transparency - 透明度报告 - OKX Tutorials Center</title>
+    <meta name="description" content="Delphi Digital 像素级复刻 - 透明度报告页面">
+    
+    <!-- Tailwind CSS v3.4.1 (原站使用) -->
+    <script src="https://cdn.tailwindcss.com/3.4.1"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        dark: {
+                            50: '#f3f5f6',
+                            100: '#e9ebed',
+                            200: '#d9dbdf',
+                            300: '#979fa7',
+                            400: '#67707b',
+                            500: '#4b5259',
+                            600: '#363a3f',
+                            700: '#2a2e32',
+                            800: '#1f2124',
+                            900: '#0e1012',
+                        },
+                        'primary-blue': {
+                            50: '#eff8ff',
+                            100: '#d1e9ff',
+                            200: '#b2ddff',
+                            300: '#84caff',
+                            400: '#53b1fd',
+                            500: '#2e90fa',
+                            600: '#007afb',
+                            700: '#0062ff',
+                            800: '#1849a9',
+                            900: '#013d9d',
+                        },
+                        error: {
+                            50: '#fef3f2',
+                            100: '#fee4e2',
+                            200: '#fecdc9',
+                            300: '#fda29b',
+                            400: '#f97066',
+                            500: '#f04438',
+                            600: '#d92d20',
+                            700: '#b42318',
+                            800: '#912018',
+                            900: '#7a271a',
+                        },
+                        success: {
+                            50: '#ecfdf3',
+                            100: '#d1fadf',
+                            200: '#a6f4c5',
+                            300: '#12b76a',
+                            400: '#32d583',
+                            500: '#039855',
+                            600: '#027a48',
+                            700: '#054f31',
+                            800: '#054f31',
+                            900: '#054f31',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+                    },
+                    spacing: {
+                        '128': '32rem',
+                        '144': '36rem',
+                    },
+                    borderRadius: {
+                        'xl': '0.75rem',
+                        '2xl': '1rem',
+                    }
+                }
+            },
+            darkMode: 'class',
+        }
+    </script>
+    
+    <!-- Google Fonts: Inter (NeurialGrotesk替代字体) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- 原站设计系统补充CSS -->
+    <link rel="stylesheet" href="/styles/design-system.css">
+    <!-- 紧急修复CSS -->
+    <link rel="stylesheet" href="/styles/emergency-fix.css">
+    <!-- 字体优化CSS -->
+    <link rel="stylesheet" href="/styles/font-optimization.css">
+    
+    <!-- 图标 -->
+    <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+    
+    <!-- 页面特定CSS -->
+    
+    
+    <style>
+        /* 临时字体映射 - 使用Inter作为NeurialGrotesk的替代 */
+        :root {
+            --font-family-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --color-bg-primary: #0e1012;
+            --color-bg-secondary: #1f2124;
+            --color-bg-tertiary: #2a2e32;
+            --color-text-primary: #ffffff;
+            --color-text-secondary: #e9ebed;
+            --color-text-tertiary: #979fa7;
+            --color-text-muted: #67707b;
+            --color-border: #2a2e32;
+            --color-primary: #2e90fa;
+            --color-primary-hover: #53b1fd;
+            --color-error: #f04438;
+            --color-success: #039855;
+        }
+        
+        body {
+            font-family: var(--font-family-sans);
+            background-color: var(--color-bg-primary);
+            color: var(--color-text-primary);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        
+        /* 加载动画 */
+        .loading-spinner {
+            border: 3px solid rgba(255, 255, 255, 0.1);
+            border-left-color: var(--color-primary);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-dark-900 text-white">
+    <!-- 加载遮罩 -->
+    <div id="app-loading" class="fixed inset-0 bg-dark-900 z-50 flex items-center justify-center transition-opacity duration-300">
+        <div class="text-center">
+            <div class="loading-spinner mb-4"></div>
+            <p class="text-tertiary">加载中...</p>
+        </div>
+    </div>
+
+    <!-- 应用容器 -->
+    <div id="app" class="min-h-screen hidden">
+        <!-- 顶栏 -->
+        <header class="sticky top-0 z-50 bg-dark-900 border-b border-dark-700">
+            <div class="container">
+                <div class="flex items-center justify-between h-16">
+                    <!-- Logo -->
+                    <div class="flex items-center">
+                        <a href="/" class="flex items-center space-x-2">
+                            <div class="w-8 h-8 rounded-md bg-blue-600 flex items-center justify-center">
+                                <span class="text-white font-semibold text-lg">O</span>
+                            </div>
+                            <span class="text-white font-semibold text-lg">OKX教程中心</span>
+                            <span class="text-xs font-medium px-1.5 py-0.5 bg-blue-600/10 text-blue-600 rounded">BETA</span>
+                        </a>
+                    </div>
+                    
+                    <!-- 右侧操作 -->
+                    <div class="flex items-center space-x-4">
+                        <!-- 搜索框 -->
+                        <div class="relative hidden md:block">
+                            <input type="search" 
+                                   class="input pl-10 pr-4 py-2 w-64" 
+                                   placeholder="搜索教程..." 
+                                   id="search-input">
+                            <div class="absolute left-3 top-1/2 transform -translate-y-1/2">
+                                <svg class="w-4 h-4 text-tertiary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                                </svg>
+                            </div>
+                        </div>
+                        
+                        <!-- 移动端菜单按钮 -->
+                        <button class="md:hidden p-2 rounded-md hover:bg-tertiary" id="mobile-menu-btn">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- 移动端导航 -->
+                <div class="md:hidden hidden py-4 border-t border-dark-700" id="mobile-menu">
+                    <div class="flex flex-col space-y-2">
+                        <!-- 侧边导航项 (移动端) -->
+                        <div class="mb-2">
+                            <div class="text-xs uppercase text-dark-400 mb-1">Navigation</div>
+                            
+                            <a href="/" class="side-nav-item spa-nav-link  text-left block" data-nav="home">
+                                <span>home</span>
+                            </a>
+                            
+                            <a href="/search" class="side-nav-item spa-nav-link  text-left block" data-nav="research">
+                                <span>Research</span>
+                            </a>
+                            
+                            <a href="/explore" class="side-nav-item spa-nav-link  text-left block" data-nav="library">
+                                <span>Library</span>
+                            </a>
+                            
+                            <a href="/bookmarks" class="side-nav-item spa-nav-link  text-left block" data-nav="saved">
+                                <span>Saved</span>
+                            </a>
+                            
+                            <a href="/projects" class="side-nav-item spa-nav-link  text-left block" data-nav="tools">
+                                <span>Tools</span>
+                            </a>
+                            
+                            <a href="/help" class="side-nav-item spa-nav-link  text-left block" data-nav="help">
+                                <span>Help</span>
+                            </a>
+                            
+                        </div>
+                        
+                        <!-- 帮助项 -->
+                        <div class="mb-2">
+                            <div class="text-xs uppercase text-dark-400 mb-1">help</div>
+                            
+                            <a href="#" class="side-nav-item spa-nav-link text-left block text-sm" data-nav="conentus">
+                                <span>Conentus</span>
+                            </a>
+                            
+                            <a href="#" class="side-nav-item spa-nav-link text-left block text-sm" data-nav="faq">
+                                <span>FAQ</span>
+                            </a>
+                            
+                            <a href="#" class="side-nav-item spa-nav-link text-left block text-sm" data-nav="feedback">
+                                <span>Feedback</span>
+                            </a>
+                            
+                        </div>
+                        
+                        <!-- 内容标签 (仅首页显示) -->
+                        
+                        
+                        <!-- 移动端搜索 -->
+                        <div class="mt-4">
+                            <input type="search" 
+                                   class="input w-full" 
+                                   placeholder="搜索教程..." 
+                                   id="mobile-search-input">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- 侧边导航栏 -->
+        <aside id="sidebar" class="hidden lg:block fixed left-0 top-16 bottom-0 w-64 bg-dark-900 border-r border-dark-700 overflow-y-auto z-40">
+            <nav class="p-6">
+                <!-- 导航项列表 -->
+                <div class="space-y-1">
+                    
+                    <a href="/" class="side-nav-item spa-nav-link " data-nav="home">
+                        <span>home</span>
+                    </a>
+                    
+                    <a href="/search" class="side-nav-item spa-nav-link " data-nav="research">
+                        <span>Research</span>
+                    </a>
+                    
+                    <a href="/explore" class="side-nav-item spa-nav-link " data-nav="library">
+                        <span>Library</span>
+                    </a>
+                    
+                    <a href="/bookmarks" class="side-nav-item spa-nav-link " data-nav="saved">
+                        <span>Saved</span>
+                    </a>
+                    
+                    <a href="/projects" class="side-nav-item spa-nav-link " data-nav="tools">
+                        <span>Tools</span>
+                    </a>
+                    
+                    <a href="/help" class="side-nav-item spa-nav-link " data-nav="help">
+                        <span>Help</span>
+                    </a>
+                    
+                    
+                    <!-- 帮助下拉 -->
+                    <div class="mt-8 pt-6 border-t border-dark-700">
+                        <div class="text-xs uppercase text-dark-400 mb-2">help</div>
+                        <div class="space-y-1 ml-2">
+                            
+                            <a href="#" class="side-nav-item spa-nav-link text-sm" data-nav="conentus">
+                                <span>Conentus</span>
+                            </a>
+                            
+                            <a href="#" class="side-nav-item spa-nav-link text-sm" data-nav="faq">
+                                <span>FAQ</span>
+                            </a>
+                            
+                            <a href="#" class="side-nav-item spa-nav-link text-sm" data-nav="feedback">
+                                <span>Feedback</span>
+                            </a>
+                            
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </aside>
+
+        <!-- 移动端侧边栏遮罩 -->
+        <div id="sidebar-overlay" class="lg:hidden fixed inset-0 bg-black bg-opacity-50 z-30 hidden"></div>
+
+        <!-- 主内容区域 -->
+        <main class="container py-8 lg:ml-64">
+            {<!-- 透明度报告页面 - 技术框架阶段 -->
+<div class="mb-8">
+    <h1 class="text-4xl font-semibold text-white mb-2">Transparency</h1>
+    <p class="text-tertiary">透明度报告 - 技术框架阶段</p>
+</div>
+
+<!-- 技术框架状态说明 -->
+<div class="bg-dark-800 rounded-xl p-4 mb-6 border-l-4 border-primary-blue-600">
+    <div class="flex items-start">
+        <div class="flex-shrink-0">
+            <div class="w-8 h-8 rounded-full bg-dark-700 flex items-center justify-center">
+                <svg class="w-4 h-4 text-primary-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+            </div>
+        </div>
+        <div class="ml-3">
+            <h4 class="text-white font-medium">技术框架模式</h4>
+            <p class="text-sm text-tertiary mt-1">
+                当前处于技术框架搭建阶段。页面结构已就绪，内容后续统一填充。
+            </p>
+            <div class="mt-2 text-xs text-tertiary">
+                <p><span class="text-primary">用户指令</span>: "p1-p3，内容是图标工具等页面的，暂时只做空页面"</p>
+                <p><span class="text-primary">实施策略</span>: 技术框架优先，内容填充后续统一处理</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 透明度承诺占位区域 -->
+<div class="bg-dark-800 rounded-xl p-6 mb-8">
+    <h2 class="text-2xl font-semibold text-white mb-4">透明度承诺 (占位)</h2>
+    <div class="prose prose-invert max-w-none">
+        <p class="text-tertiary mb-4">
+            我们对研究方法和数据来源保持透明。本页将展示：
+        </p>
+        <ul class="list-disc list-inside text-tertiary space-y-2 mb-6">
+            <li>研究方法论说明</li>
+            <li>数据来源列表</li>
+            <li>利益冲突声明</li>
+            <li>报告下载区域</li>
+        </ul>
+    </div>
+    <p class="text-center text-sm text-tertiary mt-6">透明度报告框架 - 内容后续统一填充</p>
+</div>
+}
+        </main>
+
+        <!-- 页脚 -->
+        <footer class="bg-dark-800 border-t border-dark-700 mt-16">
+            <div class="container py-12">
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                    <!-- Logo和描述 -->
+                    <div class="col-span-1 md:col-span-1">
+                        <div class="flex items-center space-x-2 mb-4">
+                            <div class="w-8 h-8 rounded-md bg-blue-600 flex items-center justify-center">
+                                <span class="text-white font-semibold text-lg">O</span>
+                            </div>
+                            <span class="text-white font-semibold text-lg">OKX教程中心</span>
+                        </div>
+                        <p class="text-tertiary text-sm mb-4">
+                            专业的OKX交易教程和研究平台。Delphi Digital像素级复刻。
+                        </p>
+                    </div>
+                    
+                    <!-- 链接 -->
+                    <div class="col-span-1">
+                        <h3 class="text-white font-medium mb-4">快速链接</h3>
+                        <ul class="space-y-2">
+                            <li><a href="/" class="text-sm text-tertiary hover:text-primary transition">首页</a></li>
+                            <li><a href="/search" class="text-sm text-tertiary hover:text-primary transition">搜索</a></li>
+                            <li><a href="/explore" class="text-sm text-tertiary hover:text-primary transition">知识库</a></li>
+                            <li><a href="/projects" class="text-sm text-tertiary hover:text-primary transition">项目库</a></li>
+                        </ul>
+                    </div>
+                    
+                    <!-- 资源 -->
+                    <div class="col-span-1">
+                        <h3 class="text-white font-medium mb-4">资源</h3>
+                        <ul class="space-y-2">
+                            <li><a href="#" class="text-sm text-tertiary hover:text-primary transition">文档中心</a></li>
+                            <li><a href="#" class="text-sm text-tertiary hover:text-primary transition">API参考</a></li>
+                            <li><a href="#" class="text-sm text-tertiary hover:text-primary transition">开发者工具</a></li>
+                            <li><a href="#" class="text-sm text-tertiary hover:text-primary transition">状态监控</a></li>
+                        </ul>
+                    </div>
+                    
+                    <!-- 支持 -->
+                    <div class="col-span-1">
+                        <h3 class="text-white font-medium mb-4">支持</h3>
+                        <ul class="space-y-2">
+                            <li><a href="#" class="text-sm text-tertiary hover:text-primary transition">反馈建议</a></li>
+                            <li><a href="#" class="text-sm text-tertiary hover:text-primary transition">合作咨询</a></li>
+                            <li><a href="#" class="text-sm text-tertiary hover:text-primary transition">隐私政策</a></li>
+                            <li><a href="#" class="text-sm text-tertiary hover:text-primary transition">服务条款</a></li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- 底部信息 -->
+                <div class="mt-12 pt-8 border-t border-dark-700 flex flex-col md:flex-row md:items-center justify-between">
+                    <p class="text-sm text-tertiary">
+                        © 2026 OKX Tutorials Center. Pixel-perfect replica of Delphi Digital.
+                    </p>
+                    <div class="flex items-center space-x-4 mt-4 md:mt-0">
+                        <a href="#" class="text-tertiary hover:text-primary transition">🐦 Twitter</a>
+                        <a href="#" class="text-tertiary hover:text-primary transition">📢 Telegram</a>
+                        <a href="#" class="text-tertiary hover:text-primary transition">💻 GitHub</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- 原站JavaScript依赖 -->
+    <!-- Vue.js 3.x (原站推断使用) -->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <!-- Swiper轮播库 (原站可能使用) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <!-- Highcharts图表库 (原站可能使用) -->
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    
+    <!-- 项目JavaScript文件 -->
+    <script src="/data/content.js"></script>
+    
+    <!-- 扩展性架构初始化 -->
+    <script src="/scripts/init.js" type="module"></script>
+    
+    <!-- 主应用脚本 -->
+    <script src="/scripts/app.js"></script>
+    
+    <!-- 页面特定JavaScript -->
+    
+    <script src="/scripts/pages/transparency.js"></script>
+    
+    
+    <script>
+        // 隐藏加载动画，显示应用
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                document.getElementById('app-loading').style.opacity = '0';
+                setTimeout(function() {
+                    document.getElementById('app-loading').style.display = 'none';
+                    document.getElementById('app').classList.remove('hidden');
+                }, 300);
+            }, 500);
+        });
+        
+        // 页面特定初始化
+        
+        window.addEventListener('app:servicesReady', function() {
+            initTransparencyPage();
+        });
+        
+    </script>
+    
+    <!-- SPA导航脚本 (用户指令: 左侧导航切换时只刷新内容区域，不是全屏刷新) -->
+    <script>
+        (function() {
+            // 等待DOM加载完成
+            document.addEventListener('DOMContentLoaded', function() {
+                // 选择所有SPA导航链接
+                const spaNavLinks = document.querySelectorAll('.spa-nav-link');
+                
+                // 为每个链接添加点击事件监听器
+                spaNavLinks.forEach(link => {
+                    link.addEventListener('click', function(event) {
+                        event.preventDefault(); // 阻止默认的链接跳转行为
+                        
+                        const targetUrl = this.getAttribute('href');
+                        if (!targetUrl || targetUrl === '#') return;
+                        
+                        console.log(`SPA导航到: ${targetUrl}`);
+                        
+                        // 显示加载状态
+                        showSPALoading();
+                        
+                        // 使用fetch加载目标页面
+                        fetch(targetUrl)
+                            .then(response => {
+                                if (!response.ok) {
+                                    throw new Error(`HTTP error! status: ${response.status}`);
+                                }
+                                return response.text();
+                            })
+                            .then(html => {
+                                // 解析HTML，提取主内容区域
+                                const parser = new DOMParser();
+                                const doc = parser.parseFromString(html, 'text/html');
+                                
+                                // 提取主内容区域的HTML
+                                const mainContent = doc.querySelector('main.container');
+                                const newTitle = doc.querySelector('title')?.textContent || document.title;
+                                
+                                if (mainContent) {
+                                    // 更新当前页面的主内容区域
+                                    const currentMain = document.querySelector('main.container');
+                                    if (currentMain) {
+                                        // 使用淡出动画
+                                        currentMain.style.opacity = '0';
+                                        setTimeout(() => {
+                                            currentMain.innerHTML = mainContent.innerHTML;
+                                            // 更新页面标题
+                                            document.title = newTitle;
+                                            // 恢复淡入动画
+                                            currentMain.style.opacity = '1';
+                                            
+                                            // 更新侧边导航活动状态
+                                            updateActiveNav(targetUrl);
+                                            
+                                            // 触发页面特定初始化
+                                            triggerPageInit(targetUrl);
+                                            
+                                            // 隐藏加载状态
+                                            hideSPALoading();
+                                            
+                                            // 更新浏览器历史记录 (不刷新页面)
+                                            history.pushState({ url: targetUrl }, newTitle, targetUrl);
+                                            
+                                            // 滚动到顶部
+                                            window.scrollTo({ top: 0, behavior: 'smooth' });
+                                        }, 200);
+                                    } else {
+                                        // 如果找不到主内容区域，回退到全页面加载
+                                        window.location.href = targetUrl;
+                                    }
+                                } else {
+                                    // 如果无法提取内容，回退到全页面加载
+                                    window.location.href = targetUrl;
+                                }
+                            })
+                            .catch(error => {
+                                console.error('SPA导航失败:', error);
+                                // 出错时回退到全页面加载
+                                window.location.href = targetUrl;
+                            });
+                    });
+                });
+                
+                // 处理浏览器前进/后退按钮
+                window.addEventListener('popstate', function(event) {
+                    if (event.state && event.state.url) {
+                        // 这里可以添加逻辑来处理前进/后退导航
+                        // 为了简化，暂时重新加载页面
+                        window.location.href = event.state.url;
+                    }
+                });
+                
+                // 显示SPA加载状态
+                function showSPALoading() {
+                    const loadingOverlay = document.createElement('div');
+                    loadingOverlay.id = 'spa-loading-overlay';
+                    loadingOverlay.className = 'fixed inset-0 bg-dark-900 bg-opacity-50 z-50 flex items-center justify-center';
+                    loadingOverlay.innerHTML = `
+                        <div class="bg-dark-800 rounded-lg p-6 flex flex-col items-center">
+                            <div class="loading-spinner mb-4"></div>
+                            <p class="text-tertiary">加载内容中...</p>
+                        </div>
+                    `;
+                    document.body.appendChild(loadingOverlay);
+                }
+                
+                // 隐藏SPA加载状态
+                function hideSPALoading() {
+                    const overlay = document.getElementById('spa-loading-overlay');
+                    if (overlay) {
+                        overlay.style.opacity = '0';
+                        setTimeout(() => {
+                            if (overlay.parentNode) {
+                                overlay.parentNode.removeChild(overlay);
+                            }
+                        }, 300);
+                    }
+                }
+                
+                // 更新侧边导航活动状态
+                function updateActiveNav(targetUrl) {
+                    // 移除所有导航项的active类
+                    document.querySelectorAll('.spa-nav-link').forEach(link => {
+                        link.classList.remove('active');
+                    });
+                    
+                    // 根据目标URL添加active类
+                    const path = targetUrl.split('?')[0]; // 移除查询参数
+                    const matchingLink = document.querySelector(`.spa-nav-link[href="${path}"]`);
+                    if (matchingLink) {
+                        matchingLink.classList.add('active');
+                    }
+                }
+                
+                // 触发页面特定初始化
+                function triggerPageInit(targetUrl) {
+                    // 根据URL执行对应的页面初始化函数
+                    const path = targetUrl.split('?')[0];
+                    
+                    // 检查是否有页面特定初始化函数
+                    if (path === '/' || path === '') {
+                        // 首页初始化
+                        if (typeof initApp === 'function') {
+                            initApp();
+                        }
+                    } else if (path.includes('/search')) {
+                        // 搜索页面初始化
+                        if (typeof initSearchPage === 'function') {
+                            initSearchPage();
+                        }
+                    } else if (path.includes('/explore')) {
+                        // 知识库页面初始化
+                        if (typeof initExplorePage === 'function') {
+                            initExplorePage();
+                        }
+                    } else if (path.includes('/bookmarks')) {
+                        // 书签页面初始化
+                        if (typeof initBookmarksPage === 'function') {
+                            initBookmarksPage();
+                        }
+                    } else if (path.includes('/projects')) {
+                        // 项目库页面初始化
+                        if (typeof initProjectsPage === 'function') {
+                            initProjectsPage();
+                        }
+                    } else if (path.includes('/help')) {
+                        // 帮助页面初始化
+                        if (typeof initHelpPage === 'function') {
+                            initHelpPage();
+                        }
+                    }
+                    
+                    // 触发自定义事件，通知其他脚本页面已更新
+                    document.dispatchEvent(new CustomEvent('page:updated', {
+                        detail: { url: targetUrl }
+                    }));
+                }
+            });
+        })();
+    </script>
+</body>
+</html>
