@@ -11,7 +11,7 @@
   - **verify**: 路由可访问 + 项目筛选占位 + 卡片网格占位 + 响应式正常
   - **目标**: `/projects` 页面技术框架实现
 
-- [ ] **P3: 其他模块技术框架** (预计：3-4 小时)
+- [x] **P3: 其他模块技术框架** (完成时间：2026-02-26 14:30 UTC) (预计：3-4 小时)
   - **owner**: 小星
   - **model**: qwen3-coder-plus
   - **output**: `40_engineering/templates/pages/analysts.html`, `40_engineering/templates/pages/transparency.html`
