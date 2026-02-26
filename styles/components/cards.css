@@ -1,0 +1,75 @@
+/* 卡片组件增强样式 */
+
+/* 基础卡片 */
+.content-card-delphi,
+.testimonial-card,
+.value-prop-card,
+.pricing-card,
+.faq-item {
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* 悬停效果 - 多层阴影 */
+.content-card-delphi:hover,
+.testimonial-card:hover,
+.value-prop-card:hover,
+.pricing-card:hover {
+  box-shadow: 
+    0 20px 25px -5px rgba(0, 0, 0, 0.1),
+    0 10px 10px -5px rgba(0, 0, 0, 0.04),
+    0 0 0 1px rgba(46, 144, 250, 0.1);
+  transform: translateY(-4px);
+}
+
+/* 价值卡片特殊悬停 */
+.value-prop-card:hover {
+  box-shadow: 
+    0 25px 50px -12px rgba(46, 144, 250, 0.25),
+    0 0 0 1px rgba(46, 144, 250, 0.2);
+}
+
+/* 定价卡片悬停 */
+.pricing-card:hover {
+  box-shadow: 
+    0 25px 50px -12px rgba(46, 144, 250, 0.15),
+    0 0 0 2px rgba(46, 144, 250, 0.1);
+}
+
+/* FAQ 卡片悬停 */
+.faq-item:hover {
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  border-color: rgba(46, 144, 250, 0.3);
+}
+
+/* 边框渐变效果 */
+.value-prop-card::before,
+.pricing-card::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(135deg, rgba(46, 144, 250, 0) 0%, rgba(46, 144, 250, 0.1) 50%, rgba(46, 144, 250, 0) 100%);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.value-prop-card:hover::before,
+.pricing-card:hover::before {
+  opacity: 1;
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+  .content-card-delphi:hover,
+  .testimonial-card:hover,
+  .value-prop-card:hover,
+  .pricing-card:hover {
+    transform: translateY(-2px);
+  }
+}

@@ -1,0 +1,82 @@
+/* 间距系统 - 12px 基准 */
+
+/* Section 间距 */
+.section-py {
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+}
+
+@media (min-width: 768px) {
+  .section-py {
+    padding-top: 6rem;
+    padding-bottom: 6rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .section-py {
+    padding-top: 8rem;
+    padding-bottom: 8rem;
+  }
+}
+
+/* 组件间距 */
+.component-mb {
+  margin-bottom: 3rem;
+}
+
+.component-mb-lg {
+  margin-bottom: 4rem;
+}
+
+.component-mb-xl {
+  margin-bottom: 6rem;
+}
+
+/* 卡片内间距 */
+.card-padding {
+  padding: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .card-padding {
+    padding: 2rem;
+  }
+}
+
+/* 网格间距 */
+.grid-gap-sm {
+  gap: 1rem;
+}
+
+.grid-gap {
+  gap: 1.5rem;
+}
+
+.grid-gap-lg {
+  gap: 2rem;
+}
+
+.grid-gap-xl {
+  gap: 3rem;
+}
+
+/* 内容间距 */
+.prose > * + * {
+  margin-top: 1.5rem;
+}
+
+.prose h2 {
+  margin-top: 3rem;
+  margin-bottom: 1.5rem;
+}
+
+.prose h3 {
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.prose p {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}

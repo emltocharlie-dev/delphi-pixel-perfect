@@ -315,7 +315,13 @@
 
         <!-- 主内容区域 -->
         <main class="container py-8 lg:ml-64">
-            {<!-- 首页内容 -->
+            {<!-- Hero 区域 -->
+{% include 'components/hero.html' %}
+
+<!-- 信任背书区域 -->
+{% include 'components/trusted-by.html' %}
+
+<!-- 首页内容 -->
 <div class="mb-8">
     <h1 class="text-4xl font-semibold text-white mb-2" id="page-title">All</h1>
     <div class="flex items-center space-x-2 text-sm text-tertiary" id="page-stats">
