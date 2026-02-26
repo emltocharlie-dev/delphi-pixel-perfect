@@ -195,23 +195,23 @@
                         <div class="mb-2">
                             <div class="text-xs uppercase text-dark-400 mb-1">Navigation</div>
                             
-                            <a href="/" class="side-nav-item  text-left block" data-nav="home">
+                            <a href="/" class="side-nav-item spa-nav-link  text-left block" data-nav="home">
                                 <span>home</span>
                             </a>
                             
-                            <a href="/search" class="side-nav-item  text-left block" data-nav="research">
+                            <a href="/search" class="side-nav-item spa-nav-link  text-left block" data-nav="research">
                                 <span>Research</span>
                             </a>
                             
-                            <a href="/explore" class="side-nav-item  text-left block" data-nav="library">
+                            <a href="/explore" class="side-nav-item spa-nav-link  text-left block" data-nav="library">
                                 <span>Library</span>
                             </a>
                             
-                            <a href="/bookmarks" class="side-nav-item  text-left block" data-nav="saved">
+                            <a href="/bookmarks" class="side-nav-item spa-nav-link  text-left block" data-nav="saved">
                                 <span>Saved</span>
                             </a>
                             
-                            <a href="/projects" class="side-nav-item  text-left block" data-nav="tools">
+                            <a href="/projects" class="side-nav-item spa-nav-link  text-left block" data-nav="tools">
                                 <span>Tools</span>
                             </a>
                             
@@ -221,15 +221,15 @@
                         <div class="mb-2">
                             <div class="text-xs uppercase text-dark-400 mb-1">help</div>
                             
-                            <a href="#" class="side-nav-item text-left block text-sm" data-nav="conentus">
+                            <a href="#" class="side-nav-item spa-nav-link text-left block text-sm" data-nav="conentus">
                                 <span>Conentus</span>
                             </a>
                             
-                            <a href="#" class="side-nav-item text-left block text-sm" data-nav="faq">
+                            <a href="#" class="side-nav-item spa-nav-link text-left block text-sm" data-nav="faq">
                                 <span>FAQ</span>
                             </a>
                             
-                            <a href="#" class="side-nav-item text-left block text-sm" data-nav="feedback">
+                            <a href="#" class="side-nav-item spa-nav-link text-left block text-sm" data-nav="feedback">
                                 <span>Feedback</span>
                             </a>
                             
@@ -266,23 +266,23 @@
                 <!-- 导航项列表 -->
                 <div class="space-y-1">
                     
-                    <a href="/" class="side-nav-item " data-nav="home">
+                    <a href="/" class="side-nav-item spa-nav-link " data-nav="home">
                         <span>home</span>
                     </a>
                     
-                    <a href="/search" class="side-nav-item " data-nav="research">
+                    <a href="/search" class="side-nav-item spa-nav-link " data-nav="research">
                         <span>Research</span>
                     </a>
                     
-                    <a href="/explore" class="side-nav-item " data-nav="library">
+                    <a href="/explore" class="side-nav-item spa-nav-link " data-nav="library">
                         <span>Library</span>
                     </a>
                     
-                    <a href="/bookmarks" class="side-nav-item " data-nav="saved">
+                    <a href="/bookmarks" class="side-nav-item spa-nav-link " data-nav="saved">
                         <span>Saved</span>
                     </a>
                     
-                    <a href="/projects" class="side-nav-item " data-nav="tools">
+                    <a href="/projects" class="side-nav-item spa-nav-link " data-nav="tools">
                         <span>Tools</span>
                     </a>
                     
@@ -292,15 +292,15 @@
                         <div class="text-xs uppercase text-dark-400 mb-2">help</div>
                         <div class="space-y-1 ml-2">
                             
-                            <a href="#" class="side-nav-item text-sm" data-nav="conentus">
+                            <a href="#" class="side-nav-item spa-nav-link text-sm" data-nav="conentus">
                                 <span>Conentus</span>
                             </a>
                             
-                            <a href="#" class="side-nav-item text-sm" data-nav="faq">
+                            <a href="#" class="side-nav-item spa-nav-link text-sm" data-nav="faq">
                                 <span>FAQ</span>
                             </a>
                             
-                            <a href="#" class="side-nav-item text-sm" data-nav="feedback">
+                            <a href="#" class="side-nav-item spa-nav-link text-sm" data-nav="feedback">
                                 <span>Feedback</span>
                             </a>
                             
@@ -354,9 +354,9 @@
     </div>
 </div>
 
-<!-- 内容网格 -->
-<div id="content-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-    <!-- 内容卡片动态加载 -->
+<!-- 内容列表 (用户指令: list形式，一行一篇文章摘要入口，不要用3列宫格，就用一列，展开) -->
+<div id="content-grid" class="flex flex-col space-y-4 mb-8">
+    <!-- 内容列表项动态加载 -->
 </div>
 
 <!-- 分页 -->
@@ -488,6 +488,187 @@
             initApp();
         });
         
+    </script>
+    
+    <!-- SPA导航脚本 (用户指令: 左侧导航切换时只刷新内容区域，不是全屏刷新) -->
+    <script>
+        (function() {
+            // 等待DOM加载完成
+            document.addEventListener('DOMContentLoaded', function() {
+                // 选择所有SPA导航链接
+                const spaNavLinks = document.querySelectorAll('.spa-nav-link');
+                
+                // 为每个链接添加点击事件监听器
+                spaNavLinks.forEach(link => {
+                    link.addEventListener('click', function(event) {
+                        event.preventDefault(); // 阻止默认的链接跳转行为
+                        
+                        const targetUrl = this.getAttribute('href');
+                        if (!targetUrl || targetUrl === '#') return;
+                        
+                        console.log(`SPA导航到: ${targetUrl}`);
+                        
+                        // 显示加载状态
+                        showSPALoading();
+                        
+                        // 使用fetch加载目标页面
+                        fetch(targetUrl)
+                            .then(response => {
+                                if (!response.ok) {
+                                    throw new Error(`HTTP error! status: ${response.status}`);
+                                }
+                                return response.text();
+                            })
+                            .then(html => {
+                                // 解析HTML，提取主内容区域
+                                const parser = new DOMParser();
+                                const doc = parser.parseFromString(html, 'text/html');
+                                
+                                // 提取主内容区域的HTML
+                                const mainContent = doc.querySelector('main.container');
+                                const newTitle = doc.querySelector('title')?.textContent || document.title;
+                                
+                                if (mainContent) {
+                                    // 更新当前页面的主内容区域
+                                    const currentMain = document.querySelector('main.container');
+                                    if (currentMain) {
+                                        // 使用淡出动画
+                                        currentMain.style.opacity = '0';
+                                        setTimeout(() => {
+                                            currentMain.innerHTML = mainContent.innerHTML;
+                                            // 更新页面标题
+                                            document.title = newTitle;
+                                            // 恢复淡入动画
+                                            currentMain.style.opacity = '1';
+                                            
+                                            // 更新侧边导航活动状态
+                                            updateActiveNav(targetUrl);
+                                            
+                                            // 触发页面特定初始化
+                                            triggerPageInit(targetUrl);
+                                            
+                                            // 隐藏加载状态
+                                            hideSPALoading();
+                                            
+                                            // 更新浏览器历史记录 (不刷新页面)
+                                            history.pushState({ url: targetUrl }, newTitle, targetUrl);
+                                            
+                                            // 滚动到顶部
+                                            window.scrollTo({ top: 0, behavior: 'smooth' });
+                                        }, 200);
+                                    } else {
+                                        // 如果找不到主内容区域，回退到全页面加载
+                                        window.location.href = targetUrl;
+                                    }
+                                } else {
+                                    // 如果无法提取内容，回退到全页面加载
+                                    window.location.href = targetUrl;
+                                }
+                            })
+                            .catch(error => {
+                                console.error('SPA导航失败:', error);
+                                // 出错时回退到全页面加载
+                                window.location.href = targetUrl;
+                            });
+                    });
+                });
+                
+                // 处理浏览器前进/后退按钮
+                window.addEventListener('popstate', function(event) {
+                    if (event.state && event.state.url) {
+                        // 这里可以添加逻辑来处理前进/后退导航
+                        // 为了简化，暂时重新加载页面
+                        window.location.href = event.state.url;
+                    }
+                });
+                
+                // 显示SPA加载状态
+                function showSPALoading() {
+                    const loadingOverlay = document.createElement('div');
+                    loadingOverlay.id = 'spa-loading-overlay';
+                    loadingOverlay.className = 'fixed inset-0 bg-dark-900 bg-opacity-50 z-50 flex items-center justify-center';
+                    loadingOverlay.innerHTML = `
+                        <div class="bg-dark-800 rounded-lg p-6 flex flex-col items-center">
+                            <div class="loading-spinner mb-4"></div>
+                            <p class="text-tertiary">加载内容中...</p>
+                        </div>
+                    `;
+                    document.body.appendChild(loadingOverlay);
+                }
+                
+                // 隐藏SPA加载状态
+                function hideSPALoading() {
+                    const overlay = document.getElementById('spa-loading-overlay');
+                    if (overlay) {
+                        overlay.style.opacity = '0';
+                        setTimeout(() => {
+                            if (overlay.parentNode) {
+                                overlay.parentNode.removeChild(overlay);
+                            }
+                        }, 300);
+                    }
+                }
+                
+                // 更新侧边导航活动状态
+                function updateActiveNav(targetUrl) {
+                    // 移除所有导航项的active类
+                    document.querySelectorAll('.spa-nav-link').forEach(link => {
+                        link.classList.remove('active');
+                    });
+                    
+                    // 根据目标URL添加active类
+                    const path = targetUrl.split('?')[0]; // 移除查询参数
+                    const matchingLink = document.querySelector(`.spa-nav-link[href="${path}"]`);
+                    if (matchingLink) {
+                        matchingLink.classList.add('active');
+                    }
+                }
+                
+                // 触发页面特定初始化
+                function triggerPageInit(targetUrl) {
+                    // 根据URL执行对应的页面初始化函数
+                    const path = targetUrl.split('?')[0];
+                    
+                    // 检查是否有页面特定初始化函数
+                    if (path === '/' || path === '') {
+                        // 首页初始化
+                        if (typeof initApp === 'function') {
+                            initApp();
+                        }
+                    } else if (path.includes('/search')) {
+                        // 搜索页面初始化
+                        if (typeof initSearchPage === 'function') {
+                            initSearchPage();
+                        }
+                    } else if (path.includes('/explore')) {
+                        // 知识库页面初始化
+                        if (typeof initExplorePage === 'function') {
+                            initExplorePage();
+                        }
+                    } else if (path.includes('/bookmarks')) {
+                        // 书签页面初始化
+                        if (typeof initBookmarksPage === 'function') {
+                            initBookmarksPage();
+                        }
+                    } else if (path.includes('/projects')) {
+                        // 项目库页面初始化
+                        if (typeof initProjectsPage === 'function') {
+                            initProjectsPage();
+                        }
+                    } else if (path.includes('/help')) {
+                        // 帮助页面初始化
+                        if (typeof initHelpPage === 'function') {
+                            initHelpPage();
+                        }
+                    }
+                    
+                    // 触发自定义事件，通知其他脚本页面已更新
+                    document.dispatchEvent(new CustomEvent('page:updated', {
+                        detail: { url: targetUrl }
+                    }));
+                }
+            });
+        })();
     </script>
 </body>
 </html>

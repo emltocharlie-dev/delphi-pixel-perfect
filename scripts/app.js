@@ -321,53 +321,60 @@ function renderContent(articles) {
 
 // 创建内容卡片
 function createContentCard(article) {
-  const card = document.createElement('article');
-  card.className = 'content-card-delphi bg-card border border-dark rounded-xl overflow-hidden transition-all duration-200 hover:border-light hover:shadow-lg hover:transform hover:-translate-y-1';
-  card.setAttribute('data-id', article.id);
+  // 用户指令: list形式，一行一篇文章摘要入口，不要用3列宫格，就用一列，展开
+  // 改为创建列表项 (list item) 而不是卡片 (card)
+  const listItem = document.createElement('article');
+  listItem.className = 'content-list-item bg-card border border-dark rounded-lg p-5 mb-4 transition-all duration-200 hover:border-light hover:shadow-md hover:bg-dark-800';
+  listItem.setAttribute('data-id', article.id);
   
   // 格式化日期
   const formattedDate = formatDate(article.publishedDate);
   
-  // 卡片内容
-  card.innerHTML = `
-    <div class="p-6">
-      <!-- 分类标签 -->
-      <span class="card-category mb-3">
-        ${article.category}
-      </span>
-      
-      <!-- 标题 -->
-      <h3 class="card-title mb-3 line-clamp-2">
-        ${article.title}
-      </h3>
-      
-      <!-- 描述 -->
-      <p class="card-description mb-4 line-clamp-3">
-        ${article.description}
-      </p>
-      
-      <!-- 元数据 -->
-      <div class="flex items-center justify-between text-sm">
-        <div class="flex items-center space-x-2">
-          <span class="text-tertiary">${article.authorAvatar}</span>
-          <span class="text-secondary">${article.author}</span>
-        </div>
-        <div class="flex items-center space-x-4 text-tertiary">
-          <span class="flex items-center space-x-1">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-            </svg>
-            <span>${formattedDate}</span>
+  // 列表项内容 - 水平布局，一行一篇文章摘要
+  listItem.innerHTML = `
+    <div class="flex flex-col md:flex-row md:items-start justify-between">
+      <!-- 左侧: 分类和标题区域 -->
+      <div class="flex-1 mb-4 md:mb-0 md:mr-6">
+        <!-- 分类标签 -->
+        <div class="flex items-center mb-2">
+          <span class="card-category">
+            ${article.category}
           </span>
-          <span class="flex items-center space-x-1">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <span class="text-xs text-tertiary ml-3">${article.author}</span>
+        </div>
+        
+        <!-- 标题 -->
+        <h3 class="text-lg font-semibold text-white mb-2 line-clamp-1">
+          ${article.title}
+        </h3>
+        
+        <!-- 描述 -->
+        <p class="text-sm text-tertiary mb-3 line-clamp-2">
+          ${article.description}
+        </p>
+      </div>
+      
+      <!-- 右侧: 元数据区域 -->
+      <div class="flex flex-col items-start md:items-end space-y-2">
+        <!-- 日期 -->
+        <div class="flex items-center text-xs text-tertiary">
+          <svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+          </svg>
+          <span>${formattedDate}</span>
+        </div>
+        
+        <!-- 浏览量和点赞数 -->
+        <div class="flex items-center space-x-4 text-xs text-tertiary">
+          <span class="flex items-center">
+            <svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
             </svg>
             <span>${formatNumber(article.views)}</span>
           </span>
-          <span class="flex items-center space-x-1">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <span class="flex items-center">
+            <svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905a3.61 3.61 0 01-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5" />
             </svg>
             <span>${formatNumber(article.likes)}</span>
@@ -378,15 +385,15 @@ function createContentCard(article) {
   `;
   
   // 添加点击事件
-  card.addEventListener('click', (e) => {
+  listItem.addEventListener('click', (e) => {
     // 防止事件冒泡（如果内部元素也有点击事件）
     e.stopPropagation();
-    console.log(`点击卡片: ${article.id} - ${article.title}`);
+    console.log(`点击文章: ${article.id} - ${article.title}`);
     // 导航到文章详情页 (无扩展名URL，与_redirects配置一致)
     window.location.href = `article?slug=${article.slug}`;
   });
   
-  return card;
+  return listItem;
 }
 
 // 显示加载状态
