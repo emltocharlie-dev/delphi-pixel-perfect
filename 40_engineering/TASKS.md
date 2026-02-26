@@ -25,14 +25,14 @@
   - **verify**: 一致性检查报告 + 问题修复 + 视觉测试通过
   - **目标**: 全站设计系统一致性检查与修复
 
-- [ ] **P5: 性能优化与部署验证** (预计：2-3 小时)
+- [x] **P5: 性能优化与部署验证** (完成时间：2026-02-26 15:00 UTC) (预计：2-3 小时)
   - **owner**: 小星
   - **model**: qwen3-coder-plus
   - **output**: `runs/delphi-performance-report-20260226/lighthouse.json`
   - **verify**: Lighthouse 90+ + 核心 Web 指标达标 + 部署稳定
   - **目标**: Lighthouse 评分 90+，加载性能优化
 
-- [ ] **P6: 内容详情标准化迁移** (预计：2-3 小时)
+- [x] **P6: 内容详情标准化迁移** (完成时间：2026-02-26 15:05 UTC) (预计：2-3 小时)
   - **owner**: 小星
   - **model**: qwen3-coder-plus
   - **output**: `40_engineering/templates/pages/article.html`

@@ -301,6 +301,29 @@ const pageData = {
     content: fs.readFileSync(path.join(config.templateDir, 'pages/transparency.html'), 'utf8'),
     pageScripts: '/scripts/pages/transparency.js',
     initFunction: 'initTransparencyPage'
+  },
+  
+  // Article 详情页
+  article: {
+    title: 'Article - 文章详情',
+    description: 'Delphi Digital 像素级复刻 - 文章详情页',
+    sideNavItems: [
+      { id: 'home', label: 'home', href: '/', active: false },
+      { id: 'research', label: 'Research', href: '/search', active: false },
+      { id: 'library', label: 'Library', href: '/explore', active: false },
+      { id: 'saved', label: 'Saved', href: '/bookmarks', active: false },
+      { id: 'tools', label: 'Tools', href: '/projects', active: false },
+      { id: 'help', label: 'Help', href: '/help', active: false }
+    ],
+    helpItems: [
+      { id: 'conentus', label: 'Conentus', href: '#' },
+      { id: 'faq', label: 'FAQ', href: '#' },
+      { id: 'feedback', label: 'Feedback', href: '#' }
+    ],
+    showContentTabs: false,
+    content: fs.readFileSync(path.join(config.templateDir, 'pages/article.html'), 'utf8'),
+    pageScripts: '/scripts/pages/article.js',
+    initFunction: 'initArticlePage'
   }
 };
 
