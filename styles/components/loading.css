@@ -1,0 +1,48 @@
+/* 加载动画品牌化 */
+
+/* 品牌加载 Spinner */
+.brand-spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid rgba(46, 144, 250, 0.1);
+  border-left-color: #2e90fa;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+/* 品牌加载条 */
+.brand-loading-bar {
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, #2e90fa, transparent);
+  background-size: 200% 100%;
+  animation: loading-shimmer 1.5s infinite;
+}
+
+@keyframes loading-shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* 骨架屏 */
+.skeleton {
+  background: linear-gradient(90deg, #1f2124 25%, #2a2e32 50%, #1f2124 75%);
+  background-size: 200% 100%;
+  animation: loading-shimmer 1.5s infinite;
+  border-radius: 0.5rem;
+}
+
+/* 页面加载遮罩 */
+#app-loading {
+  background: linear-gradient(135deg, #0e1012 0%, #1f2124 100%);
+}
+
+#app-loading.loaded {
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.5s ease;
+}
