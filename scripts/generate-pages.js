@@ -209,6 +209,52 @@ const pageData = {
     content: fs.readFileSync(path.join(config.templateDir, 'pages/help.html'), 'utf8'),
     pageScripts: '/scripts/pages/help.js',
     initFunction: 'initHelpPage'
+  },
+  
+  // Sector Performance Dashboard (Data Apps模块)
+  'sector-performance': {
+    title: 'Sector Performance Dashboard',
+    description: 'Delphi Digital像素级复刻 - 行业表现数据仪表板',
+    sideNavItems: [
+      { id: 'home', label: 'home', href: '/', active: false },
+      { id: 'research', label: 'Research', href: '/search', active: false },
+      { id: 'library', label: 'Library', href: '/explore', active: false },
+      { id: 'saved', label: 'Saved', href: '/bookmarks', active: false },
+      { id: 'tools', label: 'Tools', href: '/projects', active: false },
+      { id: 'help', label: 'Help', href: '/help', active: false }
+    ],
+    helpItems: [
+      { id: 'conentus', label: 'Conentus', href: '#' },
+      { id: 'faq', label: 'FAQ', href: '#' },
+      { id: 'feedback', label: 'Feedback', href: '#' }
+    ],
+    showContentTabs: false,
+    content: fs.readFileSync(path.join(config.templateDir, 'pages/sector-performance.html'), 'utf8'),
+    pageScripts: '/scripts/pages/data-apps.js',
+    initFunction: 'initDataAppsPage'
+  },
+  
+  // BTC Game Theory Tool (Data Apps模块)
+  'btc-game-theory': {
+    title: 'BTC Game Theory Tool',
+    description: 'Delphi Digital像素级复刻 - 比特币博弈论分析工具',
+    sideNavItems: [
+      { id: 'home', label: 'home', href: '/', active: false },
+      { id: 'research', label: 'Research', href: '/search', active: false },
+      { id: 'library', label: 'Library', href: '/explore', active: false },
+      { id: 'saved', label: 'Saved', href: '/bookmarks', active: false },
+      { id: 'tools', label: 'Tools', href: '/projects', active: false },
+      { id: 'help', label: 'Help', href: '/help', active: false }
+    ],
+    helpItems: [
+      { id: 'conentus', label: 'Conentus', href: '#' },
+      { id: 'faq', label: 'FAQ', href: '#' },
+      { id: 'feedback', label: 'Feedback', href: '#' }
+    ],
+    showContentTabs: false,
+    content: fs.readFileSync(path.join(config.templateDir, 'pages/btc-game-theory.html'), 'utf8'),
+    pageScripts: '/scripts/pages/data-apps.js',
+    initFunction: 'initDataAppsPage'
   }
 };
 
@@ -226,6 +272,11 @@ function generatePage(pageId, data) {
   let outputPath;
   if (pageId === 'home') {
     outputPath = path.join(config.outputDir, 'index.html');
+  } else if (pageId === 'sector-performance' || pageId === 'btc-game-theory') {
+    // Data Apps页面生成在 data/apps/ 目录下
+    const dataAppsDir = path.join(config.outputDir, 'data', 'apps', pageId);
+    ensureDir(dataAppsDir);
+    outputPath = path.join(dataAppsDir, 'index.html');
   } else {
     const pageDir = path.join(config.outputDir, pageId);
     ensureDir(pageDir);

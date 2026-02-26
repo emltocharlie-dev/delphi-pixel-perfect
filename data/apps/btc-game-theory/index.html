@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BTC Game Theory Tool - OKX Tutorials Center</title>
+    <meta name="description" content="Delphi Digital像素级复刻 - 比特币博弈论分析工具">
+    
+    <!-- Tailwind CSS v3.4.1 (原站使用) -->
+    <script src="https://cdn.tailwindcss.com/3.4.1"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        dark: {
+                            50: '#f3f5f6',
+                            100: '#e9ebed',
+                            200: '#d9dbdf',
+                            300: '#979fa7',
+                            400: '#67707b',
+                            500: '#4b5259',
+                            600: '#363a3f',
+                            700: '#2a2e32',
+                            800: '#1f2124',
+                            900: '#0e1012',
+                        },
+                        'primary-blue': {
+                            50: '#eff8ff',
+                            100: '#d1e9ff',
+                            200: '#b2ddff',
+                            300: '#84caff',
+                            400: '#53b1fd',
+                            500: '#2e90fa',
+                            600: '#007afb',
+                            700: '#0062ff',
+                            800: '#1849a9',
+                            900: '#013d9d',
+                        },
+                        error: {
+                            50: '#fef3f2',
+                            100: '#fee4e2',
+                            200: '#fecdc9',
+                            300: '#fda29b',
+                            400: '#f97066',
+                            500: '#f04438',
+                            600: '#d92d20',
+                            700: '#b42318',
+                            800: '#912018',
+                            900: '#7a271a',
+                        },
+                        success: {
+                            50: '#ecfdf3',
+                            100: '#d1fadf',
+                            200: '#a6f4c5',
+                            300: '#12b76a',
+                            400: '#32d583',
+                            500: '#039855',
+                            600: '#027a48',
+                            700: '#054f31',
+                            800: '#054f31',
+                            900: '#054f31',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+                    },
+                    spacing: {
+                        '128': '32rem',
+                        '144': '36rem',
+                    },
+                    borderRadius: {
+                        'xl': '0.75rem',
+                        '2xl': '1rem',
+                    }
+                }
+            },
+            darkMode: 'class',
+        }
+    </script>
+    
+    <!-- Google Fonts: Inter (NeurialGrotesk替代字体) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- 原站设计系统补充CSS -->
+    <link rel="stylesheet" href="/styles/design-system.css">
+    <!-- 紧急修复CSS -->
+    <link rel="stylesheet" href="/styles/emergency-fix.css">
+    <!-- 字体优化CSS -->
+    <link rel="stylesheet" href="/styles/font-optimization.css">
+    
+    <!-- 图标 -->
+    <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+    
+    <!-- 页面特定CSS -->
+    
+    
+    <style>
+        /* 临时字体映射 - 使用Inter作为NeurialGrotesk的替代 */
+        :root {
+            --font-family-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --color-bg-primary: #0e1012;
+            --color-bg-secondary: #1f2124;
+            --color-bg-tertiary: #2a2e32;
+            --color-text-primary: #ffffff;
+            --color-text-secondary: #e9ebed;
+            --color-text-tertiary: #979fa7;
+            --color-text-muted: #67707b;
+            --color-border: #2a2e32;
+            --color-primary: #2e90fa;
+            --color-primary-hover: #53b1fd;
+            --color-error: #f04438;
+            --color-success: #039855;
+        }
+        
+        body {
+            font-family: var(--font-family-sans);
+            background-color: var(--color-bg-primary);
+            color: var(--color-text-primary);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        
+        /* 加载动画 */
+        .loading-spinner {
+            border: 3px solid rgba(255, 255, 255, 0.1);
+            border-left-color: var(--color-primary);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-dark-900 text-white">
+    <!-- 加载遮罩 -->
+    <div id="app-loading" class="fixed inset-0 bg-dark-900 z-50 flex items-center justify-center transition-opacity duration-300">
+        <div class="text-center">
+            <div class="loading-spinner mb-4"></div>
+            <p class="text-tertiary">加载中...</p>
+        </div>
+    </div>
+
+    <!-- 应用容器 -->
+    <div id="app" class="min-h-screen hidden">
+        <!-- 顶栏 -->
+        <header class="sticky top-0 z-50 bg-dark-900 border-b border-dark-700">
+            <div class="container">
+                <div class="flex items-center justify-between h-16">
+                    <!-- Logo -->
+                    <div class="flex items-center">
+                        <a href="/" class="flex items-center space-x-2">
+                            <div class="w-8 h-8 rounded-md bg-blue-600 flex items-center justify-center">
+                                <span class="text-white font-semibold text-lg">O</span>
+                            </div>
+                            <span class="text-white font-semibold text-lg">OKX教程中心</span>
+                            <span class="text-xs font-medium px-1.5 py-0.5 bg-blue-600/10 text-blue-600 rounded">BETA</span>
+                        </a>
+                    </div>
+                    
+                    <!-- 右侧操作 -->
+                    <div class="flex items-center space-x-4">
+                        <!-- 搜索框 -->
+                        <div class="relative hidden md:block">
+                            <input type="search" 
+                                   class="input pl-10 pr-4 py-2 w-64" 
+                                   placeholder="搜索教程..." 
+                                   id="search-input">
+                            <div class="absolute left-3 top-1/2 transform -translate-y-1/2">
+                                <svg class="w-4 h-4 text-tertiary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                                </svg>
+                            </div>
+                        </div>
+                        
+                        <!-- 移动端菜单按钮 -->
+                        <button class="md:hidden p-2 rounded-md hover:bg-tertiary" id="mobile-menu-btn">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- 移动端导航 -->
+                <div class="md:hidden hidden py-4 border-t border-dark-700" id="mobile-menu">
+                    <div class="flex flex-col space-y-2">
+                        <!-- 侧边导航项 (移动端) -->
+                        <div class="mb-2">
+                            <div class="text-xs uppercase text-dark-400 mb-1">Navigation</div>
+                            
+                            <a href="/" class="side-nav-item  text-left block" data-nav="home">
+                                <span>home</span>
+                            </a>
+                            
+                            <a href="/search" class="side-nav-item  text-left block" data-nav="research">
+                                <span>Research</span>
+                            </a>
+                            
+                            <a href="/explore" class="side-nav-item  text-left block" data-nav="library">
+                                <span>Library</span>
+                            </a>
+                            
+                            <a href="/bookmarks" class="side-nav-item  text-left block" data-nav="saved">
+                                <span>Saved</span>
+                            </a>
+                            
+                            <a href="/projects" class="side-nav-item  text-left block" data-nav="tools">
+                                <span>Tools</span>
+                            </a>
+                            
+                            <a href="/help" class="side-nav-item  text-left block" data-nav="help">
+                                <span>Help</span>
+                            </a>
+                            
+                        </div>
+                        
+                        <!-- 帮助项 -->
+                        <div class="mb-2">
+                            <div class="text-xs uppercase text-dark-400 mb-1">help</div>
+                            
+                            <a href="#" class="side-nav-item text-left block text-sm" data-nav="conentus">
+                                <span>Conentus</span>
+                            </a>
+                            
+                            <a href="#" class="side-nav-item text-left block text-sm" data-nav="faq">
+                                <span>FAQ</span>
+                            </a>
+                            
+                            <a href="#" class="side-nav-item text-left block text-sm" data-nav="feedback">
+                                <span>Feedback</span>
+                            </a>
+                            
+                        </div>
+                        
+                        <!-- 内容标签 (仅首页显示) -->
+                        
+                        
+                        <!-- 移动端搜索 -->
+                        <div class="mt-4">
+                            <input type="search" 
+                                   class="input w-full" 
+                                   placeholder="搜索教程..." 
+                                   id="mobile-search-input">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- 侧边导航栏 -->
+        <aside id="sidebar" class="hidden lg:block fixed left-0 top-16 bottom-0 w-64 bg-dark-900 border-r border-dark-700 overflow-y-auto z-40">
+            <nav class="p-6">
+                <!-- 导航项列表 -->
+                <div class="space-y-1">
+                    
+                    <a href="/" class="side-nav-item " data-nav="home">
+                        <span>home</span>
+                    </a>
+                    
+                    <a href="/search" class="side-nav-item " data-nav="research">
+                        <span>Research</span>
+                    </a>
+                    
+                    <a href="/explore" class="side-nav-item " data-nav="library">
+                        <span>Library</span>
+                    </a>
+                    
+                    <a href="/bookmarks" class="side-nav-item " data-nav="saved">
+                        <span>Saved</span>
+                    </a>
+                    
+                    <a href="/projects" class="side-nav-item " data-nav="tools">
+                        <span>Tools</span>
+                    </a>
+                    
+                    <a href="/help" class="side-nav-item " data-nav="help">
+                        <span>Help</span>
+                    </a>
+                    
+                    
+                    <!-- 帮助下拉 -->
+                    <div class="mt-8 pt-6 border-t border-dark-700">
+                        <div class="text-xs uppercase text-dark-400 mb-2">help</div>
+                        <div class="space-y-1 ml-2">
+                            
+                            <a href="#" class="side-nav-item text-sm" data-nav="conentus">
+                                <span>Conentus</span>
+                            </a>
+                            
+                            <a href="#" class="side-nav-item text-sm" data-nav="faq">
+                                <span>FAQ</span>
+                            </a>
+                            
+                            <a href="#" class="side-nav-item text-sm" data-nav="feedback">
+                                <span>Feedback</span>
+                            </a>
+                            
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </aside>
+
+        <!-- 移动端侧边栏遮罩 -->
+        <div id="sidebar-overlay" class="lg:hidden fixed inset-0 bg-black bg-opacity-50 z-30 hidden"></div>
+
+        <!-- 主内容区域 -->
+        <main class="container py-8 lg:ml-64">
+            {<!-- BTC Game Theory Tool 空页面框架 -->
+<div class="mb-8">
+    <h1 class="text-4xl font-semibold text-white mb-2">BTC Game Theory Tool</h1>
+    <p class="text-tertiary">比特币博弈论分析工具 - 空页面框架 (技术搭建阶段)</p>
+</div>
+
+<!-- 页面状态说明 -->
+<div class="bg-dark-800 rounded-xl p-6 mb-8">
+    <div class="flex items-start">
+        <div class="flex-shrink-0">
+            <div class="w-12 h-12 rounded-full bg-dark-700 flex items-center justify-center">
+                <svg class="w-6 h-6 text-tertiary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5" />
+                </svg>
+            </div>
+        </div>
+        <div class="ml-4">
+            <h3 class="text-white font-medium mb-1">技术框架搭建阶段</h3>
+            <p class="text-tertiary mb-3">根据用户指令，此页面暂时为空页面框架，专注于技术架构搭建，内容后续统一填充。</p>
+            <div class="text-sm">
+                <p class="text-tertiary mb-1"><span class="text-primary">用户指令</span>: "p1-p3，内容是图标工具等页面的，暂时只做空页面"</p>
+                <p class="text-tertiary mb-1"><span class="text-primary">实施策略</span>: 技术框架优先，内容填充后续统一处理</p>
+                <p class="text-tertiary"><span class="text-primary">当前状态</span>: 空页面框架，路由可访问，布局完整</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 占位区域 - 游戏参数设置 -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+    <div class="bg-dark-800 rounded-xl p-6">
+        <h3 class="text-white font-medium mb-4">游戏参数设置 (占位)</h3>
+        <div class="space-y-4">
+            <div>
+                <label class="block text-sm font-medium text-tertiary mb-2">玩家数量</label>
+                <div class="flex items-center space-x-2">
+                    <div class="w-8 h-8 rounded-full bg-dark-700 flex items-center justify-center text-tertiary">2</div>
+                    <div class="w-8 h-8 rounded-full bg-dark-700 flex items-center justify-center text-tertiary">3</div>
+                    <div class="w-8 h-8 rounded-full bg-dark-700 flex items-center justify-center text-tertiary">4</div>
+                    <div class="w-8 h-8 rounded-full bg-dark-700 flex items-center justify-center text-tertiary">5</div>
+                    <div class="w-8 h-8 rounded-full bg-dark-700 flex items-center justify-center text-tertiary">6</div>
+                </div>
+            </div>
+            <div>
+                <label class="block text-sm font-medium text-tertiary mb-2">策略选项</label>
+                <div class="space-y-2">
+                    <div class="flex items-center">
+                        <div class="w-3 h-3 rounded-full bg-primary-blue-600 mr-2"></div>
+                        <span class="text-tertiary">Cooperative</span>
+                    </div>
+                    <div class="flex items-center">
+                        <div class="w-3 h-3 rounded-full bg-primary-blue-500 mr-2"></div>
+                        <span class="text-tertiary">Competitive</span>
+                    </div>
+                    <div class="flex items-center">
+                        <div class="w-3 h-3 rounded-full bg-primary-blue-400 mr-2"></div>
+                        <span class="text-tertiary">Mixed</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="bg-dark-800 rounded-xl p-6">
+        <h3 class="text-white font-medium mb-4">收益矩阵输入 (占位)</h3>
+        <div class="bg-dark-900 rounded-lg p-4">
+            <div class="grid grid-cols-3 gap-2 text-center">
+                <div class="p-2 bg-dark-800 rounded">Player 1</div>
+                <div class="p-2 bg-dark-800 rounded">Player 2</div>
+                <div class="p-2 bg-dark-800 rounded">Payoff</div>
+                <div class="p-2 text-tertiary">Cooperate</div>
+                <div class="p-2 text-tertiary">Cooperate</div>
+                <div class="p-2 text-tertiary">(3,3)</div>
+                <div class="p-2 text-tertiary">Cooperate</div>
+                <div class="p-2 text-tertiary">Defect</div>
+                <div class="p-2 text-tertiary">(0,5)</div>
+                <div class="p-2 text-tertiary">Defect</div>
+                <div class="p-2 text-tertiary">Cooperate</div>
+                <div class="p-2 text-tertiary">(5,0)</div>
+                <div class="p-2 text-tertiary">Defect</div>
+                <div class="p-2 text-tertiary">Defect</div>
+                <div class="p-2 text-tertiary">(1,1)</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 占位区域 - 博弈分析 -->
+<div class="bg-dark-800 rounded-xl p-6 mb-8">
+    <h3 class="text-white font-medium mb-6">博弈分析结果 (占位区域)</h3>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="space-y-4">
+            <div>
+                <h4 class="text-white font-medium mb-2">纳什均衡计算</h4>
+                <div class="bg-dark-900 rounded-lg p-4">
+                    <div class="space-y-2">
+                        <div class="flex items-center">
+                            <div class="w-2 h-2 rounded-full bg-primary-blue-600 mr-2"></div>
+                            <span class="text-tertiary">Pure Strategy: (Defect, Defect)</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-2 h-2 rounded-full bg-primary-blue-500 mr-2"></div>
+                            <span class="text-tertiary">Mixed Strategy: p=0.5, q=0.5</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <h4 class="text-white font-medium mb-2">最优策略推荐</h4>
+                <div class="bg-dark-900 rounded-lg p-4">
+                    <p class="text-tertiary">基于博弈论分析，最优策略将在内容填充后计算显示。</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="space-y-4">
+            <div>
+                <h4 class="text-white font-medium mb-2">预测结果</h4>
+                <div class="bg-dark-900 rounded-lg p-4">
+                    <div class="space-y-2">
+                        <div class="flex items-center justify-between">
+                            <span class="text-tertiary">Cooperation Probability</span>
+                            <span class="text-tertiary">-</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-tertiary">Expected Payoff</span>
+                            <span class="text-tertiary">-</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-tertiary">Social Welfare</span>
+                            <span class="text-tertiary">-</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <h4 class="text-white font-medium mb-2">敏感性分析</h4>
+                <div class="bg-dark-900 rounded-lg p-4">
+                    <p class="text-tertiary">参数敏感性测试将在内容填充后实现。</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 占位可视化区域 -->
+<div class="bg-dark-800 rounded-xl p-6 mb-8">
+    <h3 class="text-white font-medium mb-6">决策树可视化 (占位区域)</h3>
+    <div class="h-64 bg-dark-900 rounded-lg flex items-center justify-center">
+        <div class="text-center">
+            <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-dark-700 flex items-center justify-center">
+                <svg class="w-8 h-8 text-tertiary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                </svg>
+            </div>
+            <p class="text-tertiary mb-2">决策树可视化区域 - 技术框架占位</p>
+            <p class="text-sm text-tertiary">内容后续统一填充</p>
+        </div>
+    </div>
+</div>
+
+<!-- 占位分析工具 -->
+<div class="bg-dark-800 rounded-xl p-6">
+    <h3 class="text-white font-medium mb-4">分析工具区域 (占位)</h3>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div class="bg-dark-900 rounded-lg p-4 text-center">
+            <div class="w-10 h-10 mx-auto mb-2 rounded-full bg-dark-700 flex items-center justify-center">
+                <svg class="w-5 h-5 text-tertiary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+            </div>
+            <p class="text-sm text-tertiary">参数敏感性测试</p>
+        </div>
+        <div class="bg-dark-900 rounded-lg p-4 text-center">
+            <div class="w-10 h-10 mx-auto mb-2 rounded-full bg-dark-700 flex items-center justify-center">
+                <svg class="w-5 h-5 text-tertiary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                </svg>
+            </div>
+            <p class="text-sm text-tertiary">场景模拟</p>
+        </div>
+        <div class="bg-dark-900 rounded-lg p-4 text-center">
+            <div class="w-10 h-10 mx-auto mb-2 rounded-full bg-dark-700 flex items-center justify-center">
+                <svg class="w-5 h-5 text-tertiary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                </svg>
+            </div>
+            <p class="text-sm text-tertiary">结果导出</p>
+        </div>
+    </div>
+    <div class="mt-4 text-center text-sm text-tertiary">
+        <p>分析工具框架 - 内容后续统一填充</p>
+    </div>
+</div>}
+        </main>
+
+        <!-- 页脚 -->
+        <footer class="bg-dark-800 border-t border-dark-700 mt-16">
+            <div class="container py-12">
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                    <!-- Logo和描述 -->
+                    <div class="col-span-1 md:col-span-1">
+                        <div class="flex items-center space-x-2 mb-4">
+                            <div class="w-8 h-8 rounded-md bg-blue-600 flex items-center justify-center">
+                                <span class="text-white font-semibold text-lg">O</span>
+                            </div>
+                            <span class="text-white font-semibold text-lg">OKX教程中心</span>
+                        </div>
+                        <p class="text-tertiary text-sm mb-4">
+                            专业的OKX交易教程和研究平台。Delphi Digital像素级复刻。
+                        </p>
+                    </div>
+                    
+                    <!-- 链接 -->
+                    <div class="col-span-1">
+                        <h3 class="text-white font-medium mb-4">快速链接</h3>
+                        <ul class="space-y-2">
+                            <li><a href="/" class="text-sm text-tertiary hover:text-primary transition">首页</a></li>
+                            <li><a href="/search" class="text-sm text-tertiary hover:text-primary transition">搜索</a></li>
+                            <li><a href="/explore" class="text-sm text-tertiary hover:text-primary transition">知识库</a></li>
+                            <li><a href="/projects" class="text-sm text-tertiary hover:text-primary transition">项目库</a></li>
+                        </ul>
+                    </div>
+                    
+                    <!-- 资源 -->
+                    <div class="col-span-1">
+                        <h3 class="text-white font-medium mb-4">资源</h3>
+                        <ul class="space-y-2">
+                            <li><a href="#" class="text-sm text-tertiary hover:text-primary transition">文档中心</a></li>
+                            <li><a href="#" class="text-sm text-tertiary hover:text-primary transition">API参考</a></li>
+                            <li><a href="#" class="text-sm text-tertiary hover:text-primary transition">开发者工具</a></li>
+                            <li><a href="#" class="text-sm text-tertiary hover:text-primary transition">状态监控</a></li>
+                        </ul>
+                    </div>
+                    
+                    <!-- 支持 -->
+                    <div class="col-span-1">
+                        <h3 class="text-white font-medium mb-4">支持</h3>
+                        <ul class="space-y-2">
+                            <li><a href="#" class="text-sm text-tertiary hover:text-primary transition">反馈建议</a></li>
+                            <li><a href="#" class="text-sm text-tertiary hover:text-primary transition">合作咨询</a></li>
+                            <li><a href="#" class="text-sm text-tertiary hover:text-primary transition">隐私政策</a></li>
+                            <li><a href="#" class="text-sm text-tertiary hover:text-primary transition">服务条款</a></li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- 底部信息 -->
+                <div class="mt-12 pt-8 border-t border-dark-700 flex flex-col md:flex-row md:items-center justify-between">
+                    <p class="text-sm text-tertiary">
+                        © 2026 OKX Tutorials Center. Pixel-perfect replica of Delphi Digital.
+                    </p>
+                    <div class="flex items-center space-x-4 mt-4 md:mt-0">
+                        <a href="#" class="text-tertiary hover:text-primary transition">🐦 Twitter</a>
+                        <a href="#" class="text-tertiary hover:text-primary transition">📢 Telegram</a>
+                        <a href="#" class="text-tertiary hover:text-primary transition">💻 GitHub</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- 原站JavaScript依赖 -->
+    <!-- Vue.js 3.x (原站推断使用) -->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <!-- Swiper轮播库 (原站可能使用) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <!-- Highcharts图表库 (原站可能使用) -->
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    
+    <!-- 项目JavaScript文件 -->
+    <script src="/data/content.js"></script>
+    
+    <!-- 扩展性架构初始化 -->
+    <script src="/scripts/init.js" type="module"></script>
+    
+    <!-- 主应用脚本 -->
+    <script src="/scripts/app.js"></script>
+    
+    <!-- 页面特定JavaScript -->
+    
+    <script src="/scripts/pages/data-apps.js"></script>
+    
+    
+    <script>
+        // 隐藏加载动画，显示应用
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                document.getElementById('app-loading').style.opacity = '0';
+                setTimeout(function() {
+                    document.getElementById('app-loading').style.display = 'none';
+                    document.getElementById('app').classList.remove('hidden');
+                }, 300);
+            }, 500);
+        });
+        
+        // 页面特定初始化
+        
+        window.addEventListener('app:servicesReady', function() {
+            initDataAppsPage();
+        });
+        
+    </script>
+</body>
+</html>
