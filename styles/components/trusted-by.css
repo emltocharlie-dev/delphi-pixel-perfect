@@ -1,0 +1,75 @@
+/* 信任背书区域 - Logo 墙滚动动画 */
+
+.trusted-by-section {
+  overflow: hidden;
+}
+
+.trusted-logos {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 2rem;
+}
+
+/* 滚动动画容器 */
+.logo-scroll-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.logo-scroll-track {
+  display: flex;
+  gap: 4rem;
+  animation: scroll-logos 30s linear infinite;
+  width: max-content;
+}
+
+.logo-scroll-track:hover {
+  animation-play-state: paused;
+}
+
+@keyframes scroll-logos {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(calc(-320px * 6));
+  }
+}
+
+.logo-item {
+  flex-shrink: 0;
+  width: 160px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.5;
+  transition: opacity 0.3s ease;
+}
+
+.logo-item:hover {
+  opacity: 1;
+}
+
+/* 响应式调整 */
+@media (max-width: 1024px) {
+  .logo-scroll-track {
+    animation: scroll-logos 20s linear infinite;
+  }
+}
+
+@media (max-width: 768px) {
+  .trusted-logos {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  .logo-scroll-track {
+    gap: 2rem;
+    animation: scroll-logos 15s linear infinite;
+  }
+  
+  .logo-item {
+    width: 120px;
+    height: 48px;
+  }
+}

@@ -1,0 +1,105 @@
+/* 用户评价轮播样式 */
+
+.testimonials-carousel {
+  position: relative;
+  overflow: hidden;
+}
+
+.carousel-track {
+  display: flex;
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.carousel-slide {
+  min-width: 100%;
+  padding: 0 1rem;
+}
+
+@media (min-width: 768px) {
+  .carousel-slide {
+    min-width: 50%;
+  }
+}
+
+@media (min-width: 1024px) {
+  .carousel-slide {
+    min-width: 33.333%;
+  }
+}
+
+/* 轮播控制按钮 */
+.carousel-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.carousel-btn {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  background: rgba(46, 144, 250, 0.1);
+  border: 2px solid rgba(46, 144, 250, 0.3);
+  color: #2e90fa;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.carousel-btn:hover {
+  background: rgba(46, 144, 250, 0.2);
+  border-color: #2e90fa;
+  transform: scale(1.1);
+}
+
+.carousel-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* 轮播指示器 */
+.carousel-indicators {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.carousel-indicator {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: rgba(151, 159, 167, 0.3);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.carousel-indicator.active {
+  background: #2e90fa;
+  width: 2rem;
+  border-radius: 0.25rem;
+}
+
+/* 自动播放动画 */
+@keyframes autoplay-progress {
+  from {
+    width: 100%;
+  }
+  to {
+    width: 0%;
+  }
+}
+
+.autoplay-progress {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #2e90fa, #007afb);
+  animation: autoplay-progress 5s linear infinite;
+}

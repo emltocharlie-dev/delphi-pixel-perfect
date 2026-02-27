@@ -1,4 +1,4 @@
-<!-- 用户评价区域 -->
+<!-- 用户评价区域 - 轮播 -->
 <section class="testimonials-section py-20 bg-dark-800">
   <div class="container">
     <!-- 区域标题 -->
@@ -11,55 +11,87 @@
       </p>
     </div>
     
-    <!-- 评价卡片 -->
-    <div class="testimonials-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-      <!-- 评价卡片 1 -->
-      <div class="testimonial-card bg-dark-900 rounded-2xl p-8 border border-dark-700 hover:border-primary-blue-500/50 transition-all duration-300 hover:-translate-y-2">
-        <div class="flex items-center mb-6">
-          <div class="w-12 h-12 rounded-full bg-gradient-to-br from-primary-blue-400 to-primary-blue-600 flex items-center justify-center text-white font-bold text-lg">
-            JD
-          </div>
-          <div class="ml-4">
-            <h4 class="text-white font-semibold">John Doe</h4>
-            <p class="text-sm text-tertiary">CEO, Crypto Fund</p>
+    <!-- 轮播容器 -->
+    <div class="testimonials-carousel relative">
+      <div class="carousel-track" id="testimonial-track">
+        <!-- 评价卡片 1 -->
+        <div class="carousel-slide">
+          <div class="testimonial-card bg-dark-900 rounded-2xl p-8 border border-dark-700 hover:border-primary-blue-500/50 transition-all duration-300 hover:-translate-y-2">
+            <div class="flex items-center mb-6">
+              <div class="w-12 h-12 rounded-full bg-gradient-to-br from-primary-blue-400 to-primary-blue-600 flex items-center justify-center text-white font-bold text-lg">
+                JD
+              </div>
+              <div class="ml-4">
+                <h4 class="text-white font-semibold">John Doe</h4>
+                <p class="text-sm text-tertiary">CEO, Crypto Fund</p>
+              </div>
+            </div>
+            <blockquote class="text-tertiary leading-relaxed">
+              "Delphi's research is simply the best in the industry. Their deep dives have helped us identify early trends and make informed investment decisions."
+            </blockquote>
           </div>
         </div>
-        <blockquote class="text-tertiary leading-relaxed">
-          "Delphi's research is simply the best in the industry. Their deep dives have helped us identify early trends and make informed investment decisions."
-        </blockquote>
+        
+        <!-- 评价卡片 2 -->
+        <div class="carousel-slide">
+          <div class="testimonial-card bg-dark-900 rounded-2xl p-8 border border-dark-700 hover:border-primary-blue-500/50 transition-all duration-300 hover:-translate-y-2">
+            <div class="flex items-center mb-6">
+              <div class="w-12 h-12 rounded-full bg-gradient-to-br from-primary-blue-400 to-primary-blue-600 flex items-center justify-center text-white font-bold text-lg">
+                SK
+              </div>
+              <div class="ml-4">
+                <h4 class="text-white font-semibold">Sarah Kim</h4>
+                <p class="text-sm text-tertiary">Founder, DeFi Protocol</p>
+              </div>
+            </div>
+            <blockquote class="text-tertiary leading-relaxed">
+              "The quality and depth of analysis is unmatched. Delphi's reports provide actionable insights that you won't find anywhere else."
+            </blockquote>
+          </div>
+        </div>
+        
+        <!-- 评价卡片 3 -->
+        <div class="carousel-slide">
+          <div class="testimonial-card bg-dark-900 rounded-2xl p-8 border border-dark-700 hover:border-primary-blue-500/50 transition-all duration-300 hover:-translate-y-2">
+            <div class="flex items-center mb-6">
+              <div class="w-12 h-12 rounded-full bg-gradient-to-br from-primary-blue-400 to-primary-blue-600 flex items-center justify-center text-white font-bold text-lg">
+                MC
+              </div>
+              <div class="ml-4">
+                <h4 class="text-white font-semibold">Michael Chen</h4>
+                <p class="text-sm text-tertiary">Partner, VC Firm</p>
+              </div>
+            </div>
+            <blockquote class="text-tertiary leading-relaxed">
+              "We rely on Delphi's research for our investment thesis. Their team combines technical expertise with market insights perfectly."
+            </blockquote>
+          </div>
+        </div>
       </div>
       
-      <!-- 评价卡片 2 -->
-      <div class="testimonial-card bg-dark-900 rounded-2xl p-8 border border-dark-700 hover:border-primary-blue-500/50 transition-all duration-300 hover:-translate-y-2">
-        <div class="flex items-center mb-6">
-          <div class="w-12 h-12 rounded-full bg-gradient-to-br from-primary-blue-400 to-primary-blue-600 flex items-center justify-center text-white font-bold text-lg">
-            SK
-          </div>
-          <div class="ml-4">
-            <h4 class="text-white font-semibold">Sarah Kim</h4>
-            <p class="text-sm text-tertiary">Founder, DeFi Protocol</p>
-          </div>
-        </div>
-        <blockquote class="text-tertiary leading-relaxed">
-          "The quality and depth of analysis is unmatched. Delphi's reports provide actionable insights that you won't find anywhere else."
-        </blockquote>
+      <!-- 控制按钮 -->
+      <div class="carousel-controls">
+        <button class="carousel-btn" id="prev-btn" aria-label="Previous">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+          </svg>
+        </button>
+        <button class="carousel-btn" id="next-btn" aria-label="Next">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+          </svg>
+        </button>
       </div>
       
-      <!-- 评价卡片 3 -->
-      <div class="testimonial-card bg-dark-900 rounded-2xl p-8 border border-dark-700 hover:border-primary-blue-500/50 transition-all duration-300 hover:-translate-y-2">
-        <div class="flex items-center mb-6">
-          <div class="w-12 h-12 rounded-full bg-gradient-to-br from-primary-blue-400 to-primary-blue-600 flex items-center justify-center text-white font-bold text-lg">
-            MC
-          </div>
-          <div class="ml-4">
-            <h4 class="text-white font-semibold">Michael Chen</h4>
-            <p class="text-sm text-tertiary">Partner, VC Firm</p>
-          </div>
-        </div>
-        <blockquote class="text-tertiary leading-relaxed">
-          "We rely on Delphi's research for our investment thesis. Their team combines technical expertise with market insights perfectly."
-        </blockquote>
+      <!-- 指示器 -->
+      <div class="carousel-indicators">
+        <div class="carousel-indicator active" data-slide="0"></div>
+        <div class="carousel-indicator" data-slide="1"></div>
+        <div class="carousel-indicator" data-slide="2"></div>
       </div>
+      
+      <!-- 自动播放进度条 -->
+      <div class="autoplay-progress"></div>
     </div>
   </div>
 </section>
