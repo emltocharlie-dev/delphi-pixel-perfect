@@ -1,0 +1,72 @@
+/* 加密货币价格信息栏 */
+
+.crypto-prices {
+  background: linear-gradient(135deg, #1f2124 0%, #2a2e32 100%);
+  border: 1px solid #363a3f;
+  border-radius: 0.75rem;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.crypto-prices-track {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  overflow-x: auto;
+}
+
+.crypto-price-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  white-space: nowrap;
+}
+
+.crypto-price-item .symbol {
+  color: #979fa7;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.crypto-price-item .price {
+  color: #ffffff;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.crypto-price-item .change {
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.crypto-price-item .change.positive {
+  color: #039855;
+}
+
+.crypto-price-item .change.negative {
+  color: #f04438;
+}
+
+.dashboard-link {
+  color: #2e90fa;
+  font-size: 0.875rem;
+  font-weight: 600;
+  white-space: nowrap;
+  transition: color 0.2s ease;
+}
+
+.dashboard-link:hover {
+  color: #53b1fd;
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+  .crypto-prices-track {
+    gap: 1rem;
+  }
+  
+  .crypto-price-item .price {
+    font-size: 0.75rem;
+  }
+}
